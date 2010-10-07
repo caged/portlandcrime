@@ -1,0 +1,352 @@
+@import url("reset.css");
+@import url("data.css");
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  background: #ededed url(/images/bg.png);
+  font-size: 12px;
+}
+
+header, section, aside, article {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*------------------------------------------------------------------------------------
+  @group shared
+------------------------------------------------------------------------------------*/
+
+.wrap {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.wrap-inner {
+  margin: 0 10px;
+}
+
+.wrap-inner:after {
+  content: ".";
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+}
+
+.box {
+  background: rgb(255,255,255);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 1px rgba(60,60,60,0.3);
+  -moz-box-shadow: 0 1px 0 rgba(60,60,60,0.3);
+  box-shadow: 0 1px 1px rgba(60,60,60,0.3);
+}
+
+.box header {
+  margin: 0;
+  padding: 0;
+  background: #f3f5f7;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright:5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.box header h1 {
+  font-size: 14px;
+  padding: 10px;
+  display: inline-block;
+  text-shadow: 1px 1px #fff;
+}
+
+.box:after {
+  visibility: hidden;
+  height: 0;
+  content: ".";
+  clear: both;
+  display: block;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group structure
+------------------------------------------------------------------------------------*/
+#content {
+  margin-top: 10px;
+}
+
+#main {
+  width: 660px;
+  float: left;
+  min-height: 300px;
+}
+
+aside#sbar {
+  float: right;
+  width: 270px;
+  margin-left: 10px;
+}
+
+#subbar {
+  margin-top: 22px;
+}
+
+footer {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #999;
+/*  background: rgba(255,255,255, 0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;*/
+}
+
+footer .box {
+  padding: 10px;
+  background: rgba(31, 36, 41,0.1);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  text-align: center;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group header
+------------------------------------------------------------------------------------*/
+header .wrap {
+  padding-top: 7px;
+  height: 98px;
+}
+header#top {
+  height: 105px;
+  background: url(/images/hdr-tile.png) repeat-x;
+}
+
+header h1 {
+  padding-top: 18px;
+}
+/*
+nav#primary {
+  margin-top: 25px;
+} */
+
+nav#primary ul li {
+  display: inline-block;
+}
+
+nav#primary ul li a {
+  display: inline-block;
+  padding: 12px 30px 13px 30px;
+  color: #838b92;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  border-right: 1px solid #eee;
+  text-transform: uppercase;
+}
+
+nav#primary ul li a:hover {
+  color: #333;
+}
+
+nav#primary li span {
+  font-family: Pictos;
+  font-weight: normal;
+  font-size: 16px;
+  margin-right: 5px;
+  color: #6db963;
+  line-height: 0;
+  text-transform: none;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group map
+------------------------------------------------------------------------------------*/
+header a.locate {
+  display: inline-block;
+  text-indent: -99999px;
+  background: url(/images/locate.png) no-repeat;
+  width: 18px;
+  height: 19px;
+  float: right;
+  margin: 10px 10px 0 0;
+}
+
+header a.locate.finding {
+  background-position: 0 -18px;
+}
+
+#map {
+  height: 600px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+aside#info {
+  width: 220px;
+  background-color: rgba(0,0,0,0.9);
+  float: right;
+  margin: 90px 20px 20px 20px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#info header {
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright:3px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+
+  border-bottom: 1px solid rgba(150,150,150,0.4);
+  display: block;
+  padding: 9px;
+}
+
+#info header h1 {
+  margin: 0;
+  padding: 0;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group history
+------------------------------------------------------------------------------------*/
+
+#history svg {
+  stroke-width: 0;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group sbar
+------------------------------------------------------------------------------------*/
+.offenses, #offenses {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.offenses li {
+  display: block;
+  border-top: 1px solid #f6f6f6;
+}
+
+.offenses li:first-child {
+  border-top: none;
+}
+
+.offenses li ul li {
+  padding: 8px 10px;
+}
+
+.offenses li ul li a {
+  color: #333;
+}
+
+.offenses li a:hover {
+  color: #999;
+}
+
+.offenses span.check,
+.offenses span.exp {
+  font-family: Pictos;
+  margin-right: 5px;
+  color: #ccc;
+}
+
+.offenses span.exp {
+  color: rgba(50,50,50,0.6);
+  display: inline-block;
+  float: right;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform:  rotate(90deg);
+  font-size: 14px;
+}
+
+.offenses span.exp.collapsed {
+  -webkit-transform: rotate(0);
+  -moz-transform: rotate(0);
+  -o-transform: rotate(0);
+  transform:  rotate(0);
+}
+
+.offenses span.code {
+  font-style: italic;
+  color: #a6b3b9;
+  margin-left: 2px;
+}
+
+.offenses span.otype  {
+  background: #e0e0e0 -webkit-gradient(linear, left top, left bottom, from(#e0e0e0), to(#cfcfcf));
+  background: #e0e0e0 -moz-linear-gradient(top, #e0e0e0, #cfcfcf);
+  border-bottom-color: #cdcdcd;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 1px 1px rgba(255,255,255,0.5);
+  display: block;
+  padding: 8px 10px;
+}
+
+.offenses span.otype a {
+  color: #656565;
+}
+
+.offenses li.otype span.check,
+.offenses li.otype span.exp {
+  font-weight: normal;
+  line-height: 0;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.otype.non-violent span.check {
+  color: #3e3095;
+}
+
+.otype.violent span.check {
+  color: #b50000;
+}
+
+.otype.sexual span.check {
+  color: #ff00a4;
+}
+
+.otype.drugs-alchohol span.check {
+  color: #bdb62c;
+}
+
+.otype.financial span.check {
+  color: #00b93f;
+}
+
+.otype .offenses span.check:hover,
+.otype .offenses span.exp:hover {
+  color: #ff6d00 !important;
+}
+
+.offenses span.check.inactive {
+  color: #ccc;
+}
+
+/* @end */
+

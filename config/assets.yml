@@ -1,0 +1,19 @@
+embed_assets: on
+
+javascripts:
+  vendor:
+    - public/javascripts/vendor/jquery.js
+    - public/javascripts/vendor/date.js
+    - public/javascripts/vendor/polymaps.js
+    - public/javascripts/vendor/protovis.js
+    - public/javascripts/vendor/rails.js
+    - public/javascripts/views/**/*.js
+  app:
+    - public/javascripts/*.js
+    - public/javascripts/application.js
+stylesheets:
+  core:
+    - public/stylesheets/reset.css
+    - public/stylesheets/core.css
+    - public/stylesheets/data.css
+    - public/stylesheets/pictos.css

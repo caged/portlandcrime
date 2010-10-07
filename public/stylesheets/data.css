@@ -1,0 +1,195 @@
+/*------------------------------------------------------------------------------------
+  @group svg
+------------------------------------------------------------------------------------*/
+#map text {
+  fill: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+}
+
+
+/* @end */
+.grid {
+  stroke: #333;
+  stroke-opacity: .4;
+  shape-rendering: crispEdges;
+}
+
+.compass {
+  z-index: 999999;
+}
+
+.compass .back {
+  fill: #20252a;
+  fill-opacity: .7;
+}
+
+.compass .fore {
+  stroke: none;
+  stroke-width: 0;
+}
+
+.park {
+  stroke: #333;
+  stroke-opacity: 0.5;
+  stroke-width: 1px;
+  fill-opacity: 0.2;
+  fill: #ccc;
+}
+
+/*.compass rect.back.fore {
+  fill: #fff;
+  fill-opacity: .3;
+  stroke: #eee;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}*/
+
+.compass .direction {
+  fill: #333;
+  fill-opacity: 0.4;
+}
+
+.compass .chevron {
+  stroke: #fff;
+  stroke-opacity: 0.5;
+  stroke-width: 0;
+}
+
+.compass .zoom .chevron {
+  stroke-width: 4px;
+  stroke: #fff;
+}
+
+.compass .chevron.active {
+  
+}
+
+.compass.active .active .direction {
+  fill: #999;
+}
+
+text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  cursor: default;
+}
+
+/*------------------------------------------------------------------------------------
+  @group crime types
+------------------------------------------------------------------------------------*/
+.circle {
+  fill: #00d4ff;
+  fill-opacity: .8;
+  stroke: #444;
+  stroke-width: 1.5px;
+}
+
+.circle.homicide {
+  file: #333;
+  stroke: #111;
+}
+
+.circle.ag,
+.circle.si,
+.circle.ro,
+.circle.we,
+.circle.ki {
+  fill: #d7141b;
+  stroke: #a71015;
+}
+
+
+.circle.bu,
+.circle.la,
+.circle.mo,
+.circle.va,
+.circle.di,
+.circle.tr,
+.circle.st,
+.circle.ru {
+  fill: #366fd7;
+  stroke: #264e96;
+}
+
+.circle.fr,
+.circle.fo,
+.circle.em {
+  fill: #51d749;
+  stroke: #3fa738;
+}
+
+
+.circle.dr,
+.circle.li,
+.circle.du {
+  fill: #e1c338;
+  stroke: #c4aa31;
+}
+
+.circle.se,
+.circle.pr {
+  fill: #ea0caa;
+  stroke: #b30982;
+}
+
+/*.circle:hover {
+  fill-opacity: 1;
+}*/
+
+.circle.inactive, text.inactive {
+  fill-opacity: 0;
+  stroke-opacity: 0;
+  z-index: -9999999;
+}
+
+.tm.d {
+  fill: #fff;
+  fill-opacity: 0.8;
+}
+
+.tm.n {
+  fill: #000;
+  fill-opacity: 0.6;
+}
+
+/*.circle.unwanted-person {
+  background-color: #009901;
+  border-color: #007201;
+  
+  fill: #009901;
+  stroke: #007201;
+}
+
+.circle.vandalism {
+  background-color: #cc3d02;
+  border-color: #942c01;
+  
+  fill: #cc3d02;
+  stroke: #942c01;
+}
+
+.circle.traffic-accident {
+  background-color: #5a4894;
+  border-color: #453872;
+  
+  fill: #5a4894;
+  stroke: #453872;
+}
+
+.circle.robbery {
+  background-color: #8c6548;
+  border-color: #6a4c36;
+  
+  fill: #8c6548;
+  stroke: #6a4c36;
+}
+
+.circle.threats {
+  background-color: #09a594;
+  border-color: #067569;
+  
+  fill: #09a594;
+  stroke: #067569;
+}*/
+/* @end */

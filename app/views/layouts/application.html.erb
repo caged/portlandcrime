@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pdxpatrol</title>
+  <%= include_stylesheets :core %>
+  <%= include_javascripts :vendor, :app %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <header id="top">
+    <div class="wrap">
+      <div class="wrap-inner">
+        <h1><%= image_tag '/images/logo.png', :alt => 'pdxpatrol logo' %></h1>
+        <div id="subbar">
+          <nav id="primary">
+            <ul>
+              <li class="home"><%= link_to(root_path) { "<span>@</span> Home" } %></li>
+              <li class="trends"><%= link_to(root_path) { "<span>Y</span> Trends" } %></li>
+              <li class="about"><%= link_to(root_path) { "<span>i</span> About" } %></li>
+              <li class="sponsors"><%= link_to(root_path) { "<span>k</span> Sponsors" } %></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <section id="content">
+    <div class="wrap">
+      <div class="wrap-inner">
+        <%= yield %>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="wrap">
+      <div class="wrap-inner">
+        <div class="box">Copyright &copy; 2010 Labrat Revenge LLC.</div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
