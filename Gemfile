@@ -4,15 +4,22 @@ gem 'rails', '3.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'mongo_mapper', :git => 'http://github.com/jnunemaker/mongomapper.git', :branch => 'rails3'
-gem 'bson_ext'
-
-gem "rails3-generators"
-gem "jquery-rails"
-
+gem 'mongo_mapper', 
+  :git => 'http://github.com/jnunemaker/mongomapper.git', 
+  :branch => 'rails3'
+  
+gem 'bson_ext', '1.1'
+gem 'json', '1.4.6'
 gem 'jammit'
 gem 'yui-compressor'
 gem 'closure-compiler'
+gem 'excelsior', '0.1.0'
+gem 'proj4rb', '0.3.1', :require => 'proj4'
+
+group :development do
+  gem 'rails3-generators'
+  gem 'jquery-rails'
+end
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -34,3 +41,8 @@ gem 'closure-compiler'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+group :console do 
+  gem 'wirble'
+  gem 'hirb'
+end

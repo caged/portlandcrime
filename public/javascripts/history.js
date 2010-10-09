@@ -6,7 +6,7 @@ $(function() {
     'financial':        '#00B93F',
     'sexual':           '#FF00A4'
   }
-  
+  return
   $.getJSON('/tmp.json', function(crimes) {
     var start = Date.parse(crimes[0].date.split('T')[0])
     var end = Date.parse(crimes[crimes.length - 1].date.split('T')[0])

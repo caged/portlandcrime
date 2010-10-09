@@ -107,7 +107,8 @@ text {
 .circle.di,
 .circle.tr,
 .circle.st,
-.circle.ru {
+.circle.ru,
+.circle.cu {
   fill: #366fd7;
   stroke: #264e96;
 }

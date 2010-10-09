@@ -1,6 +1,31 @@
 class Crime
-  include MongoMapper::Document         
-
+  include MongoMapper::Document
+  
+  key :case_id, Integer, :required => true
+  key :reported_at, Time, :required => true
+  key :district, Integer
+  key :precinct, String
+  key :address, String
+  key :loc, Hash
+  key :code, String
+  
+  timestamps!  
+  
+  belongs_to :offense      
+  belongs_to :neighborhood
+  
+  def as_json(options = {})
+    props = attributes
+    props.delete(:loc)
+    {
+      :type => 'Feature',
+      :properties => props,
+      :geometry => {
+        :type => 'Point', 
+        :coordinates => [loc['lat'], loc['lon']]
+      }
+    }
+  end
 # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 # validates_presence_of :attribute
 

@@ -1,0 +1,205 @@
+[
+ {
+    "desc":"Any willful burning or attempt to burn a building, motor vehicle, aircraft, or personal property of another.",
+    "name":"Arson",
+    "type": "Non-Violent",
+    "order": 0,
+    "group_order": 1
+ },
+ {
+    "desc":"An attack by one person upon another for the purpose of inflicting severe injury. This type of assault usually is accompanied by the use of a weapon or by means likely to produce death or injury.",
+    "name":"Aggravated Assault",
+    "type": "Violent",
+    "order": 1,
+    "group_order": 0
+ },
+ {
+    "desc":"The unlawful entry of a structure (both residential and non-residential) with intent to commit a theft.",
+    "name":"Burglary",
+    "type": "Non-Violent",
+    "group_order": 1,
+    "order": 0
+ },
+ {
+    "desc":"The willful (non-negligent) killing of one human being by another.",
+    "name":"Homicide",
+    "type": "Violent",
+    "order": 0,
+    "group_order": 0
+ },
+ {
+    "desc":"The unlawful taking of property from the possession of another; includes pickpocket, pursesnatch, shoplift, and bike theft.",
+    "name":"Larceny",
+    "type": "Non-Violent",
+    "group_order": 1,
+    "order": 1
+ },
+ {
+    "desc":"The carnal knowledge of a female, forcibly and against her will. Attempts are included.",
+    "name":"Rape",
+    "type":"Sexual",
+    "group_order": 4,
+    "order": 0
+ },
+ {
+    "desc":"The taking or attempting to take anything of value from a person or persons by force or threat of force.",
+    "name":"Robbery",
+    "type": "Violent",
+    "order": 3,
+    "group_order": 0
+ },
+ {
+    "desc":"The unlawful taking of motor vehicle contents or parts.  Note:  Theft from Auto (Car Prowl) is a Larceny.  It has been separated from the Larceny category to more easily identify where these crimes occur.",
+    "name":"Theft from Auto",
+    "type": "Non-Violent",
+    "order": 0,
+    "group_order": 1
+ },
+ {
+    "desc":"The theft or attempted theft of a motor vehicle; includes motorcycles.",
+    "name":"Motor Vehicle Theft",
+    "type": "Non-Violent",
+    "order": 0,
+    "group_order": 1
+ },
+ {
+    "desc":"Offenses relating to the unlawful possession, sale, use, growing, and manufacturing of illegal drugs. ",
+    "name":"Drugs",
+    "type": "Drugs & Alchohol",
+    "order": 0,
+    "group_order": 2
+ },
+ {
+    "desc":"Misappropriation or misapplication of money or property entrusted to one's care, custody, or control.",
+    "name":"Embezzlement",
+    "type":"Financial",
+    "order": 0,
+    "group_order": 3
+ },
+ {
+    "desc":"Making, altering, or possessing of a document or negotiable instrument, or signing another's signature, with intent to defraud.  Attempts are included.",
+    "name":"Forgery",
+    "type":"Financial",
+    "order": 0,
+    "group_order": 3
+ },
+ {
+    "desc":"Fraudulent conversion and obtaining money or property by false pretenses. Includes identity theft, confidence games and bad checks, except forgeries and counterfeiting.",
+    "name":"Fraud",
+    "type":"Financial",
+    "order": 0,
+    "group_order": 3
+ },
+ {
+    "desc":"Sex offenses of a commercialized nature, including assisting or promoting prostitution.  Attempts are included.",
+    "name":"Prostitution",
+    "type":"Sexual",
+    "order": 1,
+    "group_order": 4
+ },
+ {
+    "desc":"Offenses against family",
+    "name":"Offenses Against Family",
+    "type":"Non-Violent",
+    "order": 1,
+    "group_order": 1
+ },
+ {
+    "desc":"Statutory rape, sodomy, molest, indecent exposure, and other offenses against common decency.  Attempts are included. (Does not include rape or prostitution.)",
+    "name":"Sex Offenses",
+    "type":"Sexual",
+    "order": 1,
+    "group_order": 4
+ },
+ {
+    "desc":"Assaults and attempted assaults where no weapons are used and which do not result in serious or aggravated injury to the victim.",
+    "name":"Simple Assault",
+    "type": "Violent",
+    "order": 2,
+    "group_order": 0
+ },
+ {
+    "desc":"Buying, receiving, and possessing stolen property, including attempts.",
+    "name":"Stolen Property",
+    "type":"Non-Violent",
+    "order": 1,
+    "group_order": 1
+ },
+ {
+    "desc":"Willful or malicious destruction, injury, disfigurement, or defacement of any public or private property, real or personal, without consent of the owner or persons having custody or control.  Attempts are included.",
+    "name":"Vandalism",
+    "type": "Non-Violent",
+    "order": 0,
+    "group_order": 1 
+ },
+ {
+    "desc":"All violations of regulations or statutes controlling the carrying, using, possessing, furnishing, and manufacturing of deadly weapons or silencers. Attempts are included.",
+    "name":"Weapons",
+    "type": "Violent",
+    "order": 4,
+    "group_order": 0
+ },
+ {
+    "desc":"Offenses relating to violations of curfew or loitering ordinances.",
+    "name":"Curfew",
+    "type":"Non-Violent",
+    "order": 1,
+    "group_order": 1
+ },
+ {
+    "desc":"Breach of the peace.",
+    "name":"Disorderly Conduct",
+    "type": "Non-Violent",
+    "order": 0,
+    "group_order": 1
+ },
+ {
+    "desc":"Driving or operating any vehicle while drunk or under the influence of liquor or drugs.",
+    "name":"DUII",
+    "type": "Drugs & Alchohol",
+    "order": 0,
+    "group_order": 2
+ },
+ {
+    "desc":"Promoting, permitting, or engaging in illegal gambling.",
+    "name":"Gambling",
+    "type":"Financial",
+    "order": 0,
+    "group_order": 3
+ },
+ {
+    "desc":"The substantial interference with another person's liberty by force, threat, or deceit, with intent to cause them to be detained against their will.",
+    "name":"Kidnap",
+    "type":"Violent",
+    "order": 1,
+    "group_order": 0
+ },
+ {
+    "desc":"All state and/or local liquor law violations with the exception of driving under the influence. Federal violations are excluded.",
+    "name":"Liquor Laws",
+    "type": "Drugs & Alchohol",
+    "order": 0,
+    "group_order": 2
+ },
+ {
+    "desc":"Nonsupport, neglect, desertion, custodial interference, or abuse of family and children. Attempts are included.",
+    "name":"Offense Against Family",
+    "type":"Non-Violent",
+    "order": 0,
+    "group_order": 1
+ },
+ {
+    "desc":"Runaway juveniles when reported by their parents or guardians.",
+    "name":"Runaway",
+    "type":"Non-Violent",
+    "order": 0,
+    "group_order": 1
+ },
+ {
+    "desc":"Includes trespass, blackmail, extortion, bomb threats, stalking, threats/intimidation",
+    "name":"Trespass",
+    "type": "Non-Violent",
+    "order": 0,
+    "group_order": 1
+ }
+]
