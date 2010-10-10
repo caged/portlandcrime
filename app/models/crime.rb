@@ -13,6 +13,10 @@ class Crime
   
   belongs_to :offense      
   belongs_to :neighborhood
+    
+  scope :in_the_past, lambda {|time|   
+    where(:reported_at.gte => Time.zone.now.change(:hour => 0) - time, 
+    :reported_at.lt => Time.zone.now.change(:hour => 0))}
   
   def as_json(options = {})
     props = attributes

@@ -94,7 +94,8 @@ text {
 .circle.si,
 .circle.ro,
 .circle.we,
-.circle.ki {
+.circle.ki,
+.circle.ho {
   fill: #d7141b;
   stroke: #a71015;
 }
@@ -108,7 +109,9 @@ text {
 .circle.tr,
 .circle.st,
 .circle.ru,
-.circle.cu {
+.circle.cu,
+.circle.ar,
+.circle.of {
   fill: #366fd7;
   stroke: #264e96;
 }
@@ -124,12 +127,13 @@ text {
 .circle.dr,
 .circle.li,
 .circle.du {
-  fill: #e1c338;
-  stroke: #c4aa31;
+  fill: #9e00cc;
+  stroke: #6d008d;
 }
 
 .circle.se,
-.circle.pr {
+.circle.pr,
+.circle.ra {
   fill: #ea0caa;
   stroke: #b30982;
 }

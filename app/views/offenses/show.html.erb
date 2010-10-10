@@ -1,0 +1,18 @@
+<section id="main">
+  <div class="box" id="map">
+    <header>
+      <h1>Crime Map</h1>
+      <%= link_to 'Locate', nil, :class => 'locate' %>
+    </header>
+  </div>
+</section>
+
+<aside id="sbar">
+  <div class="box txt">
+    <h1>
+      <%=h @offense.name %>
+      <span class="badge" data-code="<%= @offense.type_code %>">E</span>
+    </h1>
+    <p><%= @offense.desc %></p>
+  </div>
+</aside>

@@ -19,17 +19,18 @@
   <ul class="offenses">
     <% @offenses.each do |group, offs| %>
     <% permalink = group[:name].parameterize %>
-      <li class="otype <%= permalink %>">
+    <% collapse = permalink != 'violent' %>
+      <li class="group" data-code="<%= permalink[0..1] %>">
         <span class="otype">
           <span class="check group" data-code="<%= permalink[0..1] %>">3</span>
-          <%= link_to group[:name], :anchor => permalink, :class => "otype #{permalink[0..1]}" %>
-          <span class="exp">9</span>
+          <%= link_to group[:name], {:anchor => permalink}, :class => "#{permalink[0..1]}" %>
+          <span class="exp<%= collapse ? ' collapsed' : '' %>">9</span>
         </span>
-        <ul class="offenses">
+        <ul class="offenses" style="<%= collapse ? 'display:none' : '' %>">
           <% offs.each do |off| %>
-          <li>
-            <span class="check group <%= off.code %>" data-code="<%= off.code %>">3</span>
-            <%= link_to off.name, :anchor => off.permalink %>
+          <li class="off">
+            <span class="check" data-code="<%= off.code %>">3</span>
+            <%= link_to off.name, off %>
             <span class="code">(<%= off.code %>)</span>
           </li>
           <% end %>

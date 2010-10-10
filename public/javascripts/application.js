@@ -1,8 +1,49 @@
 $.fn.addSVGClass = function(c) {
-  console.log($(this)); 
-  var cl = this.getAttribute('class')
-  cl.setAttribute('class', cl + ' ' + c)
+  var el = this[0],
+      cl = el.getAttribute('class')
+  
+  if(!cl) cl = ' ';    
+  cl = cl.split(' ')
+  if(cl.indexOf(c) == -1) {
+    cl.push(c)
+    el.setAttribute('class', cl.join(' '))
+  }
+  
+  return this
 }
+
+$.fn.removeSVGClass = function(c) {
+  var el = this[0]
+      cl = el.getAttribute('class')
+      
+  cl = cl.split(' ')
+  var idx = cl.indexOf(c)
+  if(idx != -1) {
+    cl.splice(idx, 1)
+    el.setAttribute('class', cl.join(' '))
+  }
+  
+  return this
+}
+
+$.fn.hasSVGClass = function(c) {
+  var el = this[0]
+      cl = el.getAttribute('class')
+      has = false
+      
+  cl = cl.split(' ')
+  var idx = cl.indexOf(c)
+  if(idx != -1)
+    has = true
+    
+  return has
+}
+
+$.fn.slideFadeToggle = function(speed, callback, easing) {
+  return this.animate({
+      height: 'toggle'
+    }, speed, easing, callback);
+};
 
 $(function() {
   
@@ -12,40 +53,41 @@ $(function() {
    */
   var checks = $('span.check')
   checks.click(function() {
-    var $this = $(this),
-        iac = 'inactive',
-        map = $('#map')
+    var check = $(this),
+        iac = 'inactive'
     
-    if($this.hasClass('group')) {
-      var li = $(this).closest('li.otype')
-      
-      if($this.hasClass(iac)) {        
-        $this.removeClass(iac)
-        li.find('span.check').removeClass(iac)
+    if(check.hasClass('group')) {
+      var li = check.closest('li.group'),
+          children = li.find('span.check')
+          
+      if(check.hasClass(iac)) {
+        check.removeClass(iac)
+        children.removeClass(iac)
       } else {
-        $this.addClass(iac)
-        li.find('span.check').addClass(iac)
+        check.addClass(iac)
+        children.addClass(iac)
       }
     } else {
-      if($this.hasClass(iac)) {
-        $this.removeClass(iac)
-        $this.closest('li.otype')
+      if(check.hasClass(iac)) {
+        check.removeClass(iac)
+          .closest('li.group')
           .find('span.group')
           .removeClass(iac)
       } else {
-        $this.addClass('inactive')
-      }     
+        check.addClass(iac)
+      }
     }
-    $('#map').trigger('map.togglenodes')
+
+    $('#map').trigger('map.togglecrimes')
   })
   
   
   $('span.exp').click(function() {
     var span = $(this)
     var child = span.closest('li').find('ul.offenses')
-    child.slideToggle(450, function() {
+    child.slideFadeToggle('slow', function() {
       span.toggleClass('collapsed')
-    }) 
+    }, 'easeOutBack') 
   })
 })
 

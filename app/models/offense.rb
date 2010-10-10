@@ -7,10 +7,18 @@ class Offense
   key :order, Integer
   key :type, Hash
   key :code
-  
   timestamps!     
 
   many :crimes
+    
+  def type_code
+    type[:name].parameterize[0..1]
+  end
+  
+  def to_param
+    permalink
+  end
+  
 # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 # validates_presence_of :attribute
 

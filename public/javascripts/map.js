@@ -6,7 +6,6 @@ $(function() {
       .container(document.getElementById('map').appendChild(svg))
       .center({lat: 45.5250, lon: -122.6515})
       .zoom(13)
-      .on('move', move)
       .add(po.interact())
       
   map.add(po.image()
@@ -23,41 +22,28 @@ $(function() {
   
   $(document).bind('ajaxStart', function() { fetching = true })
              .bind('ajaxEnd', function() { fetching = false })
-  // 
-  // 
-  // var today    = Date.today().getTime(),
-  //     lastweek = Date.today().add(-7).days().getTime();
+
+             
   
-  $.getJSON('/.json', function(data) {
-    map.add(po.geoJson()
-      .features(data.features)
-      .on('load', load))
-  })
-  
-  // $.getJSON('/.json', function(data) {
-  //   console.log(data); 
-  // })
-    
-  // map.add(po.geoJson()
-  //   .url('/data/neighborhoods.json')
-  //   .on('load', loadneighborhoods)
-  //   .clip(false))
-    
-  // function loadneighborhoods(e) {
-  //   $.each(e.features, function() {
-  //     var el    = this.element,
-  //         props = this.data.properties
-  //     
-  //     el.setAttribute('class', 'park')
-  //     el.setAttribute('name', props.NAME)
-  //     $(el).bind('mousedown', {props: props}, function(event) {
-  //       console.log(event.data.props.NAME); 
-  //     })
+  // if($('body[data-path=crimes-index]').length != 0) {
+  //   $.getJSON('/.json', function(data) {
+  //     map.add(po.geoJson()
+  //       .features(data.features)
+  //       .on('load', load))
   //   })
+  // } else if($('body[data-path=offenses-show]').length != 0) {
+    $.getJSON(document.location.pathname, function(data) {
+      map.add(po.geoJson()
+        .features(data.features)
+        .on('load', load))
+    })
   // }
 
+
+  $('.compass').click(togglecrimes)
   
-  function load(e) {     
+  function load(e) {   
+    var counts = {}  
     $.each(e.features, function() {
       var el = this.element,
           props = this.data.properties,
@@ -65,60 +51,61 @@ $(function() {
           trans = el.getAttribute("transform"),
           time  = Date.parse(props.reported_at),
           hours = time.getHours(),
-          count = parseInt(time.toString('h'))
+          count = parseInt(time.toString('h')),
+          check = $('span.check[data-code=' + props.code + ']'),
+          inact = check.hasClass('inactive')
       
-      el.setAttribute('class', 'circle ' + props.code)
+      if(!counts[props.code]) counts[props.code] = 0
+      counts[props.code]++
+      
+      if(inact)
+        $(el).addSVGClass('inactive')
+
+      $(el).addSVGClass('circle').addSVGClass(props.code)
       el.setAttribute("r", 12)
       el.setAttribute('alt', time.toString('ddd MMM, dd yyyy hh:mmtt'))
       
+      if(inact)
+        $(text).addSVGClass('inactive')
+        
+      $(text).addSVGClass(props.code)
       text.setAttribute("transform", trans);
-      text.setAttribute('class', props.code)
       text.setAttribute("text-anchor", "middle");
       text.setAttribute("dy", ".35em");
       text.appendChild(document.createTextNode(props.code));
       el.parentNode.insertBefore(text, el.nextSibling);
     })
     
-    toggleNodes(null, 'load')
-    $('#map').bind('map.togglenodes', toggleNodes)
+    $('#sbar li.off').each(function() {
+      var el = $(this),
+          cnt = el.find('span.count')
+      if(cnt.length == 0) {
+        var check = el.find('span.check')
+        var code = check.attr('data-code')
+        
+        if(!counts[code]) counts[code] = 0
+        
+        check.parent()
+          .append($('<span class="count" />')
+          .text(counts[code]))
+      }
+    })
+    //togglecrimes(null, 'load')
+    $('#map').bind('map.togglecrimes', togglecrimes)    
   }
   
-  function toggleNodes(event, from) {
-    if(from == 'move')
+  function togglecrimes(event, from) {
     $('#sbar span.check').each(function() {
       var check = $(this),
           code  = check.attr('data-code'),
           klass = this.getAttribute('class'),
-          circles = $('.circle.' + code),
-          labels  = $('text.' + code)
+          nodes = $('.circle.' + code + ', text.' + code)
       
       if(klass.indexOf('inactive') != -1) {
-        circles.each(function() {
-          var cklass = this.getAttribute('class')
-          if(cklass.indexOf('inactive') == -1)
-            this.setAttribute('class', cklass + ' inactive')
-        })
-        
-        labels.each(function() {
-          var lklass = this.getAttribute('class')
-          if(lklass.indexOf('inactive') == -1)
-            this.setAttribute('class', lklass + ' inactive')
-        })
+        nodes.each(function() { $(this).addSVGClass('inactive') })
       } else {
-        circles.each(function() {
-          var cklass = this.getAttribute('class')
-          this.setAttribute('class', cklass.replace(/inactive/gi, ''))
-        })
-        
-        labels.each(function() {
-          var lklass = this.getAttribute('class')
-          this.setAttribute('class', lklass.replace(/inactive/gi, ''))
-        })
+        nodes.each(function() { $(this).removeSVGClass('inactive') })
       }
     }) 
-  }
-  
-  function move(event) {
-    toggleNodes(event, 'move')
   }
 })

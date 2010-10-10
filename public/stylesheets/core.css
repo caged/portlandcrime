@@ -75,6 +75,27 @@ a {
   display: block;
 }
 
+.box.txt {
+  padding: 10px;
+}
+
+.box.txt h1 {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.box.txt span.badge {
+  float: right;
+  font-size: 18px;
+  margin-right: 0;
+}
+
+.box.txt p {
+  line-height: 1.5em;
+  color: #888;
+  font-size: 13px;
+}
+
 /* @end */
 
 /*------------------------------------------------------------------------------------
@@ -265,12 +286,13 @@ aside#info {
   color: #999;
 }
 
-.offenses span.check,
-.offenses span.exp {
+/*span.check,
+span.exp,
+span.badge {
   font-family: Pictos;
   margin-right: 5px;
   color: #ccc;
-}
+}*/
 
 .offenses span.exp {
   color: rgba(50,50,50,0.6);
@@ -311,36 +333,45 @@ aside#info {
   color: #656565;
 }
 
-.offenses li.otype span.check,
-.offenses li.otype span.exp {
+span.check,
+span.exp,
+span.badge {
   font-weight: normal;
   line-height: 0;
   text-transform: none;
   cursor: pointer;
+  font-family: Pictos;
+  margin-right: 5px;
+  color: #ccc;
 }
 
-.otype.non-violent span.check {
+li[data-code=no] span.check,
+span.badge[data-code=no] {
   color: #3e3095;
 }
 
-.otype.violent span.check {
+li[data-code=vi] span.check,
+span.badge[data-code=vi] {
   color: #b50000;
 }
 
-.otype.sexual span.check {
+li[data-code=se] span.check,
+span.badge[data-code=se] {
   color: #ff00a4;
 }
 
-.otype.drugs-alchohol span.check {
-  color: #bdb62c;
+li[data-code=dr] span.check,
+span.badge[data-code=dr] {
+  color: #9e00cc;
 }
 
-.otype.financial span.check {
+li[data-code=fi] span.check,
+span.badge[data-code=fi] {
   color: #00b93f;
 }
 
-.otype .offenses span.check:hover,
-.otype .offenses span.exp:hover {
+.offenses span.check:hover,
+.offenses span.exp:hover {
   color: #ff6d00 !important;
 }
 
@@ -348,5 +379,24 @@ aside#info {
   color: #ccc;
 }
 
+span.count {
+  float: right;
+  color: #888;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background-color: #eee;
+  display: inline-block;
+  padding: 3px;
+  min-width: 25px;
+  text-align: center;
+  margin-top: -3px;
+  font-size: 10px;
+}
 /* @end */
 
+/*------------------------------------------------------------------------------------
+  @group offense
+------------------------------------------------------------------------------------*/
+
+/* @end */

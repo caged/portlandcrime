@@ -6,7 +6,7 @@
   <%= include_javascripts :vendor, :app %>
   <%= csrf_meta_tag %>
 </head>
-<body>
+<body data-path="<%= controller.controller_path %>-<%= controller.action_name %>">
   <header id="top">
     <div class="wrap">
       <div class="wrap-inner">
@@ -17,7 +17,6 @@
               <li class="home"><%= link_to(root_path) { "<span>@</span> Home" } %></li>
               <li class="trends"><%= link_to(root_path) { "<span>Y</span> Trends" } %></li>
               <li class="about"><%= link_to(root_path) { "<span>i</span> About" } %></li>
-              <li class="sponsors"><%= link_to(root_path) { "<span>k</span> Sponsors" } %></li>
             </ul>
           </nav>
         </div>

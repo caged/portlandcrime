@@ -3,6 +3,7 @@ embed_assets: on
 javascripts:
   vendor:
     - public/javascripts/vendor/jquery.js
+    - public/javascripts/vendor/jquery.easing.js
     - public/javascripts/vendor/date.js
     - public/javascripts/vendor/polymaps.js
     - public/javascripts/vendor/protovis.js
