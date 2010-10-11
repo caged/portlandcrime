@@ -98,19 +98,29 @@ $(function() {
      })
      
     $.getJSON('/neighborhoods.json?ids[]=' + nhids.join(','), function(data) {
-      var ul = $('#topneighborhoods ul.val')
+      var ul = $('#topneighborhoods ul.val'),
+          names = []
                   
       $.each(data, function() {
         var nhood = this,
             cnt = $.grep(top5, function(nhc, idx) { 
               return nhc[0] == nhood.id 
             })[0]
-        
+ 
+        names.push({name: this.name.capitalizeWords(), count: cnt[1]})
+      })
+      
+      names = names.sort(function(a, b) {
+        return (b['count'] < a['count']) ? -1 : ((b['count'] > a['count']) ? 1 : 0)
+      })
+      
+      $.each(names, function() {
+        this.name == ' ' ? this.name = 'Unknown' : this.name
         ul.append($('<li />')
           .text(this.name.capitalizeWords())
           .append($('<span />')
             .addClass('count')
-            .text(cnt[1])))
+            .text(this.count)))
       })
     })
   })

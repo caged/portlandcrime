@@ -8,6 +8,7 @@ javascripts:
     - public/javascripts/vendor/polymaps.js
     - public/javascripts/vendor/protovis.js
     - public/javascripts/vendor/rails.js
+    - public/javascripts/vendor/underscore.js
     - public/javascripts/views/**/*.js
   app:
     - public/javascripts/lib/*.js
