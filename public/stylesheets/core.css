@@ -443,4 +443,14 @@ span.count {
 .props li .val {
   color: #888;
 }
+
+.props ul.proplist {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.props .proplist li {
+  border: none;
+  padding: 5px;
+}
 /* @end */

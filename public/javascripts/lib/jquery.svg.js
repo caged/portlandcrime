@@ -41,3 +41,17 @@ $.fn.hasSVGClass = function(c) {
     
   return has
 }
+
+/**
+ * place here for now
+ */
+String.prototype.capitalizeWords = function() {
+  var words = ""
+  this.toLowerCase().split(/\-|\s|\/|\,/).forEach(function(word) {
+    var tmp = word.charAt(0).toUpperCase() + word.slice(1),
+        dir = $.grep(['SE', 'NE', 'SW', 'NW'], function(d) { return d == tmp.toUpperCase() })
+    tmp = dir.length == 1 ? dir[0] : tmp
+    words += ' ' + tmp
+  })
+  return words
+};
