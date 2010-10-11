@@ -75,13 +75,6 @@ $(function() {
       nhoods[props.neighborhood_id]++
       hash[ra.toString('MM-dd-yy')]++      
     })
-  
-   for(var nhid in nhoods)
-     nhcounts.push([nhid, nhoods[nhid]])
-     
-   nhcounts.sort(function(a, b) {
-     return (b[1] < a[1]) ? -1 : ((b[1] > a[1]) ? 1 : 0)
-   })
       
    for(var date in hash)
      counts.push(hash[date])
@@ -92,10 +85,24 @@ $(function() {
      var last = Date.parse(data.features[0].properties.reported_at) 
      $('#lastreport .val').text(last.toString('ddd MMM, dd yyyy hh:mmtt'))
      
-     var top5 = nhcounts.slice(0,5)
-     nhids = top5.map(function(ar) {
-       return ar[0]
+    /**
+     * Right now the neighborhood names aren't stored on crimes because of future 
+     * plans to store the polygon data for neighborhoods.  Because of this, I'm 
+     * finding the top 5 neighborhoods via js and requesting their names.
+     *
+     * I'm considering creating a NeighborhoodGeo class that would store the geo
+     * data and including the names in the crime document and adding a one to one 
+     * relationship with the crime model (@crime.neighborhood_geo).
+     */ 
+     for(var nhid in nhoods)
+       nhcounts.push([nhid, nhoods[nhid]])
+
+     nhcounts.sort(function(a, b) {
+       return (b[1] < a[1]) ? -1 : ((b[1] > a[1]) ? 1 : 0)
      })
+     
+     var top5 = nhcounts.slice(0,5)
+     nhids = top5.map(function(ar) { return ar[0] })
      
     $.getJSON('/neighborhoods.json?ids[]=' + nhids.join(','), function(data) {
       var ul = $('#topneighborhoods ul.val'),
@@ -103,10 +110,7 @@ $(function() {
                   
       $.each(data, function() {
         var nhood = this,
-            cnt = $.grep(top5, function(nhc, idx) { 
-              return nhc[0] == nhood.id 
-            })[0]
- 
+            cnt = $.grep(top5, function(nhc, idx) { return nhc[0] == nhood.id })[0]
         names.push({name: this.name.capitalizeWords(), count: cnt[1]})
       })
       
