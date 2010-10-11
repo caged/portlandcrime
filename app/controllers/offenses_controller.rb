@@ -8,7 +8,7 @@ class OffensesController < ApplicationController
     respond_to do |format|
       format.html
       format.json do 
-        @crimes = @offense.crimes.in_the_past(1.year)
+        @crimes = @offense.crimes.in_the_past(30.days)
         logger.info "Found #{@crimes.count} crimes"
         render :geojson => @crimes
       end

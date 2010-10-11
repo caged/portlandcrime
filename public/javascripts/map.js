@@ -6,6 +6,7 @@ $(function() {
       .container(document.getElementById('map').appendChild(svg))
       .center({lat: 45.5250, lon: -122.6515})
       .zoom(13)
+      .zoomRange([9,18])
       .add(po.interact())
       
   map.add(po.image()
@@ -23,21 +24,12 @@ $(function() {
   $(document).bind('ajaxStart', function() { fetching = true })
              .bind('ajaxEnd', function() { fetching = false })
 
-             
-  
-  // if($('body[data-path=crimes-index]').length != 0) {
-  //   $.getJSON('/.json', function(data) {
-  //     map.add(po.geoJson()
-  //       .features(data.features)
-  //       .on('load', load))
-  //   })
-  // } else if($('body[data-path=offenses-show]').length != 0) {
     $.getJSON(document.location.pathname, function(data) {
+      $(document).trigger('crimes.loaded', data)
       map.add(po.geoJson()
         .features(data.features)
         .on('load', load))
     })
-  // }
 
 
   $('.compass').click(togglecrimes)
@@ -65,6 +57,9 @@ $(function() {
       el.setAttribute("r", 12)
       el.setAttribute('alt', time.toString('ddd MMM, dd yyyy hh:mmtt'))
       
+      $(el).bind('click', {props: props, geo: this.data.geometry}, function(event) {
+        console.log(event.data); 
+      })
       if(inact)
         $(text).addSVGClass('inactive')
         

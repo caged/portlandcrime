@@ -35,9 +35,14 @@ namespace :pp do
             # Convert points to WGS84 projection
             lat = cr[8].empty? ? 0 : cr[8]
             lon = cr[9].empty? ? 0 : cr[9]
-            point = Proj4::Point.new(lat.to_f, lon.to_f)
-            wgs84 = projection.inverseDeg(point)
-            crime.loc = {:lat => wgs84.x, :lon => wgs84.y}
+            
+            if lat == 0 || lon == 0
+              crime.loc = {:lat => 0, :lon => 0}
+            else
+              point = Proj4::Point.new(lat.to_f, lon.to_f)
+              wgs84 = projection.inverseDeg(point)
+              crime.loc = {:lat => wgs84.x, :lon => wgs84.y}
+            end
 
             # A little cleanup
             cr[3] = 'Simple Assault' if cr[3] == 'Assault, Simple'

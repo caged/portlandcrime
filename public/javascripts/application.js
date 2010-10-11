@@ -1,49 +1,7 @@
-$.fn.addSVGClass = function(c) {
-  var el = this[0],
-      cl = el.getAttribute('class')
-  
-  if(!cl) cl = ' ';    
-  cl = cl.split(' ')
-  if(cl.indexOf(c) == -1) {
-    cl.push(c)
-    el.setAttribute('class', cl.join(' '))
-  }
-  
-  return this
-}
-
-$.fn.removeSVGClass = function(c) {
-  var el = this[0]
-      cl = el.getAttribute('class')
-      
-  cl = cl.split(' ')
-  var idx = cl.indexOf(c)
-  if(idx != -1) {
-    cl.splice(idx, 1)
-    el.setAttribute('class', cl.join(' '))
-  }
-  
-  return this
-}
-
-$.fn.hasSVGClass = function(c) {
-  var el = this[0]
-      cl = el.getAttribute('class')
-      has = false
-      
-  cl = cl.split(' ')
-  var idx = cl.indexOf(c)
-  if(idx != -1)
-    has = true
-    
-  return has
-}
 
 $.fn.slideFadeToggle = function(speed, callback, easing) {
-  return this.animate({
-      height: 'toggle'
-    }, speed, easing, callback);
-};
+  return this.animate({height: 'toggle'}, speed, easing, callback);
+}
 
 $(function() {
   
@@ -81,16 +39,44 @@ $(function() {
     $('#map').trigger('map.togglecrimes')
   })
   
-  
+  /**
+   * Expand and collapse of crime groups
+   */
   $('span.exp').click(function() {
     var span = $(this)
     var child = span.closest('li').find('ul.offenses')
-    child.slideFadeToggle('slow', function() {
+    child.animate({height: 'toggle'}, 'slow', 'easeOutBack', function() {
       span.toggleClass('collapsed')
-    }, 'easeOutBack') 
+    })
+  })
+  
+  $(document).bind('crimes.loaded', function(event, data) {
+    var start = Date.today().add(-30).days(),
+        end = new Date(),
+        range = pv.range(start.getTime(), end.getTime(), 86400000 /* 1 day */),
+        hash = {},
+        counts = []
+    
+    $.each(range, function() {
+       var d = new Date(this)
+       hash[d.toString('MM-dd-yy')] = 0
+    })
+    
+    $.each(data.features, function() {
+      var ra = Date.parse(this.properties.reported_at)
+      hash[ra.toString('MM-dd-yy')]++
+    })
+    
+   for(var date in hash)
+     counts.push(hash[date])
+     
+     sparkline('#pulse', counts, true)     
+     $('#total .num').text(data.features.length)
+     
+     var last = Date.parse(data.features[0].properties.reported_at) 
+     $('#lastreport .val').text(last.toString('ddd MMM, dd yyyy hh:mmtt'))
   })
 })
-
 
 String.prototype.capitalizeWords = function() {
   var words = ""

@@ -16,7 +16,7 @@ class Crime
     
   scope :in_the_past, lambda {|time|   
     where(:reported_at.gte => Time.zone.now.change(:hour => 0) - time, 
-    :reported_at.lt => Time.zone.now.change(:hour => 0))}
+    :reported_at.lt => Time.zone.now.change(:hour => 0)).sort(:reported_at.desc)}
   
   def as_json(options = {})
     props = attributes

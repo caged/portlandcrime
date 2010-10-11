@@ -10,6 +10,7 @@ javascripts:
     - public/javascripts/vendor/rails.js
     - public/javascripts/views/**/*.js
   app:
+    - public/javascripts/lib/*.js
     - public/javascripts/*.js
     - public/javascripts/application.js
 stylesheets:

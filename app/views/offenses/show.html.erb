@@ -14,5 +14,20 @@
       <span class="badge" data-code="<%= @offense.type_code %>">E</span>
     </h1>
     <p><%= @offense.desc %></p>
+    <div id="pulse"></div>
+    <div id="total">
+      <span class="num"></span>
+      <span class="label">Total</span>
+    </div>
+    <ul class="props">
+      <li id="dagerange">
+        <strong>Date:</strong>
+        <span class="val"><%= "#{(Time.zone.now - 30.days).strftime('%b %d, %Y')} - #{Time.zone.now.strftime('%b %d, %Y')}" %></span>
+      </li>
+      <li id="lastreport">
+        <strong>Last Report:</strong>
+        <span class="val"></span>
+      </li>
+    </ul>
   </div>
 </aside>
