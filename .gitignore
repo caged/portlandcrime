@@ -4,3 +4,6 @@ log/*.log
 tmp/**/*
 database.mongo.yml
 public/assets
+public/offenses
+public/index.html
+public/neighborhoods

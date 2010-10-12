@@ -24,7 +24,7 @@ $(function() {
   $(document).bind('ajaxStart', function() { fetching = true })
              .bind('ajaxEnd', function() { fetching = false })
 
-    $.getJSON(document.location.pathname, function(data) {
+    $.getJSON(document.location.pathname + '.json', function(data) {
       $(document).trigger('crimes.loaded', data)
       map.add(po.geoJson()
         .features(data.features)

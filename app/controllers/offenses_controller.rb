@@ -1,7 +1,8 @@
 class OffensesController < ApplicationController
+  caches_page :show
   def index
-  end
   
+  end
   
   def show    
     @offense = Offense.first(:permalink => params[:id])
