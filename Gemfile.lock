@@ -1,12 +1,18 @@
 GIT
+  remote: git://github.com/Caged/proj4rb.git
+  revision: 26922c73fcc280cb0545ae415610426cb8fce875
+  specs:
+    proj4rb (0.3.1)
+
+GIT
   remote: http://github.com/jnunemaker/mongomapper.git
-  revision: 5a3328244b641fa4f6a3743e9e0b4dd6a1ac2700
+  revision: fd59b0ab068be7321f8e84b9dc12fb4fa6b8535d
   branch: rails3
   specs:
     mongo_mapper (0.8.4)
       activemodel (~> 3.0.0)
       activesupport (~> 3.0.0)
-      plucky (~> 0.3.5)
+      plucky (~> 0.3.6)
 
 GEM
   remote: http://rubygems.org/
@@ -40,8 +46,8 @@ GEM
     activesupport (3.0.0)
     arel (1.0.1)
       activesupport (~> 3.0.0)
-    bson (1.1)
-    bson_ext (1.1)
+    bson (1.1.1)
+    bson_ext (1.1.1)
     builder (2.1.2)
     closure-compiler (0.3.3)
     erubis (2.6.6)
@@ -52,20 +58,19 @@ GEM
     jammit (0.5.3)
       closure-compiler (>= 0.1.0)
       yui-compressor (>= 0.9.1)
-    jquery-rails (0.2.1)
-      rails (~> 3.0.0)
+    jquery-rails (0.2.3)
+      rails (~> 3.0)
     json (1.4.6)
-    mail (2.2.6.1)
+    mail (2.2.7)
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
     mime-types (1.16)
-    mongo (1.0.9)
-      bson (>= 1.0.5)
-    plucky (0.3.5)
-      mongo (~> 1.0.8)
+    mongo (1.1.1)
+      bson (>= 1.1.1)
+    plucky (0.3.6)
+      mongo (~> 1.1)
     polyglot (0.3.1)
-    proj4rb (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
@@ -97,7 +102,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bson_ext (= 1.1)
+  bson_ext (= 1.1.1)
   closure-compiler
   excelsior (= 0.1.0)
   hirb
@@ -105,7 +110,7 @@ DEPENDENCIES
   jquery-rails
   json (= 1.4.6)
   mongo_mapper!
-  proj4rb (= 0.3.1)
+  proj4rb!
   rails (= 3.0.0)
   rails3-generators
   wirble

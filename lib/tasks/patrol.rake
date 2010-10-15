@@ -25,9 +25,15 @@ namespace :pp do
         if i != 0
           crime = Crime.first(:case_id => cr[0].to_i)
           if crime.nil?
+            # Ruby 1.9 will not parse american date formats with the month first
+            # so we do some hackery here to put the month first
+            american = cr[1].split('/')
+            month = american.shift
+            american.insert(1, month)
+
             crime = Crime.new
             crime.case_id = cr[0]
-            crime.reported_at = Time.parse("#{cr[1]} #{cr[2]}")
+            crime.reported_at = Time.parse("#{american.join('/')} #{cr[2]}")
             crime.address = cr[4]
             crime.precinct = cr[6]
             crime.district = cr[7]
@@ -63,11 +69,12 @@ namespace :pp do
             end
           end
         end
-        i = 1 if i == 0
+        i = 1 if i == 0 # Hack to ignore header row
       end
       puts "Imported #{i} crimes in #{Time.now - start} seconds"
     rescue Exception => e
-      pp e
+      pp e.message
+      pp e.backtrace
     end
   end
 end

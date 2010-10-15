@@ -8,14 +8,14 @@ gem 'mongo_mapper',
   :git => 'http://github.com/jnunemaker/mongomapper.git', 
   :branch => 'rails3'
   
-gem 'bson_ext', '1.1'
+gem 'bson_ext', '1.1.1'
 gem 'json', '1.4.6'
 gem 'jammit'
 gem 'yui-compressor'
 gem 'closure-compiler'
 gem 'excelsior', '0.1.0'
-gem 'proj4rb', '0.3.1', :require => 'proj4'
-
+gem 'proj4rb', :git => 'git://github.com/Caged/proj4rb.git'
+  
 group :development do
   gem 'rails3-generators'
   gem 'jquery-rails'
