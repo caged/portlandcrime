@@ -52,7 +52,6 @@ GEM
     closure-compiler (0.3.3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    excelsior (0.1.0)
     hirb (0.3.4)
     i18n (0.4.1)
     jammit (0.5.3)
@@ -104,7 +103,6 @@ PLATFORMS
 DEPENDENCIES
   bson_ext (= 1.1.1)
   closure-compiler
-  excelsior (= 0.1.0)
   hirb
   jammit
   jquery-rails

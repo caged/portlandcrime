@@ -1,11 +1,13 @@
 require 'pathname'
 require 'pp'
+require 'csv'
 
 namespace :pp do
   desc 'Import new crimes from PDX Data Catalog'
   task :import => :environment do
     url = Pathname.new('http://www.portlandonline.com/shared/file/data/crime_incident_data.zip')
     out = Pathname.new(Rails.public_path) + 'data' + url.basename.to_s
+    csv = out.sub(/\.zip$/, '.csv')
     
     fork { exec "curl -f#LA 'PortlandPatrolTest v0.1' #{url.to_s} -o #{out.to_s}"; exit! 1 }
     Process.wait
@@ -21,7 +23,7 @@ namespace :pp do
     start = Time.now
     
     begin
-      Excelsior::Reader.rows(File.read(out.sub(/\.zip$/, '.csv'))) do |cr|
+      CSV.foreach(csv) do |cr|
         if i != 0
           crime = Crime.first(:case_id => cr[0].to_i)
           if crime.nil?
@@ -33,7 +35,7 @@ namespace :pp do
 
             crime = Crime.new
             crime.case_id = cr[0]
-            crime.reported_at = Time.parse("#{american.join('/')} #{cr[2]}")
+            crime.reported_at = Time.zone.parse("#{american.join('/')} #{cr[2]}")
             crime.address = cr[4]
             crime.precinct = cr[6]
             crime.district = cr[7]
@@ -76,5 +78,7 @@ namespace :pp do
       pp e.message
       pp e.backtrace
     end
+    
+    #FileUtils.rm(csv)
   end
 end

@@ -13,7 +13,6 @@ gem 'json', '1.4.6'
 gem 'jammit'
 gem 'yui-compressor'
 gem 'closure-compiler'
-gem 'excelsior', '0.1.0'
 gem 'proj4rb', :git => 'git://github.com/Caged/proj4rb.git'
   
 group :development do
