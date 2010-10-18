@@ -16,8 +16,13 @@ gem 'closure-compiler'
 gem 'proj4rb', :git => 'git://github.com/Caged/proj4rb.git'
   
 group :development do
+  gem 'rspec-rails', '2.0.1'
   gem 'rails3-generators'
   gem 'jquery-rails'
+end
+
+group :test do
+  gem 'rspec', '2.0.0'
 end
 # Use unicorn as the web server
 # gem 'unicorn'
