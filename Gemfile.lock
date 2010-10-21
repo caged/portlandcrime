@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/Caged/proj4rb.git
-  revision: 9a924ae3071f0e652f27fad913972131b1ac39fa
+  revision: af9e96a3d2ee116d9a58dc4c667bde3619ac3a4d
   branch: ruby19
   specs:
     proj4rb (0.3.2)
