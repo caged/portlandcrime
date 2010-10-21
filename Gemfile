@@ -15,7 +15,7 @@ gem 'yui-compressor'
 gem 'closure-compiler'
 gem 'proj4rb', 
   :git => 'git://github.com/Caged/proj4rb.git',
-  :tag => 'v0.3.2'
+  :branch => 'ruby19'
       
   
 group :development do

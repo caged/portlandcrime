@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/Caged/proj4rb.git
-  revision: c2e9b59e62e14625c327751acca145e4464ccafd
-  tag: v0.3.2
+  revision: 9a924ae3071f0e652f27fad913972131b1ac39fa
+  branch: ruby19
   specs:
     proj4rb (0.3.2)
 
@@ -58,7 +58,7 @@ GEM
     jammit (0.5.3)
       closure-compiler (>= 0.1.0)
       yui-compressor (>= 0.9.1)
-    jquery-rails (0.2.3)
+    jquery-rails (0.2.4)
       rails (~> 3.0)
     json (1.4.6)
     mail (2.2.7)
