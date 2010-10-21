@@ -13,7 +13,10 @@ gem 'json', '1.4.6'
 gem 'jammit'
 gem 'yui-compressor'
 gem 'closure-compiler'
-gem 'proj4rb', :git => 'git://github.com/Caged/proj4rb.git'
+gem 'proj4rb', 
+  :git => 'git://github.com/Caged/proj4rb.git',
+  :tag => 'v0.3.2'
+      
   
 group :development do
   gem 'rspec-rails', '2.0.1'
@@ -45,8 +48,3 @@ end
 # group :development, :test do
 #   gem 'webrat'
 # end
-
-group :console do 
-  gem 'wirble'
-  gem 'hirb'
-end
