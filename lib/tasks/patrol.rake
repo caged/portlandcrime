@@ -71,10 +71,16 @@ namespace :pp do
             end
           end
         end
-        i = 1 if i == 0 # Hack to ignore header row
+        # Hack to ignore header row and reduce memory consuption when forced to 
+        # create hashes from large CSV files
+        i = 1 if i == 0  
       end
-      puts "Imported #{i} crimes in #{Time.now - start} seconds"
-      ImportStatistic.create({:time_taken => Time.now - start, :crimes_imported => i})
+      puts "Imported #{i - 1} crimes in #{Time.now - start} seconds"
+      ImportStatistic.create({:time_taken => Time.now - start, :crimes_imported => i - 1})
+      
+      # Remove the entire cache.  This is OK for now, but it won't last for ever.
+      # Consider moving this to a sweeper?
+      FileUtils.rm_r(File.join(Rails.public_path, 'cache'))
     rescue Exception => e
       pp e.message
       pp e.backtrace
