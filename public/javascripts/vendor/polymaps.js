@@ -2,7 +2,7 @@ if (!org) var org = {};
 if (!org.polymaps) org.polymaps = {};
 (function(po){
 
-  po.version = "2.2+1.0+2"; // This fork not semver!
+  po.version = "2.3.0"; // semver.org
 
   var zero = {x: 0, y: 0};
 po.ns = {
@@ -713,7 +713,6 @@ po.layer = function(load, unload) {
       map,
       container = po.svg("g"),
       transform,
-      layerZoom,
       levelZoom,
       levels = {};
 
