@@ -5,9 +5,7 @@ log/*.log
 tmp/**/*
 database.mongo.yml
 public/assets
-public/offenses
-public/index.html
-public/neighborhoods
+public/cache
 public/data/*.zip
 public/data/*.csv
 config/deploy.rb

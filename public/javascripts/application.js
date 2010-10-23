@@ -42,12 +42,17 @@ $(function() {
   /**
    * Expand and collapse of crime groups
    */
-  $('span.exp').click(function() {
-    var span = $(this)
-    var child = span.closest('li').find('ul.offenses')
-    child.animate({height: 'toggle'}, 'slow', 'easeOutBack', function() {
-      span.toggleClass('collapsed')
-    })
+  $('span.exp, span.otype a').click(function(event) {
+    event.stopPropagation()
+    event.preventDefault()
+    var el = $(this)
+    var child = el.closest('li').find('ul.offenses')
+    if(!el.hasClass('exp'))
+      el = el.siblings('span.exp')
+      
+    el.toggleClass('collapsed')
+    
+    child.animate({height: 'toggle'}, 'slow', 'easeOutBack')
   })
   
   $(document).bind('crimes.loaded', function(event, data) {

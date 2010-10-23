@@ -41,8 +41,10 @@ class Crime
       }
     JS
     Crime.collection.map_reduce(map, red, 
-      :reported_at => {:$gte => Time.now.change(:hour => 0) - start}, 
-      :reported_at => {:$lt => Time.now.change(:hour => 0)}).find.to_a
+      :reported_at => {
+        :$lt => Time.zone.now.change(:hour => 0).utc, 
+        :$gte => Time.at(Time.zone.now.change(:hour => 0) - start)
+      }).find.to_a
   end
 # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 # validates_presence_of :attribute
