@@ -18,6 +18,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    aaronh-chronic (0.3.9)
     abstract (1.0.0)
     actionmailer (3.0.0)
       actionpack (= 3.0.0)
@@ -107,6 +108,9 @@ GEM
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
+    whenever (0.6.1)
+      aaronh-chronic (>= 0.3.9)
+      activesupport (>= 2.3.4)
     yui-compressor (0.9.1)
 
 PLATFORMS
@@ -124,4 +128,5 @@ DEPENDENCIES
   rails3-generators
   rspec (= 2.0.0)
   rspec-rails (= 2.0.1)
+  whenever
   yui-compressor

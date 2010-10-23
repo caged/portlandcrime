@@ -1,4 +1,5 @@
 .bundle
+.rvmrc
 db/*.sqlite3
 log/*.log
 tmp/**/*
@@ -7,5 +8,6 @@ public/assets
 public/offenses
 public/index.html
 public/neighborhoods
-public/data
+public/data/*.zip
+public/data/*.csv
 config/deploy.rb

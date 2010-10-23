@@ -13,9 +13,8 @@ gem 'json', '1.4.6'
 gem 'jammit'
 gem 'yui-compressor'
 gem 'closure-compiler'
-gem 'proj4rb', 
-  :git => 'git://github.com/Caged/proj4rb.git',
-  :branch => 'ruby19'
+gem 'proj4rb', :git => 'git://github.com/Caged/proj4rb.git', :branch => 'ruby19'
+gem 'whenever', :require => false
       
   
 group :development do
