@@ -30,6 +30,20 @@ class Crime
       }
     }
   end
+  
+  def self.number_of_crimes_per_each_month_from(start = Time.zone.now.beginning_of_year)
+    map = "function() { emit(this.offense_id, { count: 0 }) }"
+    red = <<-JS
+      function(key, vals) {
+        var sum = 0
+        vals.forEach(function(val) { sum++ })
+        return {count: sum}
+      }
+    JS
+    Crime.collection.map_reduce(map, red, 
+      :reported_at => {:$gte => Time.now.change(:hour => 0) - start}, 
+      :reported_at => {:$lt => Time.now.change(:hour => 0)}).find.to_a
+  end
 # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 # validates_presence_of :attribute
 

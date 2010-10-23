@@ -33,7 +33,7 @@
               <li class="trends"><%= link_to(root_path) { "<span>Y</span> Trends" } %></li>
               <li class="about"><%= link_to(root_path) { "<span>i</span> About" } %></li>
             </ul>
-          </nav>
+          </nav><span class="last-import">Data Updated <%= @last_import.created_at.strftime('%A, %B %d %-I:%M %p') %></span>
         </div>
       </div>
     </div>

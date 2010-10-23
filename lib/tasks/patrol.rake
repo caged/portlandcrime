@@ -74,6 +74,7 @@ namespace :pp do
         i = 1 if i == 0 # Hack to ignore header row
       end
       puts "Imported #{i} crimes in #{Time.now - start} seconds"
+      ImportStatistic.create({:time_taken => Time.now - start, :crimes_imported => i})
     rescue Exception => e
       pp e.message
       pp e.backtrace

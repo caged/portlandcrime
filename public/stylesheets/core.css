@@ -157,10 +157,12 @@ header#top {
 header h1 {
   padding-top: 18px;
 }
-/*
+
+
 nav#primary {
-  margin-top: 25px;
-} */
+  width: 660px;
+  display: inline-block;
+} 
 
 nav#primary ul li {
   display: inline-block;
@@ -189,6 +191,21 @@ nav#primary li span {
   color: #6db963;
   line-height: 0;
   text-transform: none;
+}
+
+span.last-import {
+  display: inline-block;
+  color: #858585;
+  font-weight: 200;
+  margin-left: 15px;
+}
+
+span.last-import:before {
+  font-family: Pictos;
+  content: 'r ';
+  font-weight: 100;
+  font-size: 16px;
+  color: #6ea0d2;
 }
 
 /* @end */
