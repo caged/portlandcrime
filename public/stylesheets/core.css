@@ -14,6 +14,11 @@ header, section, aside, article {
 
 a {
   text-decoration: none;
+  color: #5f8ab6;
+}
+
+a:hover {
+  color: #6db963;
 }
 
 /*------------------------------------------------------------------------------------
