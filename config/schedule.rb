@@ -17,8 +17,12 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every 1.day, :at => '3:00 am' do
-   rake "pp:import"
+every 1.day, :at => '2:00 am' do
+   rake "crime:import"
+end
+
+every 1.week, :at => '3:00 am' do
+   rake "crime:reports:weekly"
 end
 
 # Learn more: http://github.com/javan/whenever

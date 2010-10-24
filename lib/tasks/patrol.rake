@@ -2,7 +2,14 @@ require 'pathname'
 require 'pp'
 require 'csv'
 
-namespace :pp do
+namespace :crime do
+  namespace :reports do
+    desc 'Run Daily Reports'
+    task :weekly => :environment do
+      Crime.monthly_totals_from_now
+    end
+  end
+  
   desc 'Import new crimes from PDX Data Catalog'
   task :import => :environment do
     url = Pathname.new('http://www.portlandonline.com/shared/file/data/crime_incident_data.zip')

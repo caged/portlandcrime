@@ -8,11 +8,12 @@ class Crime
   key :address, String
   key :loc, Hash
   key :code, String
-  
   timestamps!  
   
   belongs_to :offense      
   belongs_to :neighborhood
+  
+  add_concerns :reporting
     
   scope :in_the_past, lambda {|time|   
     where(:reported_at.gte => Time.zone.now.change(:hour => 0) - time, 
@@ -29,25 +30,6 @@ class Crime
         :coordinates => [loc['lat'], loc['lon']]
       }
     }
-  end
-  
-  def self.number_of_crimes_per_each_month_from(start = Time.now.beginning_of_year)
-    map = "function() { 
-      var month = this.reported_at.getFullYear() + '/' + this.reported_at.getMonth()
-      emit(month, {count: 1}) 
-    }"
-    red = <<-JS
-      function(key, vals) {
-        var sum = 0
-        vals.forEach(function(val) { sum += val.count })
-        return {count: sum}
-      }
-    JS
-    Crime.collection.map_reduce(map, red, 
-      :query => {:reported_at => {
-        '$lt' => Time.now, 
-        '$gte' => start
-      }}).find.to_a
   end
 # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 # validates_presence_of :attribute
