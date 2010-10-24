@@ -1,6 +1,7 @@
 Pdxpatrol::Application.routes.draw do
   resources :neighborhoods
   resources :offenses
+  resources :trends
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

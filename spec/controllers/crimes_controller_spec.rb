@@ -4,7 +4,7 @@ describe CrimesController do
   render_views
   
   it "should find crimes" do
-    get 'index'
+    get :index
     response.should be_success
   end
 end

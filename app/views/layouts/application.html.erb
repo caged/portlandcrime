@@ -2,8 +2,8 @@
 <html>
 <head>
   <title><%= @title || 'Portland Crime - *Alpha Preview' %></title>
-  <meta name="keywords" content="portland crime pdx safety neighborhood map homicide assault larceny prostitution murder gangs police oregon" />
-  <meta name="description" content="Track and review all types of crimes happening across Portland, OR neighborhoods.">
+  <meta name="keywords" content="portland crime pdx safety neighborhood chinatown pearl downtown southwest southeast northeast map homicide assault larceny prostitution murder gangs police oregon" />
+  <meta name="description" content="Track and review all types of crimes happening across Portland, OR neighborhoods."/>
   <%= include_stylesheets :core %>
   <%= include_javascripts :vendor, :app %>
   <%= csrf_meta_tag %>
@@ -30,10 +30,10 @@
           <nav id="primary">
             <ul>
               <li class="home"><%= link_to(root_path) { "<span>@</span> Home" } %></li>
-              <li class="trends"><%= link_to(root_path) { "<span>Y</span> Trends" } %></li>
+              <li class="trends"><%= link_to(trends_path) { "<span>Y</span> Trends" } %></li>
               <li class="about"><%= link_to(root_path) { "<span>i</span> About" } %></li>
             </ul>
-          </nav><span class="last-import">Data Updated <%= @last_import.created_at.strftime('%A, %B %d %-I:%M %p') %></span>
+          </nav><% if @last_import %><span class="last-import">Data Updated <%= @last_import.created_at.strftime('%A, %B %d %-I:%M %p') %></span><% end %>
         </div>
       </div>
     </div>

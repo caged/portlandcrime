@@ -5,14 +5,14 @@ class Crime
   
   def self.monthly_totals_from(start)
     map = "function() { 
-      var month = this.reported_at.getMonth() + 1 + '/' + this.reported_at.getFullYear()
-      emit(month, 1) 
+      var date = new Date(this.reported_at.getFullYear(), this.reported_at.getMonth(), 1)
+      emit(date.getMonth() + '/' + date.getFullYear(), {count:1, date: date}) 
     }"
     red = <<-JS
       function(key, vals) {
         var sum = 0
-        vals.forEach(function(val) { sum += val })
-        return sum
+        vals.forEach(function(val) { sum += val.count })
+        return {count: sum, date: vals[0].date }
       }
     JS
     Crime.collection.map_reduce(map, red, 
