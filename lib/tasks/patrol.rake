@@ -6,7 +6,7 @@ namespace :crime do
   namespace :reports do
     desc 'Run Daily Reports'
     task :weekly => :environment do
-      Crime.monthly_totals_from_now
+      Crime.weekly_totals_from_now
     end
   end
   
