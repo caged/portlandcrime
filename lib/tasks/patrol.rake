@@ -87,7 +87,8 @@ namespace :crime do
       
       # Remove the entire cache.  This is OK for now, but it won't last for ever.
       # Consider moving this to a sweeper?
-      FileUtils.rm_r(File.join(Rails.public_path, 'cache'))
+      cache = File.join(Rails.public_path, 'cache')
+      FileUtils.rm_r(cache) if File.exists?(cache)
     rescue Exception => e
       pp e.message
       pp e.backtrace
