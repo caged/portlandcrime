@@ -1,6 +1,5 @@
 $(function() {
   if($('body[data-path=trends-index]').length != 0) {
-    return
     $.getJSON('/trends.json', function(data) {
       var counts  = $.map(data, function(o) { return o.value.count }),
              max  = Math.max.apply(Math, counts),
@@ -16,7 +15,7 @@ $(function() {
         li.append($('<span />')
           .addClass('info')
           .append($('<span/>').text(week.value.count).addClass('num'))
-          .append($('<span/>').text(week._id).addClass('range')))
+          .append($('<span/>').text('Week ' + week._id).addClass('range')))
         
         li.mouseover(function() {
           $(this).addClass('on')
@@ -26,7 +25,7 @@ $(function() {
         
         
           
-        if(idx % 4 == 0) {
+        if(idx % 4 == 0 && week._id != 0.0) {
           var mon = Date.parse(week.value.date).toString('MMM'),
               span = $('<span />').addClass('mon').text(mon),
               klass = mon.toLowerCase()

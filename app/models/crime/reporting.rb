@@ -5,12 +5,12 @@ class Crime
   
   def self.weekly_totals_from(start)
     map = "function() { 
-      var weekOfMonth = Math.round(this.reported_at.getDate() / 7) + 1
-      
-      emit(this.reported_at.getMonth() + '/' + 
-        this.reported_at.getFullYear() + ' Week ' + 
-        weekOfMonth, 
-        {count:1, date: this.reported_at}) 
+      var week = getWeek(this.reported_at)
+      if(week == 53.0)  {
+        print(this.reported_at)
+        week = 0
+      }
+      emit(week, {count:1, date: this.reported_at}) 
     }"
     red = <<-JS
       function(key, vals) {

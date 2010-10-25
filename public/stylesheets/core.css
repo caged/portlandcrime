@@ -512,15 +512,18 @@ span.count {
 
 #trends ol li span.info {
   position: absolute;
-  top: -20px;
-  left: -100px;
+  top: -50px;
+  left: -20px;
   background: rgba(240,240,240,0.9);
-  width: 275px;
   text-align: center;
   display: none;
   -webkit-box-shadow: 1px 1px rgba(50,50,50,0.2);
-  padding: 3px;
+  padding: 6px;
   border: 1px solid #eee;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  width: 50px;
 }
 
 #trends ol li.on {
@@ -534,11 +537,11 @@ span.count {
 
 #trends ol li span.num {
   font-weight: bold;
+  display: block;
+  margin-bottom: 3px;
+  font-size: 140%;
 }
 
-#trends ol li span.num:after {
-  content: ' / ';
-}
 
 span.range {
   color: #666;
