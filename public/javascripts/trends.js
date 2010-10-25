@@ -1,5 +1,6 @@
 $(function() {
   if($('body[data-path=trends-index]').length != 0) {
+    return
     $.getJSON('/trends.json', function(data) {
       var counts  = $.map(data, function(o) { return o.value.count }),
              max  = Math.max.apply(Math, counts),
