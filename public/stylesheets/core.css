@@ -532,11 +532,11 @@ span.count {
   z-index: 200;
 }
 
-span.num {
+#trends ol li span.num {
   font-weight: bold;
 }
 
-span.num:after {
+#trends ol li span.num:after {
   content: ' / ';
 }
 
