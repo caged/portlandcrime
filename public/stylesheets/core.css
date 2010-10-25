@@ -476,3 +476,68 @@ span.count {
   padding: 5px;
 }
 /* @end */
+
+/*------------------------------------------------------------------------------------
+  @group trends
+------------------------------------------------------------------------------------*/
+
+#trends ol {
+  list-style: none;
+  margin: 10px 10px 30px 10px;
+  padding: 0;
+  height: 200px;
+}
+
+#trends ol li {
+  position: relative;
+  display: inline-block;
+  background: #c00;
+  margin-right: 2px;
+  width: 15px;
+  -webkit-border-top-left-radius: 2px;
+  -webkit-border-top-right-radius: 2px;
+  -moz-border-radius-topleft: 2px;
+  -moz-border-radius-topright:2px;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+}
+
+#trends ol li span.mon {
+  position: absolute;
+  bottom: -20px;
+}
+
+#trends ol li span.info {
+  position: absolute;
+  top: -20px;
+  left: -100px;
+  background: rgba(240,240,240,0.9);
+  width: 275px;
+  text-align: center;
+  display: none;
+  -webkit-box-shadow: 1px 1px rgba(50,50,50,0.2);
+  padding: 3px;
+  border: 1px solid #eee;
+}
+
+#trends ol li.on {
+  background: #800;
+}
+
+#trends ol li.on span.info {
+  display: block;
+  z-index: 200;
+}
+
+span.num {
+  font-weight: bold;
+}
+
+span.num:after {
+  content: ' / ';
+}
+
+span.range {
+  color: #666;
+}
+/* @end */

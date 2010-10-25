@@ -1,9 +1,12 @@
 $(function() {
+  var map = document.getElementById('map')
+  if(!map) return
+  
   var po = org.polymaps,
       fetching = false,
       svg = po.svg('svg'),
       map = po.map()
-      .container(document.getElementById('map').appendChild(svg))
+      .container(map.appendChild(svg))
       .center({lat: 45.5250, lon: -122.6515})
       .zoom(13)
       .zoomRange([9,18])

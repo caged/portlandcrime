@@ -1,12 +1,16 @@
 class Crime
-  def self.monthly_totals_from_now
-    monthly_totals_from(Time.now.beginning_of_year)
+  def self.weekly_totals_from_now
+    weekly_totals_from(Time.now.beginning_of_year)
   end
   
-  def self.monthly_totals_from(start)
+  def self.weekly_totals_from(start)
     map = "function() { 
-      var date = new Date(this.reported_at.getFullYear(), this.reported_at.getMonth(), 1)
-      emit(date.getMonth() + '/' + date.getFullYear(), {count:1, date: date}) 
+      var weekOfMonth = Math.round(this.reported_at.getDate() / 7) + 1
+      
+      emit(this.reported_at.getMonth() + '/' + 
+        this.reported_at.getFullYear() + ' Week ' + 
+        weekOfMonth, 
+        {count:1, date: this.reported_at}) 
     }"
     red = <<-JS
       function(key, vals) {
@@ -19,6 +23,6 @@ class Crime
       :query => {:reported_at => {
         '$lt' => Time.now, 
         '$gte' => start
-      }}, :out => 'monthly_citywide_totals_report_' + start.year.to_s)
+      }}, :out => 'weekly_citywide_totals_report_' + start.year.to_s)
   end
 end
