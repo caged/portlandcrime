@@ -1,4 +1,6 @@
 class TrendsController < ApplicationController
+  caches_page :index
+  
   def index
     time = Time.zone.now
     col = MongoMapper.database["weekly_citywide_totals_report_#{time.year}"]
