@@ -98,7 +98,7 @@
     "group_order": 4
  },
  {
-    "desc":"Offenses against family",
+    "desc":"Nonsupport, neglect, desertion, custodial interference, or abuse of family and children. Attempts are included",
     "name":"Offenses Against Family",
     "type":"Non-Violent",
     "order": 1,
@@ -180,13 +180,6 @@
     "type": "Drugs & Alchohol",
     "order": 0,
     "group_order": 2
- },
- {
-    "desc":"Nonsupport, neglect, desertion, custodial interference, or abuse of family and children. Attempts are included.",
-    "name":"Offense Against Family",
-    "type":"Non-Violent",
-    "order": 0,
-    "group_order": 1
  },
  {
     "desc":"Runaway juveniles when reported by their parents or guardians.",
