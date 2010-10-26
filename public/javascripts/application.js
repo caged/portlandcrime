@@ -56,6 +56,9 @@ $(function() {
   })
   
   $(document).bind('crimes.loaded', function(event, data) {
+    if($('body[data-path=offenses-show]').length != 1)
+      return
+      
     var start = Date.today().add(-30).days(),
         end = new Date(),
         range = pv.range(start.getTime(), end.getTime(), 86400000 /* 1 day */),
