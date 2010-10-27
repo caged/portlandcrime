@@ -4,9 +4,16 @@ require 'csv'
 
 namespace :crime do
   namespace :reports do
-    desc 'Run Daily Reports'
-    task :weekly => :environment do
-      Crime.weekly_totals_from_now
+    desc 'Run YTD Weekly Crime Totals'
+    task :ytc_crime_totals => :environment do
+      Crime.ytd_weekly_totals
+      puts "[#{Time.zone.now}] Calculated weekly crime totals from now"
+    end
+    
+    desc 'Run YTD Offense Summaries'
+    task :ytd_offense_summaries => :environment do
+      Offense.summaries_for_the_past(Time.now.beginning_of_year.to_i)
+      puts "[#{Time.zone.now}] Calculated offenses summaries"
     end
   end
   

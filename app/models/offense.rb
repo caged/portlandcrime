@@ -10,6 +10,8 @@ class Offense
   timestamps!     
 
   many :crimes
+  
+  add_concerns :reporting
     
   def type_code
     type[:name].parameterize[0..1]

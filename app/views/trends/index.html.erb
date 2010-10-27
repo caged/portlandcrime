@@ -1,5 +1,46 @@
 <% title 'Trends' %>
-  <div class="box">
+  <div class="box" id="year-counts">
     <header><h1>Trends</h1></header>
     <div id="trends"></div>
   </div>
+  <!-- legend -->
+  <div id="legend">
+    <h2>Legend:</h2>
+    <ul class="times">
+      <li class="day"><span class="lbl">Daylight / 5am-6pm</span></li>
+      <li class="night"><span class="lbl">Dark / 6pm-5am</span></li>
+      <li class="nightlife"><span class="lbl">Weekend Nightlife / Fri, Sat 8pm-2am</span></li>
+    </ul>
+    <span class="range"><%= Time.now.beginning_of_year.strftime('%B %d, %Y') %>-<%= Time.now.strftime('%B %d, %Y') %></span>
+  </div>
+  <!-- /legend -->
+  
+  <section class="boxgroup">
+    <% @offenses.each do |off| %>
+    <% offense = off[:offense] %>
+    <% summary = off[:summary]['value'] %>
+    <% total = summary['night'].to_i + summary['day'].to_i %>
+      <div class="txt box summary">
+        <h2>
+          <%=h offense.name  %>
+          <span class="total"><%= number_with_delimiter(total) %> total</span>
+        </h2>
+        <div class="summary-content">
+          <ul class="times">
+            <li class="day">
+              <span class="num"><%= number_with_delimiter(summary['day'].to_i) %></span> / 
+              <span class="percent"><%= ((summary['day'] / total) * 100).round %>%</span>
+            </li>
+            <li class="night">
+              <span class="num"><%= number_with_delimiter(summary['night'].to_i) %></span> / 
+              <span class="percent"><%= ((summary['night'] / total) * 100).round %>%</span>
+            </li>
+            <li class="nightlife">
+              <span class="num"><%= number_with_delimiter(summary['nightlife'].to_i) %></span> / 
+              <span class="percent"><%= ((summary['nightlife'] / total) * 100).round %>%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </section>

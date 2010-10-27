@@ -22,7 +22,11 @@ every 1.day, :at => '2:00 am' do
 end
 
 every 1.week, :at => '3:00 am' do
-   rake "crime:reports:weekly"
+   rake "crime:reports:ytc_crime_totals"
+end
+
+every 1.week, :at => '3:30 am' do
+   rake "crime:reports:ytd_offense_summaries"
 end
 
 # Learn more: http://github.com/javan/whenever

@@ -8,7 +8,7 @@ if db_config[Rails.env] && db_config[Rails.env]['adapter'] == 'mongodb'
   MongoMapper.connection = Mongo::Connection.new(mongo['host'], nil, :logger => Rails.logger)
   MongoMapper.database = mongo['database']
   
-  system_js = <<-JS
+  get_week_js = <<-JS
   function(date) {
     var a, b, c, d, e, f, g, n, s, w, $y, $m, $d;
 
@@ -49,6 +49,15 @@ if db_config[Rails.env] && db_config[Rails.env]['adapter'] == 'mongodb'
     return w;
   }
   JS
-  javascript = "db.system.js.insert({_id:'getWeek', value : #{system_js} });"
+  
+  between_js = <<-JS
+  function (date, start, end) {
+    return date.getTime() >= start.getTime() && date.getTime() <= end.getTime();
+  }
+  JS
+  javascript = <<-JS
+    db.system.js.insert({_id:'getWeek', value : #{get_week_js} });
+    db.system.js.insert({_id:'isBetweenTheHoursOf', value : #{between_js} });
+  JS
   MongoMapper.database.eval(javascript)
 end

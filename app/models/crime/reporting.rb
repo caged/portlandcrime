@@ -1,5 +1,5 @@
 class Crime
-  def self.weekly_totals_from_now
+  def self.ytd_weekly_totals
     weekly_totals_from(Time.now.beginning_of_year)
   end
   
@@ -7,7 +7,6 @@ class Crime
     map = "function() { 
       var week = getWeek(this.reported_at)
       if(week == 53.0)  {
-        print(this.reported_at)
         week = 0
       }
       emit(week, {count:1, date: this.reported_at}) 

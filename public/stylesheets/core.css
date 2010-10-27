@@ -101,6 +101,25 @@ a:hover {
   font-size: 13px;
 }
 
+.boxgroup:after {
+  content: ".";
+  clear: both;
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+.boxgroup .box {
+  float: left;
+  width: 465px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.boxgroup .box:nth-child(even) {
+  margin-right: 0;
+}
+
 /* @end */
 
 /*------------------------------------------------------------------------------------
@@ -480,6 +499,10 @@ span.count {
 /*------------------------------------------------------------------------------------
   @group trends
 ------------------------------------------------------------------------------------*/
+#year-counts {
+  margin-bottom: 10px;
+}
+
 #trends {
   min-height: 200px;
 }
@@ -542,8 +565,102 @@ span.count {
   font-size: 140%;
 }
 
-
 span.range {
   color: #666;
+}
+
+#legend {
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#legend h2 {
+  display: inline-block;
+}
+
+#legend ul {
+  display: inline-block;
+}
+
+#legend ul li {
+  width: auto;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-position: 10px 0;
+  line-height: 150%;
+}
+
+#legend span.range {
+  float: right;
+  margin-top: 2px;
+  font-weight: bold;
+}
+
+#legend span.lbl {
+  color: #555;
+  text-shadow: 1px 1px rgba(255,255,255,0.5);
+}
+
+div.box.summary {
+  padding: 0;
+}
+
+div.summary h2 {
+  font-size: 120%;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+}
+
+div.summary h2 span.total {
+  float: right;
+  font-weight: normal;
+  color: #ccc;
+}
+
+ul.times {
+  list-style: none;
+  margin: 0;
+}
+
+ul.times li {
+  display: inline-block;
+  width: 96px;
+  padding: 10px 10px 10px 35px;
+  background-position: 10px 6px;
+  background-repeat: no-repeat;
+}
+
+ul.times li.day {
+  background-image: url(/images/day.png);
+}
+
+ul.times li.night {
+  background-image: url(/images/night.png);
+}
+
+ul.times li.nightlife {
+  background-image: url(/images/nightlife.png);
+}
+
+ul.times li:nth-child(3) {
+  width: 130px;
+}
+
+ul.times li span.lbl {
+  color: #777;
+}
+
+ul.times li span.num {
+  font-weight: bold;
+}
+
+ul.times li span.percent {
+  font-weight: bold;
+  color: #999;
+  text-align: center;
 }
 /* @end */
