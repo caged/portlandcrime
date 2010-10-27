@@ -12,7 +12,7 @@ class TrendsController < ApplicationController
         # Looks like I'm going to need to denormalize a little and include the 
         # offense name in the crime object so I won't have to make queries such as this
         # It feels hacky
-        @offenses = Offense.find(summaries.map { |o| o['_id'] })
+        @offenses = Offense.sort(:name).find(summaries.map { |o| o['_id'] })
         @offenses.map! do |o|
           summary = summaries.detect {|s| o.id == s['_id']}
           {:offense => o, :summary => summary}
