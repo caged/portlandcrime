@@ -21,11 +21,11 @@ every 1.day, :at => '2:00 am' do
    rake "crime:import"
 end
 
-every 1.week, :at => '3:00 am' do
+every :sunday, :at => '3:00 am' do
    rake "crime:reports:ytc_crime_totals"
 end
 
-every 1.week, :at => '3:30 am' do
+every :sunday, :at => '3:30 am' do
    rake "crime:reports:ytd_offense_summaries"
 end
 
