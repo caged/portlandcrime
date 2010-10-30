@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   private
   
   def set_last_import
-    @last_import ||= ImportStatistic.sort(:created_at => -1).first
+    @last_import ||= ImportStatistic.sort(:created_at).last
   end
 end

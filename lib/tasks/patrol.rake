@@ -23,7 +23,7 @@ namespace :crime do
     out = Pathname.new(Rails.public_path) + 'data' + url.basename.to_s
     csv = out.sub(/\.zip$/, '.csv')
     
-    fork { exec "curl -f#LA 'PortlandPatrolTest v0.1' #{url.to_s} -o #{out.to_s}"; exit! 1 }
+    fork { exec "curl -f#LA 'PDXCrime v0.1' #{url.to_s} -o #{out.to_s}"; exit! 1 }
     Process.wait
     fork { exec "unzip -o #{out.to_s} -d #{out.dirname}"; exit! 1 }
     Process.wait
