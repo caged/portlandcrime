@@ -1,12 +1,13 @@
 $(function() {
-  var map = document.getElementById('map')
-  if(!map) return
+  var mapel = $('#map')
+  if(mapel.length == 0) return
   
   var po = org.polymaps,
-      fetching = false,
+      lightstyle = 5870,
+      darkstyle  = 1960,
       svg = po.svg('svg'),
       map = po.map()
-      .container(map.appendChild(svg))
+      .container(mapel[0].appendChild(svg))
       .center({lat: 45.5250, lon: -122.6515})
       .zoom(13)
       .zoomRange([9,18])
@@ -15,7 +16,7 @@ $(function() {
   map.add(po.image()
       .url(po.url("http://{S}tile.cloudmade.com"
       + "/16d73702b7824b57830171b5da5c3c85" // http://cloudmade.com/register
-      + "/5870/256/{Z}/{X}/{Y}.png")
+      + "/" + lightstyle + "/256/{Z}/{X}/{Y}.png")
       .hosts(["a.", "b.", "c.", ""])));
 
   map.add(po.compass()
@@ -37,10 +38,44 @@ $(function() {
 
   $('.compass').click(togglecrimes)
   
+  $(document).keyup(function(e) {
+    if (e.keyCode == 27) { $('.resizer').click(); }   // esc
+  });
+  
+  var resizer = $('<span />').addClass('resizer').text('`'),
+      width = mapel.width(),
+      height = mapel.height(),
+      body   = $(document.body),
+      logo   = $('<img />')
+        .attr('src', '/images/logo-small.png')
+        .addClass('fslogo'),
+      hdr    = $('header#top .wrap-inner')
+  
+      
+  resizer.bind('click', function(event) {
+    if(body.hasClass('fullscreen')) {
+      body.removeClass('fullscreen')
+      mapel.find('header').show()
+      mapel.css({position: null, width: width, height: height})
+      logo.remove()      
+    } else {
+      body.addClass('fullscreen')
+      mapel.find('header').hide()
+      mapel.css({position: 'fixed', top: 0, right: 0, width: '100%', height: '100%'})
+      mapel.find('svg').css({ width: '100%', height: '100%'})
+      mapel.prepend(logo.remove())
+    }
+    
+    map.resize()
+  })
+  
+  mapel.prepend(resizer)
+  
   function load(e) {   
     var counts = {}  
     $.each(e.features, function() {
       var el = this.element,
+          $el   = $(el)
           props = this.data.properties,
           text  = po.svg('text'),
           trans = el.getAttribute("transform"),
@@ -54,15 +89,21 @@ $(function() {
       counts[props.code]++
       
       if(inact)
-        $(el).addSVGClass('inactive')
+        $el.addSVGClass('inactive')
 
-      $(el).addSVGClass('circle').addSVGClass(props.code)
+      $el.addSVGClass('circle').addSVGClass(props.code)
+      if(time.isDaylight()) $el.addSVGClass('day') 
+      if(time.isDark()) $el.addSVGClass('dar') 
+      if(time.isWeekendNightlife()) $el.addSVGClass('wnl') 
+      
+      
       el.setAttribute("r", 12)
       el.setAttribute('alt', time.toString('ddd MMM, dd yyyy hh:mmtt'))
       
       $(el).bind('click', {props: props, geo: this.data.geometry}, function(event) {
         console.log(event.data); 
       })
+      
       if(inact)
         $(text).addSVGClass('inactive')
         

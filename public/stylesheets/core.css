@@ -12,6 +12,11 @@ header, section, aside, article {
   display: block;
 }
 
+svg {
+  display: block;
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
   color: #5f8ab6;
@@ -255,6 +260,7 @@ header a.locate.finding {
   height: 600px;
   margin-bottom: 10px;
   overflow: hidden;
+  position: relative;
 }
 
 aside#info {
@@ -283,6 +289,40 @@ aside#info {
 #info header h1 {
   margin: 0;
   padding: 0;
+}
+
+.resizer {
+  position: absolute;
+  left: 24px;
+  top: 100px;
+  font-family: Pictos;
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  background: rgba(0,0,0,0.6);
+  display: block;
+  width: 25px;
+  height: 25px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  text-align: center;
+  line-height: 14px;
+  cursor: pointer;
+}
+
+.fullscreen .resizer {
+  top: 70px;
+}
+
+.fslogo {
+  padding: 10px;
+  background: rgba(0,0,0,0.6);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 /* @end */
