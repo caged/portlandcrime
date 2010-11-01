@@ -17,11 +17,17 @@ namespace :crime do
     end
   end
   
-  desc 'Import new crimes from PDX Data Catalog'
+  desc 'Import new crimes from PDX Data Catalog.  Set YEAR to import specific year.  Defaults to current year.'
   task :import => :environment do
-    url = Pathname.new('http://www.portlandonline.com/shared/file/data/crime_incident_data.zip')
+    year = ENV['YEAR'].nil? ? nil : ENV['YEAR'].strip
+    
+    url = 'http://www.portlandonline.com/shared/file/data/crime_incident_data'
+    url += "_#{year}" unless year.nil?
+    
+    url = Pathname.new("#{url}.zip")
     out = Pathname.new(Rails.public_path) + 'data' + url.basename.to_s
     csv = out.sub(/\.zip$/, '.csv')
+    csv = csv.sub(/\_#{year}/, '') unless year.nil?
     
     fork { exec "curl -f#LA 'PDXCrime v0.1' #{url.to_s} -o #{out.to_s}"; exit! 1 }
     Process.wait
@@ -31,7 +37,7 @@ namespace :crime do
     FileUtils.rm(out)
     
     puts "\n\n"
-    
+        
     projection = Proj4::Projection.new('+proj=lcc +lat_1=44.33333333333334 +lat_2=46 +lat_0=43.66666666666666 +lon_0=-120.5 +x_0=2500000 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_def')
     i = 0
     start = Time.now
