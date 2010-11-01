@@ -9,6 +9,7 @@ javascripts:
     - public/javascripts/vendor/protovis.js
     - public/javascripts/vendor/rails.js
     - public/javascripts/vendor/underscore.js
+    - public/javascripts/vendor/jquery.uniform.js
   app:
     - public/javascripts/lib/*.js
     - public/javascripts/*.js
@@ -19,3 +20,4 @@ stylesheets:
     - public/stylesheets/core.css
     - public/stylesheets/data.css
     - public/stylesheets/pictos.css
+    - public/stylesheets/uniform.default.css

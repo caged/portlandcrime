@@ -71,13 +71,14 @@ $(function() {
   
   mapel.prepend(resizer)
   
+  
   function load(e) {   
     var counts = {}  
     $.each(e.features, function() {
       var el = this.element,
           $el   = $(el)
+          $text  = $(po.svg('text')),
           props = this.data.properties,
-          text  = po.svg('text'),
           trans = el.getAttribute("transform"),
           time  = Date.parse(props.reported_at),
           hours = time.getHours(),
@@ -92,9 +93,6 @@ $(function() {
         $el.addSVGClass('inactive')
 
       $el.addSVGClass('circle').addSVGClass(props.code)
-      if(time.isDaylight()) $el.addSVGClass('day') 
-      if(time.isDark()) $el.addSVGClass('dar') 
-      if(time.isWeekendNightlife()) $el.addSVGClass('wnl') 
       
       
       el.setAttribute("r", 12)
@@ -105,14 +103,30 @@ $(function() {
       })
       
       if(inact)
-        $(text).addSVGClass('inactive')
+        $text.addSVGClass('inactive')
         
-      $(text).addSVGClass(props.code)
-      text.setAttribute("transform", trans);
-      text.setAttribute("text-anchor", "middle");
-      text.setAttribute("dy", ".35em");
-      text.appendChild(document.createTextNode(props.code));
-      el.parentNode.insertBefore(text, el.nextSibling);
+      $text.addSVGClass(props.code)
+      $text[0].setAttribute("transform", trans);
+      $text[0].setAttribute("text-anchor", "middle");
+      $text[0].setAttribute("dy", ".35em");
+      $text[0].appendChild(document.createTextNode(props.code));
+      
+      if(time.isDaylight()) {
+        $el.addSVGClass('day')
+        $text.addSVGClass('day')
+      }
+      
+      if(time.isDark()) {
+        $el.addSVGClass('dar')
+        $text.addSVGClass('dar')
+      }
+      
+      if(time.isWeekendNightlife()) {
+        $el.addSVGClass('wnl')
+        $text.addSVGClass('wnl')
+      }
+      
+      el.parentNode.insertBefore($text[0], el.nextSibling);
     })
     
     $('#sbar li.off').each(function() {
@@ -129,8 +143,10 @@ $(function() {
           .text(counts[code]))
       }
     })
+    
     //togglecrimes(null, 'load')
     $('#map').bind('map.togglecrimes', togglecrimes)    
+
   }
   
   function togglecrimes(event, from) {
@@ -139,12 +155,12 @@ $(function() {
           code  = check.attr('data-code'),
           klass = this.getAttribute('class'),
           nodes = $('.circle.' + code + ', text.' + code)
-      
+
       if(klass.indexOf('inactive') != -1) {
         nodes.each(function() { $(this).addSVGClass('inactive') })
-      } else {
+      } else {        
         nodes.each(function() { $(this).removeSVGClass('inactive') })
       }
-    }) 
+    })
   }
 })

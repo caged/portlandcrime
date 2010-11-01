@@ -70,6 +70,10 @@ a:hover {
   border-bottom: 1px solid #dbdbdb;
 }
 
+.box.wfilter header {
+  border-bottom: 1px solid #bbb;
+}
+
 .box header h1 {
   font-size: 14px;
   padding: 10px;
@@ -123,6 +127,51 @@ a:hover {
 
 .boxgroup .box:nth-child(even) {
   margin-right: 0;
+}
+
+.filter {
+  background: #eee -webkit-gradient(linear, left top, left bottom, from(#e0e0e0), to(#cecece));
+  background: #eee -moz-linear-gradient(top,#e0e0e0 , #cecece);
+  border-top: 1px solid #ccc;
+}
+
+.filter ul.times {
+  padding: 0;
+}
+
+.filter ul.times li {
+  background: url(/images/timeperiods.png) no-repeat;
+  border-right: 1px solid #c1c1c1;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.filter ul.times li.day {
+  background: url(/images/timeperiods.png) -185px 9px no-repeat;
+}
+
+.filter ul.times li.dar {
+  background: url(/images/timeperiods.png) -185px -21px no-repeat;
+}
+
+.filter ul.times li.wnl {
+  background: url(/images/timeperiods.png) -188px -50px no-repeat;
+}
+
+.filter ul.times li.off.day {
+  background-position: 15px 9px;
+}
+
+.filter ul.times li.off.dar {
+  background-position: 15px -21px;
+}
+
+.filter ul.times li.off.wnl {
+  background-position: 15px -50px;
+}
+
+.filter ul.times li.off span.lbl {
+  color: #999;
 }
 
 /* @end */
@@ -294,7 +343,7 @@ aside#info {
 .resizer {
   position: absolute;
   left: 24px;
-  top: 100px;
+  top: 133px;
   font-family: Pictos;
   font-size: 15px;
   color: rgba(255,255,255,0.6);

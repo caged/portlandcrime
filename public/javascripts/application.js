@@ -5,6 +5,8 @@ $.fn.slideFadeToggle = function(speed, callback, easing) {
 
 $(function() {
   
+  $("select, input:checkbox, input:radio, input:file").uniform()
+  
   /**
    * Setup all the interactions for enabling and disabling offenses and
    * complete groups of crime types

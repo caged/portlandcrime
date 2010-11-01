@@ -4,13 +4,13 @@
  */
 $.fn.addSVGClass = function(c) {
   return this.each(function(i) {
-    var cl = this.getAttribute('class')
+    var cl = this.className.baseVal
 
     if(!cl) cl = ' ';    
     cl = cl.split(' ')
     if(cl.indexOf(c) == -1) {
       cl.push(c)
-      this.setAttribute('class', cl.join(' '))
+      this.setAttribute('class', $.trim(cl.join(' ')))
     }
   })
 }
