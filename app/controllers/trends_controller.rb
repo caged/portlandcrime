@@ -20,24 +20,28 @@ class TrendsController < ApplicationController
       end
 
       wants.json do
-        weeks = []
         trends = []
         
         years.each do |year|
           col = MongoMapper.database["weekly_citywide_totals_report_#{year}"]
           results = col.find.to_a
+          
+          results.collect! do |week|
+            week['value']['count']
+          end
+          
           trends << results
         end
         
-        (0..52).each do |i|
-          prev = trends.first[i] ? trends.first[i]['value']['count'] : 0
-          curr = trends.last[i] ? trends.last[i]['value']['count'] : 0
-          
-          week = {:week => (i + 1), :prev => prev, :curr => curr}
-          weeks << week
-        end 
+        # (0..52).each do |i|
+        #   prev = trends.first[i] ? trends.first[i]['value']['count'] : 0
+        #   curr = trends.last[i] ? trends.last[i]['value']['count'] : 0
+        #   
+        #   week = {:week => (i + 1), :prev => prev, :curr => curr}
+        #   weeks << week
+        # end 
         
-        render :json => weeks
+        render :json => trends
       end
     end
   end
