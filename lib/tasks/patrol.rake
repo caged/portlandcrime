@@ -4,10 +4,13 @@ require 'csv'
 
 namespace :crime do
   namespace :reports do
-    desc 'Run YTD Weekly Crime Totals'
-    task :ytc_crime_totals => :environment do
-      Crime.ytd_weekly_totals
-      puts "[#{Time.zone.now}] Calculated weekly crime totals from now"
+    desc 'Run Weekly Crime Totals For 2009 & 2010'
+    task :weekly_crime_totals => :environment do
+      %w(2009 2010).each do |year|
+        start = Time.parse("01/01/#{year}")
+        Crime.weekly_totals_between(start, start.end_of_year)
+        puts "[#{Time.zone.now}] Calculated #{year} weekly crime totals"
+      end
     end
     
     desc 'Run YTD Offense Summaries'

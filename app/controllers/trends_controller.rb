@@ -2,11 +2,11 @@ class TrendsController < ApplicationController
   caches_page :index
   
   def index
-    time = Time.zone.now
+    years = %w(2009 2010)
     
     respond_to do |wants|
       wants.html do
-        summary_col = MongoMapper.database["summaries_for_offenses_in_#{time.year}"]
+        summary_col = MongoMapper.database["summaries_for_offenses_in_#{years.last}"]
         summaries = summary_col.nil? ? [] : summary_col.find.to_a
         
         # Looks like I'm going to need to denormalize a little and include the 
@@ -20,12 +20,24 @@ class TrendsController < ApplicationController
       end
 
       wants.json do
-        col = MongoMapper.database["weekly_citywide_totals_report_#{time.year}"]
-        if col.nil?
-          render :json => {:error => "Reports haven't been generated for #{time.year}"}
-        else
-          render :json => col.find.to_a
+        weeks = []
+        trends = []
+        
+        years.each do |year|
+          col = MongoMapper.database["weekly_citywide_totals_report_#{year}"]
+          results = col.find.to_a
+          trends << results
         end
+        
+        (0..52).each do |i|
+          prev = trends.first[i] ? trends.first[i]['value']['count'] : 0
+          curr = trends.last[i] ? trends.last[i]['value']['count'] : 0
+          
+          week = {:week => (i + 1), :prev => prev, :curr => curr}
+          weeks << week
+        end 
+        
+        render :json => weeks
       end
     end
   end
