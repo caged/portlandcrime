@@ -275,6 +275,7 @@ nav#primary {
 
 nav#primary ul li {
   display: inline-block;
+  position: relative;
 }
 
 nav#primary ul li a {
@@ -290,6 +291,17 @@ nav#primary ul li a {
 
 nav#primary ul li a:hover {
   color: #333;
+}
+
+nav#primary li.selected a {
+  color: #333;
+}
+
+nav#primary li.selected a:before {
+  content: url(/images/arr.png);
+  position: absolute;
+  bottom: -8px;
+  left: 49.5%;
 }
 
 nav#primary li span {
