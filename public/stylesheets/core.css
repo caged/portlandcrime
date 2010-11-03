@@ -98,6 +98,37 @@ a:hover {
   margin-bottom: 10px;
 }
 
+#main .box.txt h1 {
+  font-size: 18px;
+}
+
+.box.txt h2 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.box.txt p {
+  margin-bottom: 10px;
+}
+
+.box.txt ul.cntr {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.box.txt ul.cntr li {
+  border-top: 1px solid #eee;
+  list-style: none;
+  padding: 10px 0;
+}
+
+.box.txt ul.cntr li:last-child {
+  padding-bottom: 0;
+}
+
 .box.txt span.badge {
   float: right;
   font-size: 18px;
@@ -461,6 +492,10 @@ span.badge {
 
 .offenses span.otype a {
   color: #656565;
+}
+
+li.group > span a:hover {
+  color: #222;
 }
 
 span.check,

@@ -49,13 +49,17 @@ $(function() {
           .text(function(d) { return d.week });
           
       vis.add(pv.Dot) 
-            .data(['2009 Weeks', '2010 Weeks']) 
+            .data(['2009', '2010']) 
             .top(-20) 
-            .left(function() { return 300 + this.index * 90 }) 
-            .size(20) 
-            .strokeStyle(null) 
+            .left(function() { return 360 + this.index * 65 }) 
+            .size(30) 
+            .strokeStyle(null)
             .fillStyle(pv.colors('#ccc', '#00b2ec')) 
-          .anchor("right").add(pv.Label);
+          .anchor("right").add(pv.Label)
+            .top(-19)
+            .left(function() { return 365 + this.index * 65 })
+            .font("bold 14px 'Helvetica Neue', sans-serif")
+            .textStyle('#444');
 
       vis.add(pv.Rule)
           .data(y.ticks())
