@@ -8,8 +8,7 @@ javascripts:
     - public/javascripts/vendor/polymaps.js
     - public/javascripts/vendor/protovis.js
     - public/javascripts/vendor/rails.js
-    - public/javascripts/vendor/underscore.js
-    - public/javascripts/vendor/jquery.uniform.js
+    - public/javascripts/maptip.js
   app:
     - public/javascripts/lib/*.js
     - public/javascripts/*.js
@@ -20,4 +19,4 @@ stylesheets:
     - public/stylesheets/core.css
     - public/stylesheets/data.css
     - public/stylesheets/pictos.css
-    - public/stylesheets/uniform.default.css
+    - public/stylesheets/maptip.css

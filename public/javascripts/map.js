@@ -98,9 +98,32 @@ $(function() {
       el.setAttribute("r", 12)
       el.setAttribute('alt', time.toString('ddd MMM, dd yyyy hh:mmtt'))
       
-      $(el).bind('click', {props: props, geo: this.data.geometry}, function(event) {
-        console.log(event.data); 
-      })
+      // $el.bind('click', {props: props, geo: this.data.geometry}, function(event) {
+      //   console.log(event.data); 
+      // })
+      
+      // $el.bind('click', {props: props, geo: this.data.geometry}, function(event) {
+      //   var mt = mapel.maptip()
+      //     mt.map(map)
+      //     mt.data(event.data)
+      //     mt.content(function(d) {
+      //       var props = d.props
+      //       console.log(d); 
+      //       return $('<div/>')
+      //         .append($('<h2/>')
+      //           .text(props.code)
+      //           .addClass(props.code)
+      //           .prepend($('<span/>').addClass('badge').text('E').attr('data-code', props.code)))
+      //         .append($('<p/>')
+      //           .text(props.address))
+      // 
+      //     })
+      //     mt.page(function(d) {
+      //       
+      //     })
+      //     mt.render()
+      // })
+      
       
       if(inact)
         $text.addSVGClass('inactive')

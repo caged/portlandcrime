@@ -3,10 +3,7 @@ $.fn.slideFadeToggle = function(speed, callback, easing) {
   return this.animate({height: 'toggle'}, speed, easing, callback);
 }
 
-$(function() {
-  
-  $("select, input:checkbox, input:radio, input:file").uniform()
-  
+$(function() {  
   /**
    * Setup all the interactions for enabling and disabling offenses and
    * complete groups of crime types

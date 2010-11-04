@@ -800,3 +800,27 @@ ul.times li span.percent {
   text-align: center;
 }
 /* @end */
+
+/*------------------------------------------------------------------------------------
+  @group maptip
+------------------------------------------------------------------------------------*/
+
+.maptip h2 {
+  font-size: 14px;
+  background: #e0e0e0 -webkit-gradient(linear, left top, left bottom, from(#e0e0e0), to(#cfcfcf));
+  background: #e0e0e0 -moz-linear-gradient(top, #e0e0e0, #cfcfcf);
+  -moz-box-shadow:inset 0 1px -1px #fff;
+  -webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+  box-shadow: inset 0 -2px 1px rbga(255,255,255,0.4);   
+  border-bottom: 1px solid #bbb;
+  padding: 5px;
+}
+
+.maptip h2 span.badge {
+  font-size: 16px;
+}
+
+.maptip p {
+  padding: 5px;
+}
+/* @end */
