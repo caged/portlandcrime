@@ -8,7 +8,7 @@ class Crime
   key :address, String
   key :loc, Hash
   key :code, String
-  timestamps!  
+  timestamps!
   
   belongs_to :offense      
   belongs_to :neighborhood

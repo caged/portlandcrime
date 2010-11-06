@@ -12,6 +12,7 @@ $(function() {
       .zoom(13)
       .zoomRange([9,18])
       .add(po.interact())
+      .add(po.hash())
       
   map.add(po.image()
       .url(po.url("http://{S}tile.cloudmade.com"
