@@ -171,18 +171,21 @@ $(function() {
         
         return parseFloat(point.x + (radius / 2.0) + 20)
       }).content(function(d) {
-        var props = d,
+        var self = this,
+            props = d,
             cnt = $('<div/>'),
             hdr = $('<h2/>'),
             bdy = $('<p/>')
       
         var check = $('#sbar span[data-code=' + props.code + ']'),
-            ctype = check.next().text(),
-            otype = check.closest('li.group').attr('data-code')
+            ctype = check.next().clone(),
+            otype = check.closest('li.group').attr('data-code'),
+            close = $('<span/>').addClass('close').text('*')
       
-        hdr.text(ctype)
+        hdr.append($('<span/>').addClass('badge').text('E').attr('data-code', otype))
+          .append(ctype)
+          .append(close)
           .addClass(otype)
-          .prepend($('<span/>').addClass('badge').text('E').attr('data-code', otype))
       
         bdy.text(props.address)
         bdy.append($('<span />')
@@ -190,7 +193,11 @@ $(function() {
           .text(Date.parse(props.reported_at).toString('dddd, MMM dS @ h:mm tt')))
         
         cnt.append($('<div/>').addClass('nub'))
-        cnt.append(hdr).append(bdy)    
+        cnt.append(hdr).append(bdy) 
+        
+        close.click(function() {
+          self.hide()
+        })   
     
         return cnt  
       }).render()

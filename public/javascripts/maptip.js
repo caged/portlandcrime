@@ -68,7 +68,10 @@
     },
     
     hide: function(fn) {
-      this.el.remove()
+      var el = this.el
+      this.el.fadeOut(function() {
+        el.remove()
+      })
     },
     
     move: function(event) {

@@ -819,10 +819,30 @@ ul.times li span.percent {
   box-shadow: inset 0 -2px 1px rbga(255,255,255,0.4);   
   border-bottom: 1px solid #bbb;
   padding: 5px;
+  position: relative;
 }
 
 .maptip h2 span.badge {
   font-size: 16px;
+}
+
+.maptip h2 a {
+  color: #333;
+}
+
+.maptip h2 span.close {
+  line-height: 0;
+  font-family: Pictos;
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  font-weight: normal;
+  color: rgba(100,100,100,0.7);
+  cursor: pointer;
+}
+
+.maptip h2 span.close:hover {
+  color: rgba(100,100,100,0.9);
 }
 
 .maptip p {
