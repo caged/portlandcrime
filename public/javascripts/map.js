@@ -147,14 +147,20 @@ $(function() {
           nodes = $('#canvas g.' + code)
 
       if(klass.indexOf('inactive') != -1) {
-        nodes.each(function() { $(this).addSVGClass('inactive') })
+        nodes.each(function() { 
+          //$(this).unbind('click', onPointClick)      
+          $(this).addSVGClass('inactive') 
+        })
       } else {        
-        nodes.each(function() { $(this).removeSVGClass('inactive') })
+        nodes.each(function() { 
+          //$(this).unbind('click', onPointClick)      
+          $(this).removeSVGClass('inactive') 
+        })
       }
     })
   }
   
-   function onPointClick(event) {
+   var onPointClick = function(event) {
     var coor = event.data.geo.coordinates,
         props = event.data.props
         

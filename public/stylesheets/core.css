@@ -358,6 +358,7 @@ header a.locate.finding {
 #canvas {
   overflow: hidden;
   position: relative;
+  height: 565px;
 }
 
 aside#info {
@@ -481,6 +482,7 @@ span.badge {
   -o-transform: rotate(90deg);
   transform:  rotate(90deg);
   font-size: 14px;
+  line-height: 100%;
 }
 
 .offenses span.exp.collapsed {
