@@ -93,61 +93,11 @@ $(function() {
       if(inact)
         $el.addSVGClass('inactive')
 
-      $el.addSVGClass('circle').addSVGClass(props.code)
-      
-      
+      $el.addSVGClass('circle').addSVGClass(props.code)      
       el.setAttribute("r", 12)
       el.setAttribute('alt', time.toString('ddd MMM, dd yyyy hh:mmtt'))
-      
-      // $el.bind('click', {props: props, geo: this.data.geometry}, function(event) {
-      //   console.log(event.data); 
-      // })
-      
-      $el.bind('click', {props: props, geo: this.data.geometry}, function(event) {
-        var coor = event.data.geo.coordinates,
-            props = event.data.props
-        mapel.maptip(this)
-          .map(map)
-          .data(props)
-          .location({lat: coor[1], lon: coor[0]})
-          .top(function(tip) {
-            var radius = tip.target.getAttribute('r'),
-                point = tip.props.map.locationPoint(this.props.location)
-            
-            return parseFloat(point.y - 30)
-          })
-          .left(function(tip) {
-            var radius = tip.target.getAttribute('r'),
-                point = tip.props.map.locationPoint(this.props.location)
-            
-            return parseFloat(point.x + (radius / 2.0) + 15)
-          })
-          .content(function(d) {
-            var props = d,
-                cnt = $('<div/>'),
-                hdr = $('<h2/>'),
-                bdy = $('<p/>')
-          
-            var check = $('#sbar span[data-code=' + props.code + ']'),
-                ctype = check.next().text(),
-                otype = check.closest('li.group').attr('data-code')
-          
-            hdr.text(ctype)
-              .addClass(otype)
-              .prepend($('<span/>').addClass('badge').text('E').attr('data-code', otype))
-          
-            bdy.text(props.address)
-            
-            cnt.append($('<div/>').addClass('nub'))
-            cnt.append(hdr).append(bdy)    
-    
-            return cnt  
-          }).page(function(d) {
-          
-          }).render()
-        
-      })
-      
+
+      $el.bind('click', {props: props, geo: this.data.geometry}, onPointClick)      
       
       if(inact)
         $text.addSVGClass('inactive')
@@ -210,4 +160,48 @@ $(function() {
       }
     })
   }
+  
+   function onPointClick(event) {
+    var coor = event.data.geo.coordinates,
+        props = event.data.props
+    mapel.maptip(this)
+      .map(map)
+      .data(props)
+      .location({lat: coor[1], lon: coor[0]})
+      .top(function(tip) {
+        var radius = tip.target.getAttribute('r'),
+            point = tip.props.map.locationPoint(this.props.location)
+        
+        return parseFloat(point.y - 30)
+      })
+      .left(function(tip) {
+        var radius = tip.target.getAttribute('r'),
+            point = tip.props.map.locationPoint(this.props.location)
+        
+        return parseFloat(point.x + (radius / 2.0) + 15)
+      })
+      .content(function(d) {
+        var props = d,
+            cnt = $('<div/>'),
+            hdr = $('<h2/>'),
+            bdy = $('<p/>')
+      
+        var check = $('#sbar span[data-code=' + props.code + ']'),
+            ctype = check.next().text(),
+            otype = check.closest('li.group').attr('data-code')
+      
+        hdr.text(ctype)
+          .addClass(otype)
+          .prepend($('<span/>').addClass('badge').text('E').attr('data-code', otype))
+      
+        bdy.text(props.address)
+        
+        cnt.append($('<div/>').addClass('nub'))
+        cnt.append(hdr).append(bdy)    
+
+        return cnt  
+      }).page(function(d) {
+      
+      }).render()
+    }
 })
