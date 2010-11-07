@@ -355,6 +355,11 @@ header a.locate.finding {
   position: relative;
 }
 
+#canvas {
+  overflow: hidden;
+  position: relative;
+}
+
 aside#info {
   width: 220px;
   background-color: rgba(0,0,0,0.9);
@@ -386,7 +391,7 @@ aside#info {
 .resizer {
   position: absolute;
   left: 24px;
-  top: 100px;
+  top: 70px;
   font-family: Pictos;
   font-size: 15px;
   color: rgba(255,255,255,0.6);
@@ -822,5 +827,17 @@ ul.times li span.percent {
 
 .maptip p {
   padding: 5px;
+}
+
+.nub {
+  border-bottom: 0;
+  height: 0;
+  width: 0; 
+  position: absolute;
+  border-top: 6px solid transparent;
+  border-right: 6px solid rgba(20,20,20,0.5);
+  border-bottom: 6px solid transparent;
+  left: -6px;
+  top: 24px;
 }
 /* @end */

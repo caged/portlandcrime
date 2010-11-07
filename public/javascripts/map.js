@@ -1,5 +1,5 @@
 $(function() {
-  var mapel = $('#map')
+  var mapel = $('#canvas')
   if(mapel.length == 0) return
   
   var po = org.polymaps,
@@ -103,27 +103,50 @@ $(function() {
       //   console.log(event.data); 
       // })
       
-      // $el.bind('click', {props: props, geo: this.data.geometry}, function(event) {
-      //   var mt = mapel.maptip()
-      //     mt.map(map)
-      //     mt.data(event.data)
-      //     mt.content(function(d) {
-      //       var props = d.props
-      //       console.log(d); 
-      //       return $('<div/>')
-      //         .append($('<h2/>')
-      //           .text(props.code)
-      //           .addClass(props.code)
-      //           .prepend($('<span/>').addClass('badge').text('E').attr('data-code', props.code)))
-      //         .append($('<p/>')
-      //           .text(props.address))
-      // 
-      //     })
-      //     mt.page(function(d) {
-      //       
-      //     })
-      //     mt.render()
-      // })
+      $el.bind('click', {props: props, geo: this.data.geometry}, function(event) {
+        var coor = event.data.geo.coordinates,
+            props = event.data.props
+        mapel.maptip(this)
+          .map(map)
+          .data(props)
+          .location({lat: coor[1], lon: coor[0]})
+          .top(function(tip) {
+            var radius = tip.target.getAttribute('r'),
+                point = tip.props.map.locationPoint(this.props.location)
+            
+            return parseFloat(point.y - 30)
+          })
+          .left(function(tip) {
+            var radius = tip.target.getAttribute('r'),
+                point = tip.props.map.locationPoint(this.props.location)
+            
+            return parseFloat(point.x + (radius / 2.0) + 15)
+          })
+          .content(function(d) {
+            var props = d,
+                cnt = $('<div/>'),
+                hdr = $('<h2/>'),
+                bdy = $('<p/>')
+          
+            var check = $('#sbar span[data-code=' + props.code + ']'),
+                ctype = check.next().text(),
+                otype = check.closest('li.group').attr('data-code')
+          
+            hdr.text(ctype)
+              .addClass(otype)
+              .prepend($('<span/>').addClass('badge').text('E').attr('data-code', otype))
+          
+            bdy.text(props.address)
+            
+            cnt.append($('<div/>').addClass('nub'))
+            cnt.append(hdr).append(bdy)    
+    
+            return cnt  
+          }).page(function(d) {
+          
+          }).render()
+        
+      })
       
       
       if(inact)

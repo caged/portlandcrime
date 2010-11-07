@@ -421,7 +421,7 @@ po.map = function() {
   map.locationPoint = function(l) {
     var k = Math.pow(2, zoom + zoomFraction - 3) / 45,
         dx = (l.lon - center.lon) * k * tileSize.x,
-        dy = (lat2y(center.lat) - lat2y(l.lat)) * k * tileSize.y;
+        dy = (lat2y(center.lat) - lat2y(l.lat)) * k * tileSize.y;        
     return {
       x: sizeRadius.x + angleCos * dx - angleSin * dy,
       y: sizeRadius.y + angleSin * dx + angleCos * dy

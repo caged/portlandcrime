@@ -1,6 +1,7 @@
 (function($) {
-  function MapTip(el) {
+  function MapTip(el, target) {
     this.canvas = el
+    this.target = target
     this.el = $('<div />')
       .addClass('maptip')
       .css('position', 'absolute')
@@ -17,15 +18,40 @@
     },
     
     map: function(el) {
-      this.props.map = el       
+      var self = this
+      this.props.map = el
+      this.props.map.on('move', function() { self.move() })    
+      this.props.map.on('resize', function() { self.resize() })
+                
       return this
     },
     
-    // canvas: function(el) {
-    //   this.props.canvas = $(el)
-    //   this.props.canvas.css('position', 'relative')
-    //   return this
-    // },
+    location: function(latlon) {
+      this.props.location = latlon
+      return this
+    },
+    
+    left: function(fn) {
+      if($.isFunction(fn)) {
+        this.props.callbackLeft = fn
+        this.props.left = fn.call(this, this)
+      } else {
+        this.props.left = fn
+      }
+      
+      return this
+    },
+    
+    top: function(fn) {
+      if($.isFunction(fn)) {
+        this.props.callbackTop = fn
+        this.props.top = fn.call(this, this)
+      } else {
+        this.props.top = fn
+      }
+      
+      return this
+    },
     
     content: function(fn) {
       if($.isFunction(fn)) {
@@ -45,18 +71,32 @@
       this.el.remove()
     },
     
+    move: function(event) {
+      this.left(this.props.callbackLeft).top(this.props.callbackTop)
+      this.el.css({left: this.props.left + 'px', top: this.props.top + 'px'}) 
+
+      console.log(this.props.left + 'px'); 
+      return this
+    },
+    
+    resize: function(event) {
+      this.left(this.props.callbackLeft).top(this.props.callbackTop)
+      this.el.css({left: this.props.left + 'px', top: this.props.top + 'px'}) 
+
+      return this
+    },
+    
     render: function() {
-      console.log(this.props.content); 
       this.cnt.html(' ').append(this.props.content)
-      this.canvas.prepend(this.el)
-      this.el.show()
+      this.canvas.prepend(this.el)  
+      this.el.show().css({left: this.props.left + 'px', top: this.props.top + 'px'})
     }
   }
   
-  $.fn.maptip = function() {
+  $.fn.maptip = function(target) {
     var tip = $.data(this, 'maptip')
     if(!tip) {
-      tip = new MapTip(this)
+      tip = new MapTip(this, target)
       $.data(this, 'maptip', tip)
     }
     
