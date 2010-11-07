@@ -54,12 +54,14 @@ $(function() {
   
       
   resizer.bind('click', function(event) {
-    if(body.hasClass('fullscreen')) {
+    if(body.hasClass('fullscreen')) {      
+      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Zoom', document.title]);
       body.removeClass('fullscreen')
       mapel.find('header').show()
       mapel.css({position: null, width: width, height: height})
       logo.remove()      
     } else {
+      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Close', document.title]);
       body.addClass('fullscreen')
       mapel.find('header').hide()
       mapel.css({position: 'fixed', top: 0, right: 0, width: '100%', height: '100%'})

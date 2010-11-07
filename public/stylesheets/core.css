@@ -403,7 +403,7 @@ aside#info {
   -moz-border-radius: 30px;
   border-radius: 30px;
   text-align: center;
-  line-height: 14px;
+  line-height: 28px;
   cursor: pointer;
 }
 
@@ -831,7 +831,6 @@ ul.times li span.percent {
 }
 
 .maptip h2 span.close {
-  line-height: 0;
   font-family: Pictos;
   top: 5px;
   right: 5px;
