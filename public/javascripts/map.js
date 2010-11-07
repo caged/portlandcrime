@@ -74,16 +74,16 @@ $(function() {
   
   
   function load(e) {   
+    console.profile('load & draw')
     var counts = {}  
     $.each(e.features, function() {
       var el = this.element,
-          $el   = $(el)
-          $text  = $(po.svg('text')),
+          $el   = $(el),
+          $cir  = $(el.firstChild),
+          text  = po.svg('text'),
           props = this.data.properties,
-          trans = el.getAttribute("transform"),
-          time  = Date.parse(props.reported_at),
-          hours = time.getHours(),
-          count = parseInt(time.toString('h')),
+          // time  = Date.parse(props.reported_at),
+          // hours = time.getHours(),
           check = $('span.check[data-code=' + props.code + ']'),
           inact = check.hasClass('inactive')
       
@@ -93,45 +93,40 @@ $(function() {
       if(inact)
         $el.addSVGClass('inactive')
 
-      $el.addSVGClass('circle').addSVGClass(props.code)      
-      el.setAttribute("r", 12)
-      el.setAttribute('alt', time.toString('ddd MMM, dd yyyy hh:mmtt'))
+      $el.addSVGClass(props.code)
+      $cir.addSVGClass('circle').addSVGClass(props.code)      
+      $cir[0].setAttribute("r", 12)
 
       $el.bind('click', {props: props, geo: this.data.geometry}, onPointClick)      
+            
+      text.setAttribute("text-anchor", "middle")
+      text.setAttribute("dy", ".35em")
+      text.appendChild(document.createTextNode(props.code))
       
-      if(inact)
-        $text.addSVGClass('inactive')
-        
-      $text.addSVGClass(props.code)
-      $text[0].setAttribute("transform", trans);
-      $text[0].setAttribute("text-anchor", "middle");
-      $text[0].setAttribute("dy", ".35em");
-      $text[0].appendChild(document.createTextNode(props.code));
+      el.appendChild(text)
       
-      if(time.isDaylight()) {
-        $el.addSVGClass('day')
-        $text.addSVGClass('day')
-      }
+      // if(time.isDaylight()) {
+      //   $el.addSVGClass('day')
+      // }
+      // 
+      // if(time.isDark()) {
+      //   $el.addSVGClass('dar')
+      // }
+      // 
+      // if(time.isWeekendNightlife()) {
+      //   $el.addSVGClass('wnl')
+      // }
       
-      if(time.isDark()) {
-        $el.addSVGClass('dar')
-        $text.addSVGClass('dar')
-      }
-      
-      if(time.isWeekendNightlife()) {
-        $el.addSVGClass('wnl')
-        $text.addSVGClass('wnl')
-      }
-      
-      el.parentNode.insertBefore($text[0], el.nextSibling);
     })
+    
+    console.profileEnd('load & draw')
     
     $('#sbar li.off').each(function() {
       var el = $(this),
           cnt = el.find('span.count')
       if(cnt.length == 0) {
-        var check = el.find('span.check')
-        var code = check.attr('data-code')
+        var check = el.find('span.check'),
+            code = check.attr('data-code')
         
         if(!counts[code]) counts[code] = 0
         
@@ -141,9 +136,7 @@ $(function() {
       }
     })
     
-    //togglecrimes(null, 'load')
     $('#map').bind('map.togglecrimes', togglecrimes)    
-
   }
   
   function togglecrimes(event, from) {
@@ -151,7 +144,7 @@ $(function() {
       var check = $(this),
           code  = check.attr('data-code'),
           klass = this.getAttribute('class'),
-          nodes = $('.circle.' + code + ', text.' + code)
+          nodes = $('#canvas g.' + code)
 
       if(klass.indexOf('inactive') != -1) {
         nodes.each(function() { $(this).addSVGClass('inactive') })

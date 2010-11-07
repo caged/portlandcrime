@@ -1162,10 +1162,12 @@ po.geoJson = function(fetch) {
 
     Point: function(o, proj) {
       var p = proj(o.coordinates),
+          g = po.svg('g'),
           c = po.svg("circle");
       c.setAttribute("r", 4.5);
-      c.setAttribute("transform", "translate(" + p.x + "," + p.y + ")");
-      return c;
+      g.appendChild(c)
+      g.setAttribute("transform", "translate(" + p.x + "," + p.y + ")");
+      return g;
     },
 
     MultiPoint: function(o, proj) {

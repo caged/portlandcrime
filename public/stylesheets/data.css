@@ -142,7 +142,7 @@ text {
   fill-opacity: 1;
 }*/
 
-.circle.inactive, text.inactive {
+g.inactive circle, g.inactive text {
   fill-opacity: 0;
   stroke-opacity: 0;
   z-index: -9999999;
