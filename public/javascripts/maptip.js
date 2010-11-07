@@ -1,4 +1,4 @@
-(function($) {
+;(function($) {
   function MapTip(el, target) {
     this.canvas = el
     this.target = target
@@ -75,7 +75,6 @@
       this.left(this.props.callbackLeft).top(this.props.callbackTop)
       this.el.css({left: this.props.left + 'px', top: this.props.top + 'px'}) 
 
-      console.log(this.props.left + 'px'); 
       return this
     },
     

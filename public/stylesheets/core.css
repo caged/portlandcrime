@@ -827,6 +827,14 @@ ul.times li span.percent {
 
 .maptip p {
   padding: 5px;
+  line-height: 1.2em;
+  font-size: 11px;
+}
+
+.maptip span.date {
+  display: block;
+  color: #999;
+  margin-top: 5px;
 }
 
 .nub {

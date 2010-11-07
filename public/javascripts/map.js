@@ -74,7 +74,6 @@ $(function() {
   
   
   function load(e) {   
-    console.profile('load & draw')
     var counts = {}  
     $.each(e.features, function() {
       var el = this.element,
@@ -94,7 +93,8 @@ $(function() {
         $el.addSVGClass('inactive')
 
       $el.addSVGClass(props.code)
-      $cir.addSVGClass('circle').addSVGClass(props.code)      
+      $cir.addSVGClass('circle')
+      $cir.addSVGClass(props.code)      
       $cir[0].setAttribute("r", 12)
 
       $el.bind('click', {props: props, geo: this.data.geometry}, onPointClick)      
@@ -118,9 +118,7 @@ $(function() {
       // }
       
     })
-    
-    console.profileEnd('load & draw')
-    
+        
     $('#sbar li.off').each(function() {
       var el = $(this),
           cnt = el.find('span.count')
@@ -157,6 +155,7 @@ $(function() {
    function onPointClick(event) {
     var coor = event.data.geo.coordinates,
         props = event.data.props
+        
     mapel.maptip(this)
       .map(map)
       .data(props)
@@ -166,14 +165,12 @@ $(function() {
             point = tip.props.map.locationPoint(this.props.location)
         
         return parseFloat(point.y - 30)
-      })
-      .left(function(tip) {
+      }).left(function(tip) {
         var radius = tip.target.getAttribute('r'),
             point = tip.props.map.locationPoint(this.props.location)
         
-        return parseFloat(point.x + (radius / 2.0) + 15)
-      })
-      .content(function(d) {
+        return parseFloat(point.x + (radius / 2.0) + 20)
+      }).content(function(d) {
         var props = d,
             cnt = $('<div/>'),
             hdr = $('<h2/>'),
@@ -188,13 +185,14 @@ $(function() {
           .prepend($('<span/>').addClass('badge').text('E').attr('data-code', otype))
       
         bdy.text(props.address)
+        bdy.append($('<span />')
+          .addClass('date')
+          .text(Date.parse(props.reported_at).toString('dddd, MMM dS @ h:mm tt')))
         
         cnt.append($('<div/>').addClass('nub'))
         cnt.append(hdr).append(bdy)    
-
+    
         return cnt  
-      }).page(function(d) {
-      
       }).render()
     }
 })
