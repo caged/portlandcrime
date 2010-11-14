@@ -1,4 +1,5 @@
 <% title @neighborhood.name %>
+<% keywords @neighborhood.name %>
 <section id="main">
   <div class="box" id="map">
     <header>
@@ -28,7 +29,11 @@
         <% last_year = @last_year_trends['value'][offense.id.to_s] %>
       
         <tr>
-          <th><span class="badge" data-code="<%= offense.type_code %>">E</span><%= offense.name %></th>
+          <th>
+            <% link_to offense_url(offense) do %>
+            <span class="badge" data-code="<%= offense.type_code %>">E</span><%= offense.name %>
+            <% end %>
+          </th>
           <td><%= number_with_delimiter this_year.to_i %></td>
           <td><%= number_with_delimiter last_year.to_i %></td>
           <td><%= percent_change_from(this_year, last_year) %></td>
@@ -57,7 +62,49 @@
       </div>
     </div>
     <div>
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th><%= @this_year_start.year %></th>
+            <th><%= @last_year_start.year %></th>
+            <th>+/-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @offenses.each do |type, offenses| %>
+          <% this_year_type_total = 0 %>
+          <% last_year_type_total = 0 %>
+          <% offenses.each do |offense| %>
+            <% this_year = @this_year_trends['value'][offense.id.to_s] %>
+            <% last_year = @last_year_trends['value'][offense.id.to_s] %>
+            <% this_year_type_total += this_year %>
+            <% last_year_type_total += last_year %>
+          <% end %>
 
+          <tr>
+            <th><span class="badge" data-code="<%= type['name'].parameterize[0..1] %>">E</span><%= truncate(type['name'], :length => 12) %></th>
+            <td><%= number_with_delimiter this_year_type_total.to_i %></td>
+            <td><%= number_with_delimiter last_year_type_total.to_i %></td>
+            <td><%= percent_change_from(this_year_type_total, last_year_type_total) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
+  </div>
+  <div class="box txt">
+    <h1>Latest Crimes</h1>
+    <ol class="crime-list">
+      <% @crimes.each do |crime| %>
+      <li data-code="<%= crime.code %>" class="<%= crime.at_daylight? ? 'day' : 'night'  %>">
+        <h3 data-code="<%= crime.offense.type['name'].parameterize[0..1] %>">
+          <%= crime.offense.name %>
+          <span class="date"><%= crime.reported_at.strftime('%b %d %I:%m%p') %></span>
+        </h3>
+        <p><span class="district">District <%= crime.district %></span>&mdash;<%= crime.address %></p>
+      </li>
+      <% end %>
+    </ol>
   </div>
 </aside>

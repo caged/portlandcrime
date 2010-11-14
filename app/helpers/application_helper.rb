@@ -3,6 +3,10 @@ module ApplicationHelper
     @title ||= "#{str} | Portland Crime"
   end
   
+  def keywords(*str)
+    @keywords = str.join(' ')
+  end
+  
   # Determines selected nav
   # 
   # Examples:
@@ -14,7 +18,7 @@ module ApplicationHelper
     klass = nil  
     begin
       mappings = {
-        :home   => [:crimes, [:offenses, :show]],
+        :home   => [:crimes, [:offenses, :show], [:neighborhoods, :show]],
         :trends => [:trends],
         :about  => [[:site, :about]]
       }

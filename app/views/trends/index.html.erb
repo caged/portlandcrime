@@ -22,7 +22,7 @@
     <% total = summary['night'].to_i + summary['day'].to_i %>
       <div class="txt box summary">
         <h2>
-          <%=h offense.name.strip %>
+          <%= link_to h(offense.name), offense_path(offense) %>
           <span class="total"><%= number_with_delimiter(total) %> total</span>
         </h2>
         <div class="summary-content">

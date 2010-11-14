@@ -34,6 +34,16 @@ class Crime
       }
     }
   end
+  
+  def at_dark?
+    hour = reported_at.hour
+    hour >= 18 || hour < 6
+  end
+  
+  def at_daylight?
+    hour = reported_at.hour
+    hour >= 6 && hour < 18
+  end
 # Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
 # validates_presence_of :attribute
 

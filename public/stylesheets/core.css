@@ -19,7 +19,7 @@ svg {
 
 a {
   text-decoration: none;
-  color: #5f8ab6;
+  color: #52779e;
 }
 
 a:hover {
@@ -91,6 +91,7 @@ a:hover {
 
 .box.txt {
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 .box.txt h1 {
@@ -436,6 +437,116 @@ aside#info {
 /* @end */
 
 /*------------------------------------------------------------------------------------
+  @group data codes
+------------------------------------------------------------------------------------*/
+
+
+li[data-code=no] span.check,
+span.badge[data-code=no] {
+  color: #3e3095;
+}
+
+h3[data-code=no] {
+  border-left: 6px solid #3e3095;
+}
+
+li[data-code=vi] span.check,
+span.badge[data-code=vi] {
+  color: #b50000;
+}
+
+h3[data-code=vi] {
+  border-left: 6px solid #b50000;
+}
+
+li[data-code=se] span.check,
+span.badge[data-code=se] {
+  color: #ff00a4;
+}
+
+h3[data-code=se] {
+  border-left: 6px solid #ff00a4;
+}
+
+li[data-code=dr] span.check,
+span.badge[data-code=dr] {
+  color: #ef6917;
+}
+
+h3[data-code=dr] {
+  border-left: 6px solid #ef6917;
+}
+
+li[data-code=fi] span.check,
+span.badge[data-code=fi] {
+  color: #00b93f;
+}
+
+h3[data-code=fi] {
+  border-left: 6px solid #00b93f;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group crimes
+------------------------------------------------------------------------------------*/
+
+.crime-list {
+  list-style: none;
+}
+
+.crime-list li {
+  border-top: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.crime-list li h3 {
+  font-size: 12px;
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 5px;
+  color: #444;
+}
+
+.box.txt .crime-list li p {
+  margin-bottom: 0;
+}
+
+.box.txt .crime-list li p span.district {
+  font-style: italic;
+  color: #bbb;
+}
+
+.box.txt ol.crime-list span.badge {
+  float: none;
+}
+
+.crime-list span.date {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  font-weight: normal;
+  font-size: 11px;
+  color: #bbb;
+  display: block;
+  padding: 10px 25px 10px 0;
+  background-position: 100% 6px;
+  background-repeat: no-repeat;
+}
+
+.crime-list li.day span.date {
+  background-image: url(/images/day.png);
+}
+
+.crime-list li.night span.date {
+  background-image: url(/images/night.png);
+}
+
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
   @group sbar
 ------------------------------------------------------------------------------------*/
 .offenses, #offenses {
@@ -529,31 +640,6 @@ span.badge {
   color: #ccc;
 }
 
-li[data-code=no] span.check,
-span.badge[data-code=no] {
-  color: #3e3095;
-}
-
-li[data-code=vi] span.check,
-span.badge[data-code=vi] {
-  color: #b50000;
-}
-
-li[data-code=se] span.check,
-span.badge[data-code=se] {
-  color: #ff00a4;
-}
-
-li[data-code=dr] span.check,
-span.badge[data-code=dr] {
-  color: #ef6917;
-}
-
-li[data-code=fi] span.check,
-span.badge[data-code=fi] {
-  color: #00b93f;
-}
-
 .offenses span.check:hover,
 .offenses span.exp:hover {
   color: #ff6d00 !important;
@@ -604,6 +690,10 @@ div.year {
   width: 100%;
 }
 
+#sbar .comparison {
+  margin-top: 10px;
+}
+
 .comparison th {
   font-weight: bold;
   padding: 5px;
@@ -642,7 +732,8 @@ div.year {
 
 .box.txt .comparison tbody th span.badge {
   float: none;
-  margin-right: 3px;
+  margin-right: 5px;
+  line-height: 0;
 }
 
 span.glyph {
@@ -845,6 +936,14 @@ div.summary h2 {
 
 div.box.summary h2 {
   margin-top: 0;
+}
+
+div.box.summary h2 a {
+  color: #333;
+}
+
+div.box.summary h2 a:hover {
+  color: #6db963;
 }
 
 div.summary h2 span.total {

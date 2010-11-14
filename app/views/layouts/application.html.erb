@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= @title || 'Portland Crime' %></title>
-  <meta name="keywords" content="portland crime pdx safety neighborhood chinatown pearl downtown southwest southeast northeast northwest map homicide assault larceny prostitution murder gangs police oregon" />
+  <meta name="keywords" content="<%= @keywords %> portland crime pdx safety neighborhood chinatown pearl downtown southwest southeast northeast northwest map homicide assault larceny prostitution murder gangs police oregon" />
   <meta name="description" content="Track and review all types of crimes happening across Portland, OR neighborhoods."/>
   <%= include_stylesheets :core %>
   <%= include_javascripts :vendor, :app %>

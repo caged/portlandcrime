@@ -1,4 +1,6 @@
 class NeighborhoodsController < ApplicationController
+  caches_page :show
+  
   def index
     respond_to do |wants|
       wants.json do
@@ -20,6 +22,8 @@ class NeighborhoodsController < ApplicationController
 
     respond_to do |wants|
       wants.html do
+        @crimes = @neighborhood.crimes.in_the_past(5.days).limit(5).sort(:reported_at => -1)
+        
         @this_years_total = @neighborhood.crimes.between(@this_year_start, (Time.now - 1.week)).count
         @last_years_total = @neighborhood.crimes.between(@last_year_start, (Time.now - 1.week) - 1.year).count
 
