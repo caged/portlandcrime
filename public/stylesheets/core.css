@@ -393,7 +393,7 @@ aside#info {
 .resizer {
   position: absolute;
   left: 24px;
-  top: 70px;
+  top: 80px;
   font-family: Pictos;
   font-size: 15px;
   color: rgba(255,255,255,0.6);

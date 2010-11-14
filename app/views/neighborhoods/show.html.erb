@@ -30,7 +30,7 @@
       
         <tr>
           <th>
-            <% link_to offense_url(offense) do %>
+            <%= link_to offense_url(offense) do %>
             <span class="badge" data-code="<%= offense.type_code %>">E</span><%= offense.name %>
             <% end %>
           </th>

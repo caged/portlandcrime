@@ -70,18 +70,18 @@ $(function() {
       
   resizer.bind('click', function(event) {
     if(body.hasClass('fullscreen')) {      
-      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Zoom', document.title]);
+      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Close', document.title]);
       body.removeClass('fullscreen')
       mapel.find('header').show()
-      mapel.css({position: null, width: width, height: height})
+      mapel.css({position: 'static', width: width, height: height, 'z-index': 'inherit'})
       logo.remove()      
     } else {
-      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Close', document.title]);
+      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Zoom', document.title]);
       body.addClass('fullscreen')
       mapel.find('header').hide()
-      mapel.css({position: 'fixed', top: 0, right: 0, width: '100%', height: '100%'})
+      mapel.css({position: 'fixed', top: 0, right: 0, width: '100%', height: '100%', 'z-index': 9999})
       mapel.find('svg').css({ width: '100%', height: '100%'})
-      mapel.prepend(logo.remove())
+      mapel.append(logo.remove())
     }
     
     map.resize()
