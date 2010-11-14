@@ -65,7 +65,7 @@
  {
     "desc":"Offenses relating to the unlawful possession, sale, use, growing, and manufacturing of illegal drugs. ",
     "name":"Drugs",
-    "type": "Drugs & Alchohol",
+    "type": "Drugs & Alcohol",
     "order": 0,
     "group_order": 2
  },
@@ -156,7 +156,7 @@
  {
     "desc":"Driving or operating any vehicle while drunk or under the influence of liquor or drugs.",
     "name":"DUII",
-    "type": "Drugs & Alchohol",
+    "type": "Drugs & Alcohol",
     "order": 0,
     "group_order": 2
  },
@@ -177,7 +177,7 @@
  {
     "desc":"All state and/or local liquor law violations with the exception of driving under the influence. Federal violations are excluded.",
     "name":"Liquor Laws",
-    "type": "Drugs & Alchohol",
+    "type": "Drugs & Alcohol",
     "order": 0,
     "group_order": 2
  },

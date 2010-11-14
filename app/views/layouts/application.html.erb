@@ -40,6 +40,7 @@
               <li class="trends<%= selected_class :trends %>"><%= link_to(trends_path) { "<span>Y</span> Trends" } %></li>
               <li class="about<%= selected_class :about %>"><%= link_to(about_path) { "<span>i</span> About" } %></li>
             </ul>
+            </nav><% if @last_import %><span class="last-import">Data Updated <%= @last_import.created_at.strftime('%A, %B %d %-I:%M %p') %></span><% end %>
         </div>
       </div>
     </div>
