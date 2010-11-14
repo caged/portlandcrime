@@ -1,8 +1,11 @@
 Pdxpatrol::Application.routes.draw do
-  resources :neighborhoods
+  resources :neighborhoods do
+    resource :crimes
+  end
+  
   resources :offenses
-  resources :trends
 
+  get '/trends', :to => 'trends#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -19,16 +22,16 @@ Pdxpatrol::Application.routes.draw do
   #   resources :products
 
   # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+    # resources :products do
+    #   member do
+    #     get 'short'
+    #     post 'toggle'
+    #   end
+    #   
+    #   collection do
+    #     get 'sold'
+    #   end
+    # end
 
   # Sample resource route with sub-resources:
   #   resources :products do

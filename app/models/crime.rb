@@ -1,5 +1,6 @@
 class Crime
   include MongoMapper::Document
+  plugin GeoSpatial        
   
   key :case_id, Integer, :required => true
   key :reported_at, Time, :required => true
@@ -14,6 +15,8 @@ class Crime
   belongs_to :neighborhood
   
   add_concerns :reporting
+  
+  scope :between, lambda {|from, to| where(:reported_at.gte => from, :reported_at.lt => to) }
     
   scope :in_the_past, lambda {|time|   
     where(:reported_at.gte => Time.zone.now.change(:hour => 0) - time, 

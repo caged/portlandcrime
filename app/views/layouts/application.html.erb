@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @title || 'Portland Crime - *Alpha Preview' %></title>
-  <meta name="keywords" content="portland crime pdx safety neighborhood chinatown pearl downtown southwest southeast northeast map homicide assault larceny prostitution murder gangs police oregon" />
+  <title><%= @title || 'Portland Crime' %></title>
+  <meta name="keywords" content="portland crime pdx safety neighborhood chinatown pearl downtown southwest southeast northeast northwest map homicide assault larceny prostitution murder gangs police oregon" />
   <meta name="description" content="Track and review all types of crimes happening across Portland, OR neighborhoods."/>
   <%= include_stylesheets :core %>
   <%= include_javascripts :vendor, :app %>
@@ -24,6 +24,9 @@
     })();
     <% end %>
   </script>
+  <script type="text/javascript" charset="utf-8">
+    <%= yield :page_js %>
+  </script>
 </head>
 <body data-path="<%= controller.controller_path %>-<%= controller.action_name %>">
   <header id="top">
@@ -37,7 +40,6 @@
               <li class="trends<%= selected_class :trends %>"><%= link_to(trends_path) { "<span>Y</span> Trends" } %></li>
               <li class="about<%= selected_class :about %>"><%= link_to(about_path) { "<span>i</span> About" } %></li>
             </ul>
-          </nav><% if @last_import %><span class="last-import">Data Updated <%= @last_import.created_at.strftime('%A, %B %d %-I:%M %p') %></span><% end %>
         </div>
       </div>
     </div>

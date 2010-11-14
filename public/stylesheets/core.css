@@ -577,6 +577,91 @@ span.count {
   margin-top: -3px;
   font-size: 10px;
 }
+
+div.year {
+  display: inline-block;
+  width: 49%;
+}
+
+#total div.year span.num {
+  font-size: 200%;
+  min-height: 0;
+  margin-bottom: 10px;
+}
+
+#total div.year span.label {
+  font-style: normal;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group neighborhood
+------------------------------------------------------------------------------------*/
+
+
+.comparison {
+  width: 100%;
+}
+
+.comparison th {
+  font-weight: bold;
+  padding: 5px;
+  border-bottom: 2px solid #ccc;
+}
+
+.comparison td {
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #eee;
+  padding: 10px 5px;
+  text-align: center;
+}
+
+.comparison tr td:last-child {
+  border-right: 0;
+}
+
+.comparison th:first-child {
+  text-align: left;
+}
+
+.comparison tbody th {
+  border-bottom: 1px solid #eee;
+  border-right: 1px dotted #ccc;
+}
+
+.comparison tbody tr:last-child td,
+.comparison tbody tr:last-child th {
+  border-bottom: none;
+}
+
+.comparison tr:nth-child(even) td,
+.comparison tr:nth-child(even) th {
+  background: #f7f7f7;
+}
+
+.box.txt .comparison tbody th span.badge {
+  float: none;
+  margin-right: 3px;
+}
+
+span.glyph {
+  font-family: Pictos;
+  color: #999;
+}
+
+span.percent {
+  color: #999;
+}
+
+span.rise {
+  color: #a00;
+}
+
+span.fall {
+  color: #63a85a;
+}
+
 /* @end */
 
 /*------------------------------------------------------------------------------------

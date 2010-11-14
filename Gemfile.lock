@@ -15,6 +15,13 @@ GIT
       activesupport (~> 3.0.0)
       plucky (~> 0.3.6)
 
+GIT
+  remote: https://github.com/parrish/mongo_geo.git
+  revision: 829b59102ad818a8652d29382a247b7b9cc36ece
+  specs:
+    mongo_geo (0.2.0)
+      mongo_mapper (>= 0.8.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -49,7 +56,7 @@ GEM
     arel (1.0.1)
       activesupport (~> 3.0.0)
     bson (1.1.1)
-    bson_ext (1.1.1)
+    bson_ext (1.1.2)
     builder (2.1.2)
     closure-compiler (0.3.3)
     diff-lcs (1.1.2)
@@ -117,11 +124,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bson_ext (= 1.1.1)
+  bson_ext (= 1.1.2)
   closure-compiler
   jammit
   jquery-rails
   json (= 1.4.6)
+  mongo_geo!
   mongo_mapper!
   proj4rb!
   rails (= 3.0.0)

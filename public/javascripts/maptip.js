@@ -103,10 +103,10 @@
   }
   
   $.fn.maptip = function(target) {
-    var tip = $.data(this, 'maptip')
+    var tip = $.data(this, 'maptip-callout')
     if(!tip) {
       tip = new MapTip(this, target)
-      $.data(this, 'maptip', tip)
+      $.data(this, 'maptip-callout', tip)
     }
     
     return tip 

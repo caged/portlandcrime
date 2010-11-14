@@ -1,0 +1,63 @@
+<% title @neighborhood.name %>
+<section id="main">
+  <div class="box" id="map">
+    <header>
+      <h1>Crime Map</h1>
+      <%= link_to 'Locate', nil, :class => 'locate' %>
+    </header>
+    <div id="canvas"></div>
+  </div>
+  <div class="box txt">
+    <h1>Yearly Comparison</h1>
+    <% if @this_year_trends.nil? || @last_year_trends.nil? %>
+    <p>It appears neighborhood statistical trends haven't been run yet.</p>
+    <% else %>
+    <table class="comparison">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th><%= @this_year_start.year %></th>
+          <th><%= @last_year_start.year %></th>
+          <th>+/-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @offenses.each do |type, offenses| %>
+        <% offenses.each do |offense| %>
+        <% this_year = @this_year_trends['value'][offense.id.to_s] %>
+        <% last_year = @last_year_trends['value'][offense.id.to_s] %>
+      
+        <tr>
+          <th><span class="badge" data-code="<%= offense.type_code %>">E</span><%= offense.name %></th>
+          <td><%= number_with_delimiter this_year.to_i %></td>
+          <td><%= number_with_delimiter last_year.to_i %></td>
+          <td><%= percent_change_from(this_year, last_year) %></td>
+        </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+</section>
+
+<aside id="sbar">
+  <div class="box txt">
+    <h1>
+      <%=h @neighborhood.name %>
+    </h1>
+    <div id="total">
+      <div class="year">
+        <span class="num"><%= number_with_delimiter @this_years_total %></span>
+        <span class="label"><%= @this_year_start.year %> Total</span>
+      </div>
+      <div class="year">
+        <span class="num"><%= number_with_delimiter @last_years_total %></span>
+        <span class="label"><%= @last_year_start.year %> Total</span>
+      </div>
+    </div>
+    <div>
+
+    </div>
+  </div>
+</aside>

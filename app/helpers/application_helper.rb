@@ -31,7 +31,6 @@ module ApplicationHelper
         opts = {:controller => c}
         opts.merge!(:action => a) unless a.nil?
       
-        logger.info "current_page?(#{opts})"
         if current_page?(opts)
           klass = ' selected'
           break

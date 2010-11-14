@@ -118,7 +118,7 @@ $(function() {
       $.each(data, function() {
         var nhood = this,
             cnt = $.grep(top5, function(nhc, idx) { return nhc[0] == nhood.id })[0]
-        names.push({name: this.name.capitalizeWords(), count: cnt[1]})
+        names.push({name: this.name.capitalizeWords(), count: cnt[1], permalink: this.permalink})
       })
       
       names = names.sort(function(a, b) {
@@ -128,7 +128,7 @@ $(function() {
       $.each(names, function() {
         this.name == ' ' ? this.name = 'Unknown' : this.name
         ul.append($('<li />')
-          .text(this.name.capitalizeWords())
+          .html($('<a />').attr('href', '/neighborhoods/' + this.permalink).text(this.name.capitalizeWords()))
           .append($('<span />')
             .addClass('count')
             .text(this.count)))

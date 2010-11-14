@@ -2,7 +2,8 @@ $(function() {
   var mapel = $('#canvas')
   if(mapel.length == 0) return
   
-  var po = org.polymaps,
+  var path = $(document.body).data().path,
+      po = org.polymaps,
       lightstyle = 5870,
       darkstyle  = 1960,
       svg = po.svg('svg'),
@@ -25,24 +26,35 @@ $(function() {
     .position('top-left')
     .radius(30)
     .pan('none'))
-  
-  $(document).bind('ajaxStart', function() { fetching = true })
-             .bind('ajaxEnd', function() { fetching = false })
+    
+  $('.compass').click(togglecrimes)   
+   // if(path == 'neighborhoods-show') {
+   //   $.getJSON(document.location.pathname + '/crimes.json', addDataLayer)
+   // }
 
-    $.getJSON(document.location.pathname + '.json', function(data) {
-      $(document).trigger('crimes.loaded', data)
-      map.add(po.geoJson()
-        .features(data.features)
-        .on('load', load))
-    })
-
-
-  $('.compass').click(togglecrimes)
+   
+   $.getJSON(document.location.pathname + '.json', addDataLayer) 
+   
+   
+   function addDataLayer(data) {
+     // Likely a Neighborhood if we have a Polygon.  Center the map to the 
+     // neighborhoods first point
+     var first = data.features[0]
+     if(first.geometry.type.toLowerCase() == 'polygon') {
+       var ll = first.geometry.coordinates[0][0] 
+       map.center({lat: ll[1], lon: ll[0]})
+       map.zoom(14)
+     }
+     
+     $(document).trigger('crimes.loaded', data)
+     map.add(po.geoJson()
+       .features(data.features)
+       .on('load', load))
+   }
   
-  $(document).keyup(function(e) {
-    if (e.keyCode == 27) { $('.resizer').click(); }   // esc
-  });
-  
+  /**
+   * Fullscreen support
+   */
   var resizer = $('<span />').addClass('resizer').text('`'),
       width = mapel.width(),
       height = mapel.height(),
@@ -52,6 +64,9 @@ $(function() {
         .addClass('fslogo'),
       hdr    = $('header#top .wrap-inner')
   
+  $(document).keyup(function(e) {
+    if (e.keyCode == 27) { $('.resizer').click(); }   // esc
+  })
       
   resizer.bind('click', function(event) {
     if(body.hasClass('fullscreen')) {      
@@ -74,51 +89,41 @@ $(function() {
   
   mapel.prepend(resizer)
   
-  
-  function load(e) {   
+  function load(e) {  
     var counts = {}  
     $.each(e.features, function() {
-      var el = this.element,
-          $el   = $(el),
-          $cir  = $(el.firstChild),
-          text  = po.svg('text'),
-          props = this.data.properties,
-          // time  = Date.parse(props.reported_at),
-          // hours = time.getHours(),
-          check = $('span.check[data-code=' + props.code + ']'),
-          inact = check.hasClass('inactive')
+      if(this.data.geometry.type.toLowerCase() == 'polygon') {
+        renderNeighborhood(this)
+      } else {
+        var el = this.element,
+            $el   = $(el),
+            $cir  = $(el.firstChild),
+            text  = po.svg('text'),
+            props = this.data.properties,
+            // time  = Date.parse(props.reported_at),
+            // hours = time.getHours(),
+            check = $('span.check[data-code=' + props.code + ']'),
+            inact = check.hasClass('inactive')
       
-      if(!counts[props.code]) counts[props.code] = 0
-      counts[props.code]++
+        if(!counts[props.code]) counts[props.code] = 0
+        counts[props.code]++
       
-      if(inact)
-        $el.addSVGClass('inactive')
+        if(inact)
+          $el.addSVGClass('inactive')
 
-      $el.addSVGClass(props.code)
-      $cir.addSVGClass('circle')
-      $cir.addSVGClass(props.code)      
-      $cir[0].setAttribute("r", 12)
+        $el.addSVGClass(props.code)
+        $cir.addSVGClass('circle')
+        $cir.addSVGClass(props.code)      
+        $cir[0].setAttribute("r", 12)
 
-      $el.bind('click', {props: props, geo: this.data.geometry}, onPointClick)      
+        $el.bind('click', {props: props, geo: this.data.geometry}, onPointClick)      
             
-      text.setAttribute("text-anchor", "middle")
-      text.setAttribute("dy", ".35em")
-      text.appendChild(document.createTextNode(props.code))
+        text.setAttribute("text-anchor", "middle")
+        text.setAttribute("dy", ".35em")
+        text.appendChild(document.createTextNode(props.code))
       
-      el.appendChild(text)
-      
-      // if(time.isDaylight()) {
-      //   $el.addSVGClass('day')
-      // }
-      // 
-      // if(time.isDark()) {
-      //   $el.addSVGClass('dar')
-      // }
-      // 
-      // if(time.isWeekendNightlife()) {
-      //   $el.addSVGClass('wnl')
-      // }
-      
+        el.appendChild(text)
+      }
     })
         
     $('#sbar li.off').each(function() {
@@ -127,18 +132,28 @@ $(function() {
       if(cnt.length == 0) {
         var check = el.find('span.check'),
             code = check.attr('data-code')
-        
+      
         if(!counts[code]) counts[code] = 0
-        
+      
         check.parent()
           .append($('<span class="count" />')
           .text(counts[code]))
       }
     })
-    
-    $('#map').bind('map.togglecrimes', togglecrimes)    
+  
+    $('#map').bind('map.togglecrimes', togglecrimes)
   }
   
+  function renderNeighborhood(nhood) {
+    var $el = $(nhood.element)
+    
+    $el.addSVGClass('nhood')
+  }
+  
+  /**
+   * Check the state of crimes in the sidebar, assigning the proper class 
+   * depending if they are active or inactive
+   */
   function togglecrimes(event, from) {
     $('#sbar span.check').each(function() {
       var check = $(this),
@@ -190,6 +205,9 @@ $(function() {
             otype = check.closest('li.group').attr('data-code'),
             close = $('<span/>').addClass('close').text('*')
       
+        if(ctype.length == 0)
+         ctype = $('#sbar h1').clone()
+         
         hdr.append($('<span/>').addClass('badge').text('E').attr('data-code', otype))
           .append(ctype)
           .append(close)
