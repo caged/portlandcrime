@@ -843,6 +843,10 @@ div.summary h2 {
   padding: 10px;
 }
 
+div.box.summary h2 {
+  margin-top: 0;
+}
+
 div.summary h2 span.total {
   float: right;
   font-weight: normal;
