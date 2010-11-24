@@ -5,9 +5,11 @@ class Neighborhood
   key :permalink
   key :geo, Hash
   key :properties, Hash
+  
   timestamps!
   
   many :crimes
+  many :demographics # For future historical demographics
   
   add_concerns :reporting
   
