@@ -1,0 +1,33 @@
+<ol class="alpha-list">
+  <% ('A'..'Z').each do |l| %>
+  <li><%= link_to(l, "##{l}") %></li>
+  <% end %>
+</ol>
+
+<div class="box wfilter" id="map">
+  <header>
+    <h1>Portland Area Neighborhoods</h1>
+    <%= link_to 'Locate', nil, :class => 'locate' %>
+  </header>
+  <div id="neighborhoods-map"></div>
+</div>
+
+<section class="boxgroup">
+  <% @neighborhoods.sort_by(&:name).group_by {|n| n.name[0..0] }.each do |letter, neighborhoods| %>
+    <% if !letter.blank? && !neighborhoods.empty? %>
+    <section class="letter-group">
+      <h2 class="ltr" id="<%= letter %>"><%= letter %></h2>
+      <% neighborhoods.each do |nh| %>
+        <% if nh.portland? && !nh.permalink.empty? %>
+          <div class="txt box summary">
+            <h2>
+              <%= link_to nh.name, neighborhood_path(nh) %>
+              <span class="total"><%= number_with_delimiter(@totals[nh.id]) %> total crimes</span>
+            </h2>
+          </div>
+        <% end %>
+      <% end %>
+      </section>
+    <% end %>
+  <% end %>
+</section>

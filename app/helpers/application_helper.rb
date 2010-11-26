@@ -18,8 +18,9 @@ module ApplicationHelper
     klass = nil  
     begin
       mappings = {
-        :home   => [:crimes, [:offenses, :show], [:neighborhoods, :show]],
+        :home   => [:crimes, [:offenses, :show]],
         :trends => [:trends],
+        :neighborhoods => [[:neighborhoods, :index], [:neighborhoods, :show]],
         :about  => [[:site, :about]]
       }
     

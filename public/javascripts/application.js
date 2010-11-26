@@ -54,6 +54,13 @@ $(function() {
     child.animate({height: 'toggle'}, 'slow', 'easeOutBack')
   })
   
+  $('ol.alpha-list li a').click(function() {
+    var el     = $(this).attr('href'),
+        offset = $(el).offset().top
+        
+    $('html,body').animate({scrollTop: offset}, 500, 'easeOutQuad')
+  })
+  
   $(document).bind('crimes.loaded', function(event, data) {
     if($('body[data-path=offenses-show]').length != 1)
       return

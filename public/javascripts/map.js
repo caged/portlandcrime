@@ -21,11 +21,11 @@ $(function() {
       + "/" + lightstyle + "/256/{Z}/{X}/{Y}.png")
       .hosts(["a.", "b.", "c.", ""])));
 
-  map.add(po.compass()
-    .zoom('small')
-    .position('top-left')
-    .radius(30)
-    .pan('none'))
+  // map.add(po.compass()
+  //   .zoom('small')
+  //   .position('top-left')
+  //   .radius(30)
+  //   .pan('none'))
     
   $('.compass').click(togglecrimes)   
    // if(path == 'neighborhoods-show') {
@@ -142,6 +142,13 @@ $(function() {
     })
   
     $('#map').bind('map.togglecrimes', togglecrimes)
+    
+      if($('#map .compass').length == 0)
+        map.add(po.compass()
+          .zoom('small')
+          .position('top-left')
+          .radius(30)
+          .pan('none'))
   }
   
   function renderNeighborhood(nhood) {

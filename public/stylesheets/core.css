@@ -37,6 +37,7 @@ a:hover {
 
 .wrap-inner {
   margin: 0 10px;
+  position: relative;
 }
 
 .wrap-inner:after {
@@ -204,6 +205,35 @@ a:hover {
 
 .filter ul.times li.off span.lbl {
   color: #999;
+}
+
+ol.alpha-list {
+  list-style: none;
+  margin: 10px 0;
+  position: fixed;
+  z-index: 9999;
+  right: 20px;
+  top: 105px;
+}
+
+ol.alpha-list li {
+  display: block;
+  margin: 1px 0;
+}
+
+ol.alpha-list li a {
+  width: 12px;
+  font-size: 10px;
+  text-align: center;
+  display: inline-block;
+  padding: 3px;
+  background: rgba(200, 200, 200,0.5);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #555;
+  font-weight: bold;
+  text-shadow: 1px 1px rgba(255,255,255,0.5);
 }
 
 /* @end */
@@ -751,6 +781,42 @@ span.rise {
 
 span.fall {
   color: #63a85a;
+}
+
+section.letter-group {
+  margin: 5px 0;
+}
+
+/*.boxgroup section.letter-group  .box:nth-child(odd) {
+  margin-right: 5px;
+  
+}*/
+.boxgroup section.letter-group h2 {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.boxgroup section.letter-group .box:nth-child(even) {
+  margin-right: 10px;
+}
+
+.boxgroup section.letter-group .box:nth-child(odd) {
+  margin-right: 0;
+}
+
+section.letter-group:after {
+  content: ".";
+  clear: both;
+  display: block;
+  visibility: hidden;
+  height: 0;
+}
+
+h2.ltr {
+  margin-bottom: 10px;
+  padding: 10px 5px;
+  display: block;
+  border-bottom: 2px solid rgba(100,100,100,0.3);
 }
 
 /* @end */

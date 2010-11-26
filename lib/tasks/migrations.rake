@@ -104,12 +104,29 @@ namespace :migrations do
           props[k] = v.gsub(',', '').to_i
         end
 
-        n.properties = props  
+        demographics = n.demographics.detect {|d| d.year == 2000 }
+        if demographics.nil?
+          demographic = Demographic.new(:year => 2000)
+          n.demographics << demographic
+        end
+        demographic.properties = props
         if n.save
           puts "Imported demographics for #{n.name}"
         end
       end
     end
-
+  end
+  
+  desc 'Flag non-portland neighborhoods'
+  task :four_flag_non_portland_neighborhoods => :environment do
+    permalinks = NON_PDX_NHOODS.collect {|n| n.parameterize }
+    Neighborhood.all.each do |nh|
+      if permalinks.include?(nh.permalink)
+        nh.portland = false
+      else
+        nh.portland = true
+      end
+      nh.save
+    end
   end
 end

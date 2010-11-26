@@ -3,6 +3,7 @@ class Neighborhood
 
   key :name
   key :permalink
+  key :portland, Boolean, :default => true
   key :geo, Hash
   key :properties, Hash
   
@@ -13,6 +14,8 @@ class Neighborhood
   
   add_concerns :reporting
   
+  scope :portland_only, where(:portland => true)
+  
   def to_param
     permalink
   end
@@ -21,7 +24,7 @@ class Neighborhood
     {
       :id => id,
       :geometry => geo,
-      :properties => properties
+      :properties => properties.merge(:name => name, :permalink => permalink)
     }
   end
 end
