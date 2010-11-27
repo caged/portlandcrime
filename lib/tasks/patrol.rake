@@ -92,9 +92,7 @@ namespace :crime do
             crime.offense = offense
             crime.code = offense.code
           
-            name = PDX_NHOODS_NAME_MAP[cr[5]].nil? ? cr[5] : PDX_NHOODS_NAME_MAP[cr[5]]
-            
-            puts "NAME: #{name.titlecase} PERMALINK:#{name.parameterize}"
+            name = PDX_NHOODS_NAME_MAP[cr[5]].nil? ? cr[5] : PDX_NHOODS_NAME_MAP[cr[5]]            
             nhood = Neighborhood.first_or_create(:name => name.titlecase, :permalink => name.parameterize)
             crime.neighborhood = nhood
 

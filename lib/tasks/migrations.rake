@@ -32,13 +32,16 @@ namespace :migrations do
   desc 'Correct improper neighborhood name imports'
   task :two_unify_same_neighborhoods => :environment do
     PDX_NHOODS_NAME_MAP.each do |k, v|
+      cn = Neighborhood.first(:name => v.titlecase)
+      cn.permalink = v.parameterize
+      cn.save
       
       # The crime importer wasn't swapped over to use the name map, so this needs
       # to be corrected by finding all neighborhoods in the name map and assigning
       # their crimes to the correct neighborhood
-      nh = Neighborhood.first(:permalink => k)
+      nh = Neighborhood.first(:permalink => k.parameterize)
       unless nh.nil?
-        correct_nh = Neighborhood.first(:permalink => v.permalink)
+        correct_nh = Neighborhood.first(:permalink => v.parameterize)
         if correct_nh.nil?
           puts "COULDN'T FIND #{v}"
         else
