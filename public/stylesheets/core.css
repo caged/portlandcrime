@@ -236,6 +236,12 @@ ol.alpha-list li a {
   text-shadow: 1px 1px rgba(255,255,255,0.5);
 }
 
+ol.alpha-list li a:hover {
+  color: #fff;
+  text-shadow: 1px 1px rgba(0,0,0,0.3);
+  background: rgba(44, 143, 244,0.9);
+}
+
 /* @end */
 
 /*------------------------------------------------------------------------------------

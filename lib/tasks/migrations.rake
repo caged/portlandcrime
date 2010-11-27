@@ -10,6 +10,7 @@ namespace :migrations do
     nhoods = JSON.parse(File.read(File.join(Rails.root, 'db', 'data', 'neighborhoods.json')))
     
     Neighborhood.all.each do |n|
+      name = n.name
       cur_name = n.name.downcase
       nhood = nhoods['features'].detect { |f| f['properties']['NAME'].downcase == cur_name }
       if nhood.nil?
@@ -20,7 +21,7 @@ namespace :migrations do
       end
       
       unless nhood.nil?
-        n.name = nhood['properties']['NAME'].titlecase
+        n.name = name.titlecase
         n.geo = nhood['geometry']
         n.properties = nhood['properties']
         n.save
