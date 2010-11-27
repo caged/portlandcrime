@@ -31,15 +31,14 @@ namespace :migrations do
   # Migration for noob mistake
   desc 'Correct improper neighborhood name imports'
   task :two_unify_same_neighborhoods => :environment do
-    Neighborhood
     PDX_NHOODS_NAME_MAP.each do |k, v|
       
       # The crime importer wasn't swapped over to use the name map, so this needs
       # to be corrected by finding all neighborhoods in the name map and assigning
       # their crimes to the correct neighborhood
-      nh = Neighborhood.first(:name => k)
+      nh = Neighborhood.first(:permalink => k)
       unless nh.nil?
-        correct_nh = Neighborhood.first(:name => v.titlecase)
+        correct_nh = Neighborhood.first(:permalink => v.permalink)
         if correct_nh.nil?
           puts "COULDN'T FIND #{v}"
         else
@@ -93,7 +92,7 @@ namespace :migrations do
     nhoods = CSV.read(data, :headers => true)
     Neighborhood.all.each do |n|
       found = nhoods.detect do |nh|
-        n.name.downcase == nh['NEIGHBORHOOD'].downcase ||
+        n.name.parameterize == nh['NEIGHBORHOOD'].parameterize ||
         (PDX_DEMOGRAPHICS_NAME_MAP[n.permalink] && PDX_DEMOGRAPHICS_NAME_MAP[n.permalink].downcase == nh['NEIGHBORHOOD'].downcase)
       end
       
@@ -104,8 +103,8 @@ namespace :migrations do
           props[k] = v.gsub(',', '').to_i
         end
 
-        demographics = n.demographics.detect {|d| d.year == 2000 }
-        if demographics.nil?
+        demographic = n.demographics.detect {|d| d.year == 2000 }
+        if demographic.nil?
           demographic = Demographic.new(:year => 2000)
           n.demographics << demographic
         end
