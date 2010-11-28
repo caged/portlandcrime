@@ -14,6 +14,7 @@ it's a good start.  The data is updated daily and is provided by the city.
   * Seasonal statistics
   * Weather statistics
   * Historical Census Data
+  * Maptip paging (←prev crime / next crime→)
   * Replay the day: Time-lapse map & graph of incidents played over a specific time period.
   * Take back this block: Identifies troubled areas in Portland and encourages 
     citizens to come together and help solve problems.

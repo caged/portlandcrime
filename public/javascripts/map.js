@@ -28,13 +28,8 @@ $(function() {
   //   .pan('none'))
     
   $('.compass').click(togglecrimes)   
-   if(path == 'neighborhoods-show') {
-     $.getJSON(document.location.pathname + '/crimes.geojson', addDataLayer)
-   }
-
    
    $.getJSON(document.location.pathname + '.geojson', addDataLayer) 
-   
    
    function addDataLayer(data) {
      // Likely a Neighborhood if we have a Polygon.  Center the map to the 
@@ -49,9 +44,16 @@ $(function() {
        
        map.center({lat: ll[1], lon: ll[0]})
        map.zoom(14)
+       
+       
+       if(path == 'neighborhoods-show') {
+         $.getJSON(document.location.pathname + '/crimes.geojson', addDataLayer)
+       }
+       
+     } else {
+       $(document).trigger('crimes.loaded', data)
      }
      
-     $(document).trigger('crimes.loaded', data)
      map.add(po.geoJson()
        .features(data.features)
        .on('load', load))
@@ -213,18 +215,28 @@ $(function() {
             hdr = $('<h2/>'),
             bdy = $('<p/>')
       
+        // Try to reuse what's already on the page.
         var check = $('#sbar span[data-code=' + props.code + ']'),
             ctype = check.next().clone(),
             otype = check.closest('li.group').attr('data-code'),
             close = $('<span/>').addClass('close').text('*')
       
-        if(ctype.length == 0)
+        // Couldn't find the right info on the page, make a request for it.
+        if(ctype.length == 0) {
+          $.getJSON('/offenses/' + d.offense_id + '.json', function(data) {
+            otype = data.type.name.toLowerCase().substring(0,2)
+            hdr.append($('<span/>').addClass('badge').text('E').attr('data-code', otype))
+              .append($('<a/>').attr('href', '/offenses/' + data.permalink).text(data.name))
+              .append(close)
+              .addClass(otype)
+          })
          ctype = $('#sbar h1').clone()
-         
-        hdr.append($('<span/>').addClass('badge').text('E').attr('data-code', otype))
-          .append(ctype)
-          .append(close)
-          .addClass(otype)
+        } else {
+         hdr.append($('<span/>').addClass('badge').text('E').attr('data-code', otype))
+           .append(ctype)
+           .append(close)
+           .addClass(otype) 
+        }
       
         bdy.text(props.address)
         bdy.append($('<span />')

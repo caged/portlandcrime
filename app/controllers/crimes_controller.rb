@@ -21,7 +21,6 @@ class CrimesController < ApplicationController
           neighborhood = Neighborhood.where(:permalink => params[:neighborhood_id]).first
           unless neighborhood.nil?
             crimes = neighborhood.crimes.in_the_past(7.days).all
-            logger.info crimes
             render :geojson => crimes
           end
         end

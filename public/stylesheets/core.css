@@ -1073,6 +1073,7 @@ ul.times li span.percent {
 ------------------------------------------------------------------------------------*/
 
 .maptip h2 {
+  min-height: 14px;
   font-size: 14px;
   background: #e0e0e0 -webkit-gradient(linear, left top, left bottom, from(#e0e0e0), to(#cfcfcf));
   background: #e0e0e0 -moz-linear-gradient(top, #e0e0e0, #cfcfcf);
