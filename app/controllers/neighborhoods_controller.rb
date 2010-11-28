@@ -47,7 +47,7 @@ class NeighborhoodsController < ApplicationController
         @this_year_trends = MongoMapper.database["neighborhood_totals_for_#{@this_year_start.year}"].find_one(:_id => @neighborhood.id)          
         @last_year_trends = MongoMapper.database["neighborhood_totals_for_#{@last_year_start.year}"].find_one(:_id => @neighborhood.id)
       end
-      wants.json do
+      wants.geojson do
         geo = @neighborhood
         render :geojson => [geo]
       end

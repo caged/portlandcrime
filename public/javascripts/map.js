@@ -28,20 +28,25 @@ $(function() {
   //   .pan('none'))
     
   $('.compass').click(togglecrimes)   
-   // if(path == 'neighborhoods-show') {
-   //   $.getJSON(document.location.pathname + '/crimes.json', addDataLayer)
-   // }
+   if(path == 'neighborhoods-show') {
+     $.getJSON(document.location.pathname + '/crimes.geojson', addDataLayer)
+   }
 
    
-   $.getJSON(document.location.pathname + '.json', addDataLayer) 
+   $.getJSON(document.location.pathname + '.geojson', addDataLayer) 
    
    
    function addDataLayer(data) {
      // Likely a Neighborhood if we have a Polygon.  Center the map to the 
      // neighborhoods first point
-     var first = data.features[0]
-     if(first.geometry.type.toLowerCase() == 'polygon') {
-       var ll = first.geometry.coordinates[0][0] 
+     var first = data.features[0],
+         type = first.geometry.type.toLowerCase()
+     if(type == 'polygon' || type == 'multipolygon') {
+       if(type == 'multipolygon')
+        var ll = first.geometry.coordinates[0][0][0]
+       else
+         var ll = first.geometry.coordinates[0][0] 
+       
        map.center({lat: ll[1], lon: ll[0]})
        map.zoom(14)
      }
@@ -92,7 +97,8 @@ $(function() {
   function load(e) {  
     var counts = {}  
     $.each(e.features, function() {
-      if(this.data.geometry.type.toLowerCase() == 'polygon') {
+      var type = this.data.geometry.type.toLowerCase()
+      if(type == 'polygon' || type == 'multipolygon') {
         renderNeighborhood(this)
       } else {
         var el = this.element,

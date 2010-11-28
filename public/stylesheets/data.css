@@ -174,4 +174,11 @@ g.inactive circle, g.inactive text {
   fill-opacity: 0.2;
 }
 
+.nhood-detail .layer .nhood {
+  stroke-dasharray: 3 3;
+  stroke: #355ee6;
+  fill-opacity: 0;
+  stroke-width: 3;
+}
+
 /* @end */
