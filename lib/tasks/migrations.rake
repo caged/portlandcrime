@@ -12,15 +12,23 @@ namespace :migrations do
     Neighborhood.all.each do |n|
       name = n.name
       cur_name = n.name.downcase
+      
       nhood = nhoods['features'].detect { |f| f['properties']['NAME'].downcase == cur_name }
-      if nhood.nil?
-        name = PDX_NHOODS_NAME_MAP[n.name]
+      
+      if name == 'Mt. Scott Arleta'
+        nhood = nhoods['features'].detect { |f| f['properties']['NAME'] == 'MT. SCOTT-ARLETA' }
+      end
+      
+      if nhood.nil?        
+        name = PDX_NHOODS_NAME_MAP[n.name]        
         unless name.nil?
           nhood = nhoods['features'].detect { |f| f['properties']['NAME'].downcase == name.downcase }
+        else
+          # hrm
         end
       end
       
-      unless nhood.nil?
+      unless nhood.nil?        
         n.name = name.titlecase
         n.geo = nhood['geometry']
         n.properties = nhood['properties']

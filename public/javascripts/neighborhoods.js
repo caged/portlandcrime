@@ -11,7 +11,7 @@ $(function() {
       .container(mapel[0].appendChild(svg))
       .center({lat: 45.5250, lon: -122.6515})
       .zoom(11)
-      .zoomRange([9,13])
+      .zoomRange([9,17])
       .add(po.interact())
       .add(po.hash())
       
