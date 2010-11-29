@@ -7,7 +7,7 @@ class Crime
   key :district, Integer
   key :precinct, String
   key :address, String
-  key :loc, Hash
+  key :loc, Hash, :default => {'lat' => 0, 'lon' => 0}
   key :code, String
   timestamps!
   
@@ -45,30 +45,4 @@ class Crime
     hour = reported_at.hour
     hour >= 6 && hour < 18
   end
-# Validations :::::::::::::::::::::::::::::::::::::::::::::::::::::
-# validates_presence_of :attribute
-
-# Assocations :::::::::::::::::::::::::::::::::::::::::::::::::::::
-# belongs_to :model
-# many :model
-# one :model
-
-# Callbacks ::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
-# before_create :your_model_method
-# after_create :your_model_method
-# before_update :your_model_method 
-
-# Attribute options extras ::::::::::::::::::::::::::::::::::::::::
-# attr_accessible :first_name, :last_name, :email
-
-# Validations
-# key :name, :required =>  true      
-
-# Defaults
-# key :done, :default => false
-
-# Typecast
-# key :user_ids, Array, :typecast => 'ObjectId'
-  
-   
 end

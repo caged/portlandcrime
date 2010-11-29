@@ -16,6 +16,12 @@ GIT
       plucky (~> 0.3.6)
 
 GIT
+  remote: https://github.com/indirect/rails3-generators.git
+  revision: fecefbf651909a2251d4790790229d262310d5ce
+  specs:
+    rails3-generators (0.14.0)
+
+GIT
   remote: https://github.com/parrish/mongo_geo.git
   revision: 829b59102ad818a8652d29382a247b7b9cc36ece
   specs:
@@ -96,25 +102,22 @@ GEM
       activesupport (= 3.0.3)
       bundler (~> 1.0)
       railties (= 3.0.3)
-    rails3-generators (0.14.0)
     railties (3.0.3)
       actionpack (= 3.0.3)
       activesupport (= 3.0.3)
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
-    rspec (2.0.0)
-      rspec-core (= 2.0.0)
-      rspec-expectations (= 2.0.0)
-      rspec-mocks (= 2.0.0)
-    rspec-core (2.0.0)
-    rspec-expectations (2.0.0)
-      diff-lcs (>= 1.1.2)
-    rspec-mocks (2.0.0)
-      rspec-core (= 2.0.0)
-      rspec-expectations (= 2.0.0)
-    rspec-rails (2.0.1)
-      rspec (~> 2.0.0)
+    rspec (2.1.0)
+      rspec-core (~> 2.1.0)
+      rspec-expectations (~> 2.1.0)
+      rspec-mocks (~> 2.1.0)
+    rspec-core (2.1.0)
+    rspec-expectations (2.1.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.1.0)
+    rspec-rails (2.1.0)
+      rspec (~> 2.1.0)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -138,8 +141,8 @@ DEPENDENCIES
   mongo_mapper!
   proj4rb!
   rails (= 3.0.3)
-  rails3-generators
-  rspec (= 2.0.0)
-  rspec-rails (= 2.0.1)
+  rails3-generators!
+  rspec (= 2.1.0)
+  rspec-rails (= 2.1.0)
   whenever
   yui-compressor

@@ -17,13 +17,13 @@ gem 'proj4rb', :git => 'git://github.com/Caged/proj4rb.git', :branch => 'ruby19'
 gem 'whenever', :require => false
 gem 'mongo_geo', :git => 'https://github.com/parrish/mongo_geo.git'
   
-group :development do
-  gem 'rspec-rails', '2.0.1'
-  gem 'rails3-generators'
-  gem 'jquery-rails'
-end
-
-group :test do
+group :development, :test do
   gem 'factory_girl_rails'
-  gem 'rspec', '2.0.0'
+  gem 'rspec', '2.1.0'
+  gem 'rspec-rails', '2.1.0'
+  gem 'rails3-generators', :git => 'https://github.com/indirect/rails3-generators.git'
+end  
+
+group :development do
+  gem 'jquery-rails'
 end
