@@ -1,17 +1,16 @@
 class TrimetRoute
   include MongoMapper::Document  
   
-  key :route_number, Integer
-  key :public_route_number, Integer
-  key :direction, Integer
-  key :direction_desc
-  key :frequent, Boolean
+  key :status
   key :type
+  key :line
+  key :tunnel, Integer
+  key :length, Float
   key :geo, Hash
   
-  scope :max_routes, :type => 'max'
-  scope :streetcar_routes, :type => 'sc'
-  scope :bus_routes, :type => 'bus'
+  scope :max, :type => 'max', :status => 'existing'
+  scope :streetcar, :type => 'street car', :status => 'existing'
+  scope :rail, :type.in => ['street car', 'max'], :status => 'existing'
   
   def as_geojson(options = {})
     props = attributes

@@ -1093,7 +1093,7 @@ ul.times li span.percent {
   color: #333;
 }
 
-.maptip h2 span.close {
+.maptip span.close {
   font-family: Pictos;
   top: 5px;
   right: 5px;
@@ -1103,7 +1103,7 @@ ul.times li span.percent {
   cursor: pointer;
 }
 
-.maptip h2 span.close:hover {
+.maptip span.close:hover {
   color: rgba(100,100,100,0.9);
 }
 
@@ -1131,7 +1131,7 @@ ul.times li span.percent {
   top: 24px;
 }
 
-.maptip.maptip-maxstop {
+/*.maptip.maptip-maxstop {
   background: rgba(0,0,0,0.8);
 }
 
@@ -1139,5 +1139,52 @@ ul.times li span.percent {
   height: auto;
   background: transparent;
   color: rgba(200,200,200,0.8);
+}*/
+
+.maptip.bsc, 
+.maptip.sc, 
+.maptip.max {
+  background: rgba(0,0,0,0.8);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: rgba(200,200,200,0.8);
+}
+
+.maptip.bsc .maptip-cnt,
+.maptip.sc .maptip-cnt,
+.maptip.max .maptip-cnt {
+  background: transparent;
+}
+
+.maptip.bsc span.close,
+.maptip.sc span.close,
+.maptip.max span.close {
+  color: rgba(150,150,150,0.9);
+}
+
+.maptip.bsc span.close:hover,
+.maptip.sc span.close:hover,
+.maptip.max span.close:hover {
+  color: rgba(190,190,190,0.9);
+}
+
+.maptip span.type {
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+
+.maptip.bsc div.nub,
+.maptip.sc div.nub,
+.maptip.max div.nub {
+  border-bottom: 0;
+  height: 0;
+  width: 0; 
+  position: absolute;
+  border-top: 5px solid transparent;
+  border-right: 5px solid rgba(0,0,0,0.8);
+  border-bottom: 5px solid transparent;
+  left: -5px;
+  top: 6px;
 }
 /* @end */

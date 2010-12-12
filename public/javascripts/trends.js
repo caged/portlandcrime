@@ -72,4 +72,4 @@ $(function() {
       vis.render();
     })
   }
-})
+});

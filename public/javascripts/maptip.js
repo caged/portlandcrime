@@ -9,11 +9,12 @@
   function MapTip(el, target) {
     this.canvas = el
     this.target = target
+    this.defaultClassName = 'maptip'
     this.el = $('<div />')
-      .addClass('maptip')
+      .addClass(this.defaultClassName)
       .css('position', 'absolute')
     
-    this.cnt = $('<div />').addClass('maptip-cnt')
+    this.cnt = $('<div />').addClass(this.defaultClassName + '-cnt')
     this.el.append(this.cnt)
     this.props = {}
   }
@@ -30,6 +31,21 @@
       this.props.map.on('move', function() { self.move() })    
       this.props.map.on('resize', function() { self.resize() })
                 
+      return this
+    },
+    
+    classNames: function(fn) {
+      if($.isFunction(fn)) {
+        this.props.classNames = fn.call(this, this.props.data)
+      } else {
+        this.props.classNames = fn
+      }
+      
+      this.el.attr('class', '')
+      this.el
+        .addClass(this.defaultClassName)
+        .addClass(this.props.classNames)
+        
       return this
     },
     
@@ -109,7 +125,6 @@
       this.cnt.html(' ').append(this.props.content)
       this.canvas.prepend(this.el)  
       this.el
-        .addClass(this.props.className)
         .show()
         .css({left: this.props.left + 'px', top: this.props.top + 'px'})
     }
@@ -124,4 +139,4 @@
     
     return tip 
   }
-})(jQuery)
+})(jQuery);

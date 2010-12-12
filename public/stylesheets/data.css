@@ -194,10 +194,26 @@ g.inactive circle, g.inactive text {
   fill-opacity: 0.6;
 }
 
-.max-route {
+.sc-stop,
+.bsc-stop {
+  fill: #8e62cf;
+  stroke: #aa89db;
+  stroke-width: 1;
+  fill-opacity: 0.6;
+}
+
+.max-route,
+.street-car-route {
   fill: none;
   stroke: #555;
-  stroke-width: 3;
+  stroke-width: 2;
+}
+
+.max-route,
+.street-car-route {
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-dasharray: 10 2;
 }
 
 /* @end */

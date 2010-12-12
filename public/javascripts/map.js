@@ -22,44 +22,45 @@ $(function() {
       .hosts(["a.", "b.", "c.", ""])));
 
   
-  /**
-   * Generate trimet routes
-   */
-  //   $.getJSON('/routes/max.geojson', function(data) {
-  //     map.add(po.geoJson()
-  //       .features(data.features)
-  //       .on('load', routesLoaded))
-  //   }) 
-  // 
-  // function routesLoaded(e) {
-  //   var counts = {}  
-  //   $.each(e.features, function() {
-  //     var el  = this.element,
-  //         $el = $(el)
-  //         
-  //     $el.addSVGClass('max-route')
-  //   })
-  // }
+/**
+ * Generate trimet routes
+ */
+  $.getJSON('/routes/rail.geojson', function(data) {
+    map.add(po.geoJson()
+      .features(data.features)
+      .on('load', routesLoaded))
+  }) 
   
-  
-  
-    
-  $('.compass').click(togglecrimes)
-  
+  function routesLoaded(e) {
+    var counts = {}  
+    $.each(e.features, function() {
+      var el  = this.element,
+          $el = $(el),
+          props = this.data.properties
+      
+      $el.addSVGClass(props.type.replace(/\s+/g, '-') + '-route')
+    })
+  }  
     
   
   /**
    * Load Max stops then load crimes
    */    
-  $.getJSON('/stops/max.geojson', function(data) {
+  var loaded = false
+  $.getJSON('/stops/rail.geojson', function(data) {
     map.add(po.geoJson()
       .features(data.features)
       .on('load', function(e) {
         stopsLoaded(e)
-        $.getJSON(document.location.pathname + '.geojson', addDataLayer) 
+        if(!loaded) {
+          $.getJSON(document.location.pathname + '.geojson', addDataLayer) 
+          loaded = true
+        }
       })
     )
   }) 
+  
+  
 
   function stopsLoaded(e) {
     var counts = {}  
@@ -70,7 +71,7 @@ $(function() {
           props = this.data.properties
           
       $cir[0].setAttribute("r", 3)    
-      $cir.addSVGClass('max-stop')
+      $cir.addSVGClass(props.type + '-stop')
       $cir.bind('click', {props: props, geo: this.data.geometry}, onStopClick)      
     })
   }
@@ -83,6 +84,9 @@ $(function() {
       .map(map)
       .data(props)
       .location({lat: coor[1], lon: coor[0]})
+      .classNames(function(d) {
+        return d.type
+      })
       .top(function(tip) {
         var radius = tip.target.getAttribute('r'),
             point = tip.props.map.locationPoint(this.props.location)
@@ -96,16 +100,21 @@ $(function() {
       }).content(function(d) {
         var self = this,
             props = d,
-            cnt = $('<div/>'),
+            cnt = $('<div/>').addClass(props.type + '-stop-cnt'),
             hdr = $('<h2/>'),
-            bdy = $('<p/>')
+            bdy = $('<p/>'),
+            type = 'Max'
       
-        if(props.type == 'max') {
-         bdy.text(props.name)
-         cnt.append(bdy) 
-        }
+        if(props.type == 'bsc' || props.type == 'sc')
+          type = 'Streetcar'
+          
+         bdy.html('<span class="type">' + type + '</span>: ' + props.name)
+         cnt.append(bdy)
+         cnt.append($('<div/>').addClass('nub'))
+
         // Try to reuse what's already on the page.
         var close = $('<span/>').addClass('close').text('*')
+        bdy.append(close)
         close.click(function() {
           self.hide()
         })   
@@ -210,6 +219,8 @@ $(function() {
         .position('top-left')
         .radius(30)
         .pan('none'))
+      
+      $('.compass').click(togglecrimes)
     }
   }
   
@@ -256,6 +267,9 @@ $(function() {
       .map(map)
       .data(props)
       .location({lat: coor[1], lon: coor[0]})
+      .classNames(function(d) {
+        return d.code
+      })
       .top(function(tip) {
         var radius = tip.target.getAttribute('r'),
             point = tip.props.map.locationPoint(this.props.location)
@@ -349,4 +363,4 @@ $(function() {
   })
   
   mapel.prepend(resizer)
-})
+});

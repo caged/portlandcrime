@@ -8,7 +8,7 @@ namespace :trimet do
       stops.each do |s|
         props = s['properties']
         geo   = s['geometry']['coordinates']
-        stop = TrimetStop.first_or_new(:stop_id => props['stop_id'])
+        stop = TrimetStop.new(:stop_id => props['stop_id'])
 
         stop.name = props['stop_name']
         stop.jurisdiction = props['jurisdic']
@@ -18,24 +18,29 @@ namespace :trimet do
         stop.save
       end
       TrimetStop.ensure_index([[:loc, "2d"]])
+      TrimetStop.ensure_index(:type)
     end
     
     desc 'Import Trimet Bus, Max, and Streetcar Stops'
     task :routes => :environment do
-      file = Pathname.new(Rails.root) + 'db' + 'data' + 'trimet-routes.json'
+      raise "Already Imported Routes" if TrimetRoute.count < 0
+      
+      file = Pathname.new(Rails.root) + 'db' + 'data' + 'lightrail-routes.json'
       routes = JSON.parse(File.read(file))['features']
       
       routes.each do |r|
         props = r['properties']
-        route = TrimetRoute.first_or_new(:route_number => props['rte'])
-        route.public_route_number = props['public_rte']
-        route.frequent = props['frequent'].downcase == 'false' ? false : true
-        route.direction = props['dir']
-        route.direction_desc = props['dir_desc']
-        route.type = props['type'].downcase
+        route = TrimetRoute.new
+        route.type = props['TYPE'].downcase
+        route.status = props['STATUS'].downcase
+        route.tunnel = props['TUNNEL']
+        route.line = props['LINE']
+        route.length = props['LENGTH']
         route.geo = r['geometry']
         route.save
       end
+      
+      TrimetRoute.ensure_index([[:type, 1], [:status, 1]])
     end
   end
 end

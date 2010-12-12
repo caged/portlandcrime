@@ -28,7 +28,6 @@ $(function() {
    })
    
    function load(e) {
-     
      $.each(e.features, function() {
        var el = $(this.element),
            props = this.data.properties,
@@ -53,4 +52,4 @@ $(function() {
          .radius(30)
          .pan('none'))
    }
-})
+});

@@ -10,8 +10,9 @@ class TrimetStop
   key :loc, Hash, :default => {'lat' => 0, 'lon' => 0}
   
   scope :max_stops, :type => 'max'
-  scope :streetcar_stops, :type => 'sc'
-  scope :bus_stops, :type => 'bus'
+  scope :streetcar_stops, :type.in => %w(sc bsc)
+  scope :bus_stops, :type.in => %w(bus bsc)
+  scope :rail_stops, :type.in => %w(sc max bsc)
   
   def as_geojson(options = {})
     props = attributes
