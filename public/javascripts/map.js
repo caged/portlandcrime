@@ -21,16 +21,102 @@ $(function() {
       + "/" + lightstyle + "/256/{Z}/{X}/{Y}.png")
       .hosts(["a.", "b.", "c.", ""])));
 
-  // map.add(po.compass()
-  //   .zoom('small')
-  //   .position('top-left')
-  //   .radius(30)
-  //   .pan('none'))
+  
+  /**
+   * Generate trimet routes
+   */
+  //   $.getJSON('/routes/max.geojson', function(data) {
+  //     map.add(po.geoJson()
+  //       .features(data.features)
+  //       .on('load', routesLoaded))
+  //   }) 
+  // 
+  // function routesLoaded(e) {
+  //   var counts = {}  
+  //   $.each(e.features, function() {
+  //     var el  = this.element,
+  //         $el = $(el)
+  //         
+  //     $el.addSVGClass('max-route')
+  //   })
+  // }
+  
+  
+  
     
-  $('.compass').click(togglecrimes)   
+  $('.compass').click(togglecrimes)
+  
+    
+  
+  /**
+   * Load Max stops then load crimes
+   */    
+  $.getJSON('/stops/max.geojson', function(data) {
+    map.add(po.geoJson()
+      .features(data.features)
+      .on('load', function(e) {
+        stopsLoaded(e)
+        $.getJSON(document.location.pathname + '.geojson', addDataLayer) 
+      })
+    )
+  }) 
+
+  function stopsLoaded(e) {
+    var counts = {}  
+    $.each(e.features, function() {
+      var el = this.element,
+          $el   = $(el),
+          $cir  = $(el.firstChild),
+          props = this.data.properties
+          
+      $cir[0].setAttribute("r", 3)    
+      $cir.addSVGClass('max-stop')
+      $cir.bind('click', {props: props, geo: this.data.geometry}, onStopClick)      
+    })
+  }
+  
+  function onStopClick(event) {
+    var coor = event.data.geo.coordinates,
+        props = event.data.props
+    
+    mapel.maptip(this)
+      .map(map)
+      .data(props)
+      .location({lat: coor[1], lon: coor[0]})
+      .top(function(tip) {
+        var radius = tip.target.getAttribute('r'),
+            point = tip.props.map.locationPoint(this.props.location)
+        
+        return parseFloat(point.y - 10)
+      }).left(function(tip) {
+        var radius = tip.target.getAttribute('r'),
+            point = tip.props.map.locationPoint(this.props.location)
+        
+        return parseFloat(point.x + (radius / 2.0) + 10)
+      }).content(function(d) {
+        var self = this,
+            props = d,
+            cnt = $('<div/>'),
+            hdr = $('<h2/>'),
+            bdy = $('<p/>')
+      
+        if(props.type == 'max') {
+         bdy.text(props.name)
+         cnt.append(bdy) 
+        }
+        // Try to reuse what's already on the page.
+        var close = $('<span/>').addClass('close').text('*')
+        close.click(function() {
+          self.hide()
+        })   
+    
+        return cnt  
+      }).render()
+  }   
    
-   $.getJSON(document.location.pathname + '.geojson', addDataLayer) 
-   
+   /**
+    * Add a map geojson layer
+    */
    function addDataLayer(data) {
      // Likely a Neighborhood if we have a Polygon.  Center the map to the 
      // neighborhoods first point
@@ -48,8 +134,7 @@ $(function() {
        
        if(path == 'neighborhoods-show') {
          $.getJSON(document.location.pathname + '/crimes.geojson', addDataLayer)
-       }
-       
+       } 
      } else {
        $(document).trigger('crimes.loaded', data)
      }
@@ -59,44 +144,12 @@ $(function() {
        .on('load', load))
    }
   
+  
   /**
-   * Fullscreen support
+   * Compose points on the map.  Also render neighborhoods if detected
    */
-  var resizer = $('<span />').addClass('resizer').text('`'),
-      width = mapel.width(),
-      height = mapel.height(),
-      body   = $(document.body),
-      logo   = $('<img />')
-        .attr('src', '/images/logo-small.png')
-        .addClass('fslogo'),
-      hdr    = $('header#top .wrap-inner')
-  
-  $(document).keyup(function(e) {
-    if (e.keyCode == 27) { $('.resizer').click(); }   // esc
-  })
-      
-  resizer.bind('click', function(event) {
-    if(body.hasClass('fullscreen')) {      
-      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Close', document.title]);
-      body.removeClass('fullscreen')
-      mapel.find('header').show()
-      mapel.css({position: 'static', width: width, height: height, 'z-index': 'inherit'})
-      logo.remove()      
-    } else {
-      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Zoom', document.title]);
-      body.addClass('fullscreen')
-      mapel.find('header').hide()
-      mapel.css({position: 'fixed', top: 0, right: 0, width: '100%', height: '100%', 'z-index': 9999})
-      mapel.find('svg').css({ width: '100%', height: '100%'})
-      mapel.append(logo.remove())
-    }
-    
-    map.resize()
-  })
-  
-  mapel.prepend(resizer)
-  
-  function load(e) {  
+  //var fullyLoaded = false
+  function load(e) {
     var counts = {}  
     $.each(e.features, function() {
       var type = this.data.geometry.type.toLowerCase()
@@ -108,8 +161,6 @@ $(function() {
             $cir  = $(el.firstChild),
             text  = po.svg('text'),
             props = this.data.properties,
-            // time  = Date.parse(props.reported_at),
-            // hours = time.getHours(),
             check = $('span.check[data-code=' + props.code + ']'),
             inact = check.hasClass('inactive')
       
@@ -151,12 +202,15 @@ $(function() {
   
     $('#map').bind('map.togglecrimes', togglecrimes)
     
-      if($('#map .compass').length == 0)
-        map.add(po.compass()
-          .zoom('small')
-          .position('top-left')
-          .radius(30)
-          .pan('none'))
+    // If the compass doesn't exist, this is the first time
+    // load has been called.
+    if($('#map .compass').length == 0) {
+      map.add(po.compass()
+        .zoom('small')
+        .position('top-left')
+        .radius(30)
+        .pan('none'))
+    }
   }
   
   function renderNeighborhood(nhood) {
@@ -190,6 +244,10 @@ $(function() {
     })
   }
   
+  
+  /**
+   * Show MapTips
+   */
    var onPointClick = function(event) {
     var coor = event.data.geo.coordinates,
         props = event.data.props
@@ -253,4 +311,42 @@ $(function() {
         return cnt  
       }).render()
     }
+    
+  
+  /**
+   * Fullscreen support
+   */
+  var resizer = $('<span />').addClass('resizer').text('`'),
+      width = mapel.width(),
+      height = mapel.height(),
+      body   = $(document.body),
+      logo   = $('<img />')
+        .attr('src', '/images/logo-small.png')
+        .addClass('fslogo'),
+      hdr    = $('header#top .wrap-inner')
+  
+  $(document).keyup(function(e) {
+    if (e.keyCode == 27) { $('.resizer').click(); }   // esc
+  })
+      
+  resizer.bind('click', function(event) {
+    if(body.hasClass('fullscreen')) {      
+      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Close', document.title]);
+      body.removeClass('fullscreen')
+      mapel.find('header').show()
+      mapel.css({position: 'static', width: width, height: height, 'z-index': 'inherit'})
+      logo.remove()      
+    } else {
+      _gaq.push(['_trackEvent', 'Map', 'Fullscreen Zoom', document.title]);
+      body.addClass('fullscreen')
+      mapel.find('header').hide()
+      mapel.css({position: 'fixed', top: 0, right: 0, width: '100%', height: '100%', 'z-index': 9999})
+      mapel.find('svg').css({ width: '100%', height: '100%'})
+      mapel.append(logo.remove())
+    }
+    
+    map.resize()
+  })
+  
+  mapel.prepend(resizer)
 })

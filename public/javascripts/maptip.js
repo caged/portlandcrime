@@ -70,6 +70,16 @@
       return this
     },
     
+    className: function(fn) {
+      if($.isFunction(fn)) {
+        this.props.className = fn.call(this, this.props.data)
+        return this
+      }
+      
+      this.props.className = fn
+      return this
+    },
+    
     page: function(fn) {
       return this
     },
@@ -98,7 +108,10 @@
     render: function() {
       this.cnt.html(' ').append(this.props.content)
       this.canvas.prepend(this.el)  
-      this.el.show().css({left: this.props.left + 'px', top: this.props.top + 'px'})
+      this.el
+        .addClass(this.props.className)
+        .show()
+        .css({left: this.props.left + 'px', top: this.props.top + 'px'})
     }
   }
   

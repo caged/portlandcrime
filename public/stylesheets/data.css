@@ -182,3 +182,22 @@ g.inactive circle, g.inactive text {
 }
 
 /* @end */
+
+/*------------------------------------------------------------------------------------
+  @group stops
+------------------------------------------------------------------------------------*/
+
+.max-stop {
+  fill: #e6b442;
+  stroke: #e7c26e;
+  stroke-width: 1;
+  fill-opacity: 0.6;
+}
+
+.max-route {
+  fill: none;
+  stroke: #555;
+  stroke-width: 3;
+}
+
+/* @end */
