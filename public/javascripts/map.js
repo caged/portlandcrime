@@ -70,7 +70,7 @@ $(function() {
           $cir  = $(el.firstChild),
           props = this.data.properties
           
-      $cir[0].setAttribute("r", 3)    
+      $cir[0].setAttribute("r", 4)    
       $cir.addSVGClass(props.type + '-stop')
       $cir.bind('click', {props: props, geo: this.data.geometry}, onStopClick)      
     })
