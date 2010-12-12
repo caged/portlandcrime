@@ -41,7 +41,7 @@ describe NeighborhoodsController do
       assigns[:last_year_start].should == assigns[:this_year_start] - 1.year
       assigns[:offenses].should == {}
       assigns[:neighborhood].should == @neighborhood_factories[0]
-      assigns[:crimes].should == []
+      assigns[:crimes].should_not be_nil
       assigns[:this_years_total].should_not be_nil
       assigns[:last_years_total].should_not be_nil
       

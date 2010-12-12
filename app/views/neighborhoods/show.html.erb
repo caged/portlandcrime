@@ -93,6 +93,7 @@
       </table>
     </div>
   </div>
+  <% if @crimes && !@crimes.empty? %>
   <div class="box txt">
     <h1>Last 5 Crimes</h1>
     <ol class="crime-list">
@@ -107,4 +108,5 @@
       <% end %>
     </ol>
   </div>
+  <% end %>
 </aside>
