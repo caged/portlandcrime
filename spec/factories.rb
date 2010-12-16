@@ -10,7 +10,7 @@ Factory.define :crime do |c|
   c.address  'NE HOLLADAY ST and NE 1ST AVE, PORTLAND, OR 97232'
   c.loc 'lat' => -122.6647148823268, 'lon' => 45.530095588454486
   c.code  'si'
-  #c.after_build {|c| c.offense = Factory.build(:offense) }  
+  c.after_build {|c|  c.offense = Factory.build(:offense)}  
 end
 
 Factory.define :neighborhood do |n|

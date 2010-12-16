@@ -38,7 +38,7 @@ class NeighborhoodsController < ApplicationController
       wants.html do
         @crimes = @neighborhood.crimes.limit(5).sort(:reported_at => -1).all
         
-        # Based on yearly trends, there is a window of a couple weeks for
+        # Based on yearly trends. There is a window of a couple weeks for
         # crimes to be fully reported.
         @this_years_total = @neighborhood.crimes.between(@this_year_start, (Time.now - 1.week)).count
         @last_years_total = @neighborhood.crimes.between(@last_year_start, (Time.now - 1.week) - 1.year).count
