@@ -4,6 +4,13 @@
   <title><%= @title || 'Portland Crime' %></title>
   <meta name="keywords" content="<%= @keywords %> portland crime pdx safety neighborhood chinatown pearl downtown southwest southeast northeast northwest map homicide assault larceny prostitution murder gangs police oregon" />
   <meta name="description" content="Track and review all types of crimes happening across Portland, OR neighborhoods."/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <!--[if IE]>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    CFInstall.check();
+  </script>
+  <![endif]-->
   <%= include_stylesheets :core %>
   <%= include_javascripts :vendor, :app %>
   <%= csrf_meta_tag %>

@@ -24,8 +24,8 @@ class CrimesController < ApplicationController
             crimes = neighborhood.crimes.in_the_past(7.days).all
           end
         end
+        render :geojson => crimes
       end
-      render :geojson => crimes
     end
   end
 end

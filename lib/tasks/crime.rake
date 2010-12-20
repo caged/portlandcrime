@@ -75,7 +75,7 @@ namespace :crime do
               puts crime.errors.full_messages.join(", ")
             else
               i += 1
-              puts "\c[[FImported #{i} Crimes. #{Time.now - start} seconds"
+              puts "\c[[FImported #{i} Crimes. #{'%0.2f' % (Time.now - start)} seconds"
             end
           end
         end
@@ -83,7 +83,7 @@ namespace :crime do
         # create hashes from large CSV files
         i = 1 if i == 0  
       end
-      puts "Imported #{i - 1} crimes in #{Time.now - start} seconds"
+      puts "Imported #{i - 1} crimes in #{'%0.2f' % (Time.now - start)} seconds"
       ImportStatistic.create({:time_taken => Time.now - start, :crimes_imported => i - 1})
       
       # Remove the entire cache.  This is OK for now, but it won't last for ever.

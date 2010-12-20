@@ -34,14 +34,14 @@ class Offense
       }
     JS
     
-    fin = <<-JS
-    
-    JS
+
     Crime.collection.map_reduce(map, red,
-    :query => {:reported_at => {
-      '$lt' => Time.now, 
-      '$gte' => Time.now.change(:hour => 0) - start
-    }}, :out => "summaries_for_offenses_in_#{Time.now.year}")
+      :query => {
+        :reported_at => {
+          '$lt' => Time.now, 
+          '$gte' => Time.now.change(:hour => 0) - start
+        }
+      }, :out => "summaries_for_offenses_in_#{Time.now.year}")
   end
 end
 

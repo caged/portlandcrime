@@ -4,6 +4,7 @@ $.fn.slideFadeToggle = function(speed, callback, easing) {
 }
 
 $(function() {  
+       
   /**
    * Setup all the interactions for enabling and disabling offenses and
    * complete groups of crime types
