@@ -10,6 +10,7 @@
   </div>
   <div class="box txt">
     <h1>Yearly Comparison</h1>
+    <%= @this_year_trends %>
     <% if @this_year_trends.nil? || @last_year_trends.nil? %>
     <p>It appears neighborhood statistical trends haven't been run yet.</p>
     <% else %>
@@ -62,6 +63,9 @@
       </div>
     </div>
     <div>
+      <% if @this_year_trends.nil? || @last_year_trends.nil? %>
+      <p>Haven't parsed trends for this year.</p>
+      <% else %>
       <table class="comparison">
         <thead>
           <tr>
@@ -91,6 +95,7 @@
           <% end %>
         </tbody>
       </table>
+      <% end %>
     </div>
   </div>
   <% if @crimes && !@crimes.empty? %>
