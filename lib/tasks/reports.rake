@@ -16,7 +16,7 @@ namespace :crime do
   
     desc 'Run YTD Offense Summaries'
     task :ytd_offense_summaries => :environment do
-      Offense.summaries_for_the_past(Time.now.beginning_of_year.to_i)
+      Offense.summaries_for_the_past(Time.zone.now.yday.days)
       puts "[#{Time.zone.now}] Calculated offenses summaries"
     end
   
@@ -24,8 +24,9 @@ namespace :crime do
     task :neighborhood_offense_totals => :environment do
       # Crimes trickle in over a course of two weeks, making up to the day reporting slighly inaccurate 
       # when making historical comparisons, so we trim off two weeks to account for this volatility
-      Neighborhood.offense_totals_between(Time.now.beginning_of_year, Time.now - 2.weeks)
-      Neighborhood.offense_totals_between(Time.now.beginning_of_year - 1.year, (Time.now - 2.weeks) - 1.year)
+      threshold = Time.now.yday >= 14 ? 2.weeks : 0.days
+      Neighborhood.offense_totals_between(Time.now.beginning_of_year, Time.now - threshold)
+      Neighborhood.offense_totals_between(Time.now.beginning_of_year - 1.year, (Time.now - threshold) - 1.year)
     end
   end
 end
