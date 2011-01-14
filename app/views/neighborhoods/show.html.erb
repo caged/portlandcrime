@@ -9,7 +9,7 @@
     <div id="canvas" class="nhood-detail"></div>
   </div>
   <div class="box txt">
-    <h1>Yearly Comparison</h1>
+    <h1>Year-to-Date Comparison</h1>
     <% if @this_year_trends.nil? || @last_year_trends.nil? %>
     <p>It appears neighborhood statistical trends haven't been run yet.</p>
     <% else %>
@@ -54,11 +54,11 @@
     <div id="total">
       <div class="year">
         <span class="num"><%= number_with_delimiter @this_years_total %></span>
-        <span class="label"><%= @this_year_start.year %> Total</span>
+        <span class="label"><%= @this_year_start.year %> YTD Total</span>
       </div>
       <div class="year">
         <span class="num"><%= number_with_delimiter @last_years_total %></span>
-        <span class="label"><%= @last_year_start.year %> Total</span>
+        <span class="label"><%= @last_year_start.year %> YTD Total</span>
       </div>
     </div>
     <div>

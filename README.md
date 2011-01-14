@@ -38,7 +38,7 @@ use Nginx's gzip_static module. It's the single best thing you can do to increas
 ## Demographics
 There are neighborhood demographics in db/data/neighborhood-demographics.csv and supporting models for those demographics, however, 
 I found them to be outdated and questionable so I chose not to use them.  I've asked the city about updating these statistics and was 
-informed that they don't have the budget for it, but they gave me the census block data they used to correlate neighborhoods to census blocks.
+informed that they haven't received budget approval for such a project, but they gave me the census block data they used to correlate neighborhoods to census blocks.
 I hope I can use this data to upgrade neighborhood demographics for the new American Community Survey.
 
 If you want to import demographics anyway, run `rake migrations:three_import_neighborhood_demographics`

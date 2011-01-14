@@ -24,9 +24,10 @@ namespace :crime do
     task :neighborhood_offense_totals => :environment do
       # Crimes trickle in over a course of two weeks, making up to the day reporting slighly inaccurate 
       # when making historical comparisons, so we trim off two weeks to account for this volatility
-      threshold = Time.now.yday >= 14 ? 2.weeks : 0.days
+      threshold = Time.now.yday > 14 ? 2.weeks : 0.days
       Neighborhood.offense_totals_between(Time.now.beginning_of_year, Time.now - threshold)
       Neighborhood.offense_totals_between(Time.now.beginning_of_year - 1.year, (Time.now - threshold) - 1.year)
+      puts "[#{Time.zone.now}] Calculated neighborhood statistics"
     end
   end
 end
