@@ -14,6 +14,8 @@ class Neighborhood
   
   add_concerns :reporting
   
+  # Not interested in tracking Ghresham, Beaverton, etc. crime that Portland 
+  # precint responds to, but keep them around in case we need them later.
   scope :portland_only, where(:portland => true)
   
   def to_param
