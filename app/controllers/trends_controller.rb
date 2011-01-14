@@ -2,7 +2,7 @@ class TrendsController < ApplicationController
   caches_page :index
   
   def index
-    years = %w(2009 2010)
+    years = [(Time.now - 1.year).year, Time.now.year]
     
     respond_to do |wants|
       wants.html do

@@ -1,7 +1,7 @@
 /**
  * MapTip - [Alpha Quality]
  * Flexible Polymaps Tooltips
- * Copyright (c) 2010 Justin Palmer
+ * Copyright (c) 2011 Justin Palmer
  * http://labratrevenge.com
  * Released under the MIT License
  */

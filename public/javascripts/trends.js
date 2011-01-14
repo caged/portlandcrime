@@ -2,7 +2,8 @@ $(function() {
   if($('body[data-path=trends-index]').length != 0) {
     $.getJSON('/trends.json', function(data) {      
       var ranges = ["prev", "curr"],
-          months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+          months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          curYear = new Date().getUTCFullYear()
       
       var w = $('#trends').width() - 70,
           h = 200,
@@ -49,7 +50,7 @@ $(function() {
           .text(function(d) { return d.week });
           
       vis.add(pv.Dot) 
-            .data(['2009', '2010']) 
+            .data([curYear - 1, curYear]) 
             .top(-20) 
             .left(function() { return 360 + this.index * 65 }) 
             .size(30) 
