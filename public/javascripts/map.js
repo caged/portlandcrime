@@ -145,6 +145,10 @@ $(function() {
          $.getJSON(document.location.pathname + '/crimes.geojson', addDataLayer)
        } 
      } else {
+       $('#map-header').append($('<span/>')
+        .addClass('crimecount')
+        .text(data.features.length + ' crimes reported in 7 days')) 
+        
        $(document).trigger('crimes.loaded', data)
      }
      
@@ -159,7 +163,7 @@ $(function() {
    */
   //var fullyLoaded = false
   function load(e) {
-    var counts = {}  
+    var counts = {}
     $.each(e.features, function() {
       var type = this.data.geometry.type.toLowerCase()
       if(type == 'polygon' || type == 'multipolygon') {

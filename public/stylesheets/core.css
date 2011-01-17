@@ -371,6 +371,15 @@ span.last-import:before {
 /*------------------------------------------------------------------------------------
   @group map
 ------------------------------------------------------------------------------------*/
+header span.crimecount {
+  position: absolute;
+  right: 10px;
+  font-weight: normal;
+  color: #aaa;
+  font-size: 12px;
+  text-shadow: none;
+}
+
 header a.locate {
   display: inline-block;
   text-indent: -99999px;
