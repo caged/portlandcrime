@@ -10,7 +10,7 @@ $(function() {
       map = po.map()
       .container(mapel[0].appendChild(svg))
       .center({lat: 45.5250, lon: -122.6515})
-      .zoom(13)
+      .zoom(12)
       .zoomRange([9,18])
       .add(po.interact())
       .add(po.hash())
