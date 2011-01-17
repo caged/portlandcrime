@@ -262,7 +262,10 @@ $(function() {
    var onPointClick = function(event) {
     var coor = event.data.geo.coordinates,
         props = event.data.props
-        
+
+    if($(event.target).is(':hidden'))
+      return
+      
     mapel.maptip(this)
       .map(map)
       .data(props)
