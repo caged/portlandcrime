@@ -274,9 +274,7 @@ $(function() {
         return d.code
       })
       .top(function(tip) {
-        var radius = tip.target.getAttribute('r'),
-            point = tip.props.map.locationPoint(this.props.location)
-        
+        var point = tip.props.map.locationPoint(this.props.location)
         return parseFloat(point.y - 30)
       }).left(function(tip) {
         var radius = tip.target.getAttribute('r'),
@@ -288,10 +286,8 @@ $(function() {
             props = d,
             cnt = $('<div/>'),
             hdr = $('<h2/>'),
-            bdy = $('<p/>')
-      
-        // Try to reuse what's already on the page.
-        var check = $('#sbar span[data-code=' + props.code + ']'),
+            bdy = $('<p/>'),
+            check = $('#sbar span[data-code=' + props.code + ']'),
             ctype = check.next().clone(),
             otype = check.closest('li.group').attr('data-code'),
             close = $('<span/>').addClass('close').text('*')
