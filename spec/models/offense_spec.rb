@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Offense do
   before do
-    @offense = Factory.create(:offense, :name => 'Burglary')
+    @offense = Factory.create(:offense_with_crimes, :name => 'Burglary')
   end
   
   it "should generate permalink and code from name" do
