@@ -22,6 +22,8 @@ class Crime
     where(:reported_at.gte => Time.zone.now.change(:hour => 0) - time, 
           :reported_at.lt => Time.zone.now).sort(:reported_at.desc)}
   
+  scope :in_the_year, lambda { |year| year = Time.new(year); between(year, year.end_of_year) }
+  
   def as_geojson(options = {})
     props = attributes
     props.delete(:loc)

@@ -7,10 +7,10 @@ GIT
 
 GIT
   remote: http://github.com/jnunemaker/mongomapper.git
-  revision: fd59b0ab068be7321f8e84b9dc12fb4fa6b8535d
-  branch: rails3
+  revision: 49821df61931aebd426f3fba4658f31dc7c13825
+  ref: 49821d
   specs:
-    mongo_mapper (0.8.4)
+    mongo_mapper (0.8.6)
       activemodel (~> 3.0.0)
       activesupport (~> 3.0.0)
       plucky (~> 0.3.6)
@@ -60,8 +60,8 @@ GEM
       activesupport (= 3.0.3)
     activesupport (3.0.3)
     arel (2.0.4)
-    bson (1.1.1)
-    bson_ext (1.1.2)
+    bson (1.2.0)
+    bson_ext (1.2.0)
     builder (2.1.2)
     closure-compiler (0.3.3)
     diff-lcs (1.1.2)
@@ -84,8 +84,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mongo (1.1.1)
-      bson (>= 1.1.1)
+    mongo (1.2.0)
+      bson (>= 1.2.0)
     plucky (0.3.6)
       mongo (~> 1.1)
     polyglot (0.3.1)
@@ -134,7 +134,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bson_ext (= 1.1.2)
+  bson_ext (= 1.2.0)
   closure-compiler
   factory_girl_rails
   jammit
