@@ -317,7 +317,7 @@ nav#primary ul li {
 
 nav#primary ul li a {
   display: inline-block;
-  padding: 12px 30px 13px 30px;
+  padding: 12px 15px 13px 15px;
   color: #838b92;
   font-weight: 600;
   font-size: 12px;
@@ -355,7 +355,7 @@ span.last-import {
   display: inline-block;
   color: #858585;
   font-weight: 200;
-  margin-left: 15px;
+  margin-left: 35px;
 }
 
 span.last-import:before {
