@@ -2,7 +2,7 @@ class NeighborhoodsController < ApplicationController
   caches_page :show, :index  
   def index
     @this_year_start = Time.now.beginning_of_year
-    @neighborhoods = Neighborhood.all
+    @neighborhoods = Neighborhood.portland_only
     
     respond_to do |wants|
       wants.html do
