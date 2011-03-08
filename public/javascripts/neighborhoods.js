@@ -20,14 +20,14 @@ $(function() {
       + "/16d73702b7824b57830171b5da5c3c85" // http://cloudmade.com/register
       + "/" + lightstyle + "/256/{Z}/{X}/{Y}.png")
       .hosts(["a.", "b.", "c.", ""])));
-    
+  
    $.getJSON(document.location.pathname + '.geojson', function(data) {
      map.add(po.geoJson()
        .features(data.features)
        .on('load', load))
    })
    
-   function load(e) {
+   function load(e) {     
      $.each(e.features, function() {
        var el = $(this.element),
            props = this.data.properties,
