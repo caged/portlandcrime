@@ -7,28 +7,48 @@
     <div id="canvas"></div>
   </div>
 </section>
-<aside id="sbar" class="box">
-  <header><h1>Crime Types</h1></header>
-  <ul class="offenses">
-    <% @offenses.each do |group, offs| %>
-    <% permalink = group[:name].parameterize %>
-    <% collapse = permalink != 'violent' %>
-      <li class="group" data-code="<%= permalink[0..1] %>">
-        <span class="otype">
-          <span class="check group" data-code="<%= permalink[0..1] %>">3</span>
-          <%= link_to group[:name], {:anchor => permalink}, :class => "#{permalink[0..1]}" %>
-          <span class="exp<%= collapse ? ' collapsed' : '' %>">9</span>
-        </span>
-        <ul class="offenses" style="<%= collapse ? 'display:none' : '' %>">
-          <% offs.each do |off| %>
-          <li class="off">
-            <span class="check" data-code="<%= off.code %>">3</span>
-            <%= link_to off.name, off %>
-            <span class="code">(<%= off.code %>)</span>
-          </li>
-          <% end %>
-        </ul>
+<aside id="sbar">
+  <section class="box">
+    <header><h1>Crime Types</h1></header>
+    <ul class="offenses">
+      <% @offenses.each do |group, offs| %>
+      <% permalink = group[:name].parameterize %>
+      <% collapse = permalink != 'violent' %>
+        <li class="group" data-code="<%= permalink[0..1] %>">
+          <span class="otype">
+            <span class="check group" data-code="<%= permalink[0..1] %>">3</span>
+            <%= link_to group[:name], {:anchor => permalink}, :class => "#{permalink[0..1]}" %>
+            <span class="exp<%= collapse ? ' collapsed' : '' %>">9</span>
+          </span>
+          <ul class="offenses" style="<%= collapse ? 'display:none' : '' %>">
+            <% offs.each do |off| %>
+            <li class="off">
+              <span class="check" data-code="<%= off.code %>">3</span>
+              <%= link_to off.name, off %>
+              <span class="code">(<%= off.code %>)</span>
+            </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+  
+  <section class="box">
+    <header><h1>Around the City</h1></header>
+    <ul class="icon-list">
+      <li class="schools">
+        <span class="check">3</span>
+        <%= link_to { '<span>&#112;</span> Schools'.html_safe } %>
       </li>
-    <% end %>
-  </ul>
+      <li class="streetcarstops">
+        <span class="check">3</span>
+        <%= link_to { '<span>&#59;</span> Street Car Stops'.html_safe } %>
+      </li>
+      <li class="maxstops">
+        <span class="check">3</span>
+        <%= link_to '<span>&#59;</span> Max Stops'.html_safe %>
+      </li>
+    </ul>
+  </section>
 </aside>

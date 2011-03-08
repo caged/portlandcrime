@@ -594,13 +594,23 @@ h3[data-code=fi] {
 /*------------------------------------------------------------------------------------
   @group sbar
 ------------------------------------------------------------------------------------*/
-.offenses, #offenses {
+aside#sbar .box {
+  margin-bottom: 20px;
+}
+
+aside#sbar .box:last-child {
+  margin-bottom: 0;
+}
+
+.offenses, #offenses,
+.icon-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.offenses li {
+.offenses li,
+.icon-list li {
   display: block;
   border-top: 1px solid #f6f6f6;
 }
@@ -609,25 +619,20 @@ h3[data-code=fi] {
   border-top: none;
 }
 
-.offenses li ul li {
+.offenses li ul li,
+.icon-list li {
   padding: 8px 10px;
 }
 
-.offenses li ul li a {
+.offenses li ul li a,
+.icon-list li a {
   color: #333;
 }
 
-.offenses li a:hover {
+.offenses li a:hover,
+.icon-list li a:hover {
   color: #999;
 }
-
-/*span.check,
-span.exp,
-span.badge {
-  font-family: Pictos;
-  margin-right: 5px;
-  color: #ccc;
-}*/
 
 .offenses span.exp {
   color: rgba(50,50,50,0.6);
@@ -722,6 +727,12 @@ div.year {
 
 #total div.year span.label {
   font-style: normal;
+}
+
+.icon-list li a span {
+  font-family: Pictos;
+  font-size: 14px;
+  margin-right: 3px;
 }
 
 /* @end */

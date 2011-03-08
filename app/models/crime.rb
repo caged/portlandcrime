@@ -23,7 +23,13 @@ class Crime
           :reported_at.lt => Time.zone.now).sort(:reported_at.desc)}
   
   scope :in_the_year, lambda { |year| year = Time.new(year); between(year, year.end_of_year) }
+  scope :of_type, :find_crimes_of_type
   
+  def self.of_type(type_name)
+    type_codes = Offense.all('type.name' => type_name).collect {|o| o.code }
+    where(:code.in => type_codes)
+  end
+   
   def as_geojson(options = {})
     props = attributes
     props.delete(:loc)
@@ -46,5 +52,5 @@ class Crime
   def at_daylight?
     hour = reported_at.hour
     hour >= 6 && hour < 18
-  end
+  end 
 end
