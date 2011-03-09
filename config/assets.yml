@@ -5,8 +5,10 @@ javascripts:
     - public/javascripts/vendor/jquery.js
     - public/javascripts/vendor/jquery.easing.js
     - public/javascripts/vendor/date.js
+    - public/javascripts/vendor/jquery.tipsy.js
     - public/javascripts/vendor/polymaps.js
     - public/javascripts/vendor/protovis.js
+    - public/javascripts/vendor/protovis.tipsy.js
     - public/javascripts/vendor/rails.js
     - public/javascripts/maptip.js
   app:
@@ -20,3 +22,4 @@ stylesheets:
     - public/stylesheets/data.css
     - public/stylesheets/pictos.css
     - public/stylesheets/maptip.css
+    - public/stylesheets/vendor/tipsy.css

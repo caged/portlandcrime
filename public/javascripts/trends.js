@@ -35,7 +35,9 @@ $(function() {
           .left(function() { return this.index * k })
           .height(function(t, d) { return y(d[t]) })
           .fillStyle(pv.colors("#ccc", "#00b2ec"))
-          .lineWidth(1);
+          .lineWidth(1)
+          .title(function(key, obj) { return obj[key] })
+          .event('mouseover', pv.Behavior.tipsy({gravity: "s", fade: true}));
           
       panel.anchor("bottom").add(pv.Label)
           .visible(function() { return !(this.parent.index % 3) })
@@ -97,7 +99,9 @@ $(function() {
            .left(function() { return this.index * k })
            .height(function(t, d) { return y(d[t]) })
            .fillStyle(pv.colors("#ccc", "#00b2ec"))
-           .lineWidth(1);
+           .lineWidth(1)
+           .title(function(key, obj) { return obj[key] })
+           .event('mouseover', pv.Behavior.tipsy({gravity: "s", fade: true}));
 
        panel.anchor("bottom").add(pv.Label)
            .textBaseline("top")
