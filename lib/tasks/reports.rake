@@ -5,12 +5,15 @@ require 'name_map'
 
 namespace :crime do
   namespace :reports do
-    desc 'Run Weekly Crime Totals For last year & this year'
-    task :weekly_crime_totals => :environment do
+    desc 'Run Crime Totals For last year & this year'
+    task :crime_totals => :environment do
       [(Time.now - 1.year).year, Time.now.year].each do |year|
         start = Time.parse("01/01/#{year}")
         Crime.weekly_totals_between(start, start.end_of_year)
         puts "[#{Time.zone.now}] Calculated #{year} weekly crime totals"
+        
+        Crime.monthly_totals_between(start, start.end_of_year)
+        puts "[#{Time.zone.now}] Calculated #{year} monthly crime totals"
       end
     end
   

@@ -22,7 +22,7 @@ every 1.day, :at => '2:00 am' do
 end
 
 every :sunday, :at => '3:00 am' do
-   rake "crime:reports:weekly_crime_totals"
+   rake "crime:reports:crime_totals"
 end
 
 every :sunday, :at => '3:30 am' do

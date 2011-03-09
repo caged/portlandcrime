@@ -12,7 +12,9 @@
   </script>
   <![endif]-->
   <%= include_stylesheets :core %>
-  <%= include_javascripts :vendor, :app %>
+  <%= include_javascripts :vendor %>
+  <script src="http://cdn.jquerytools.org/1.2.5/all/jquery.tools.min.js"></script>
+  <%= include_javascripts :app %>
   <%= csrf_meta_tag %>
   <script type="text/javascript">
 

@@ -907,7 +907,7 @@ h2.ltr {
   margin-bottom: 10px;
 }
 
-#trends {
+div.pane {
   min-height: 200px;
 }
 
@@ -1200,4 +1200,73 @@ ul.times li span.percent {
   left: -5px;
   top: 6px;
 }
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group controls
+------------------------------------------------------------------------------------*/
+
+.box header .segments {
+  float: right;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #aaa;
+  margin-right: 10px;
+  margin-top: 5px;
+  border: 1px solid #c1c1c1;
+}
+
+.box header .segments li {
+  display: inline-block;
+  list-style: none;
+}
+
+.box header .segments li a {
+  -moz-box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px 0 inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px 0 inset;
+  -o-box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px 0 inset;
+  box-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px 0 inset;
+  border-right: 1px solid #999;
+  display: inline-block;
+  background: #eee -webkit-gradient(linear, left top, left bottom, from(#e8e8e8), to(#cecece));
+  background: #eee -moz-linear-gradient(top, #e8e8e8, #cecece);
+}
+
+.box header .segments li:first-child a {
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-bottom-left-radius: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  border-top-left-radius: 3px;
+}
+
+.box header .segments li:last-child a {
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-bottom-right-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  border-top-right-radius: 3px;
+  border-right: none;
+}
+
+.box header .segments li a {
+  display: inline-block;
+  padding: 5px;
+  color: #777;
+  font-weight: bold;
+  text-shadow: 0 1px rgba(255,255,255,0.5);
+}
+
+.box header .segments li a.current {
+  background: #cbd4df -webkit-gradient(linear, left top, left bottom, from(#eaeef2), to(#cbd4df));
+  background: #cbd4df -moz-linear-gradient(top, #eaeef2, #cbd4df);
+}
+
+.box header .segments li a.current {
+  color: #516177;
+}
+
 /* @end */

@@ -1,7 +1,22 @@
 <% title 'Trends' %>
   <div class="box" id="year-counts">
-    <header><h1>Weekly Trend</h1></header>
-    <div id="trends"></div>
+    <header>
+      <h1>Weekly Trend</h1>
+      <ul class="segments">
+        <li><a href="#weekly" title="Weekly Trends">Weekly</a></li><li><a href="#monthly" title="Monthly Trends">Monthly</a></li>
+      </ul>
+    </header>
+    <div id="trends">
+      <!-- weekly -->
+      <div class="pane"><div id="weekly"></div></div>
+      <!-- /weekly -->
+      
+      <!-- montly -->
+      <div class="pane"><div id="monthly" class="pane"></div></div>
+      <!-- /montly -->
+      
+      
+    </div>
   </div>
   <!-- legend -->
   <div id="legend">

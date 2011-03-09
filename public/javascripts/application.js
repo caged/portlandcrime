@@ -4,6 +4,9 @@ $.fn.slideFadeToggle = function(speed, callback, easing) {
 }
 
 $(function() {  
+  $("ul.segments").tabs("div.pane").bind('onClick', function() {
+    $(document).trigger('tab.clicked', this);
+  });
        
   /**
    * Setup all the interactions for enabling and disabling offenses and
