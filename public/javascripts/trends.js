@@ -7,8 +7,11 @@ $(function() {
       
       var w = $('#trends').width() - 70,
           h = 200,
-          x = pv.Scale.ordinal(data, function(d) { return d.week }).splitBanded(0, w, 4 / 5),
-          y = pv.Scale.linear(0, 1400).range(0, h),
+          pmax = pv.max(data, function(d) { return d.prev }),
+          cmax = pv.max(data, function(d) { return d.curr }),
+          max  = pv.max([pmax, cmax]),
+          x = pv.Scale.ordinal(data, function(d) { return d.week }).splitBanded(0, w, 0.6),
+          y = pv.Scale.linear(0, max).range(0, h),
           k = x.range().band / ranges.length
 
       var vis = new pv.Panel()
@@ -27,7 +30,7 @@ $(function() {
       panel.add(pv.Bar)
           .data(ranges)
           .bottom(0)
-          .width(k - 2)
+          .width(k - 1)
           .left(function() { return this.index * k })
           .height(function(t, d) { return y(d[t]) })
           .fillStyle(pv.colors("#ccc", "#00b2ec"))
@@ -63,12 +66,13 @@ $(function() {
             .textStyle('#444');
 
       vis.add(pv.Rule)
-          .data(y.ticks())
+          .data(y.ticks(12))
           .bottom(y)
           .strokeStyle(function(i) { return i ? "rgba(100, 100, 100, .1)" : "#ccc" })
-        .anchor("right").add(pv.Label)
+        .anchor("left").add(pv.Label)
           .visible(function() { return !(this.index & 1) })
-          .textMargin(6);
+          .right(-30)
+          .textAlign('right')
 
       vis.render();
     })
