@@ -95,7 +95,7 @@ $(function() {
        panel.add(pv.Bar)
            .data(ranges)
            .bottom(0)
-           .width(k - 1)
+           .width(k - 5)
            .left(function() { return this.index * k })
            .height(function(t, d) { return y(d[t]) })
            .fillStyle(pv.colors("#ccc", "#00b2ec"))
@@ -131,6 +131,15 @@ $(function() {
            .textAlign('right')
            
        $(document).bind('tab.clicked', function(event, el) {
+         el = $(el)
+         var selected = $('li a.current').attr('href'),
+             hdr      = el.prev('h1')
+        
+         if(selected == '#monthly')
+           hdr.text('Weekly Trend')
+         else
+          hdr.text('Monthly Trend')
+          
          vis.canvas('monthly').render();
        })
     })
