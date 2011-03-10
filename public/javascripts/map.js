@@ -59,8 +59,6 @@ $(function() {
       })
     )
   }) 
-  
-  
 
   function stopsLoaded(e) {
     var counts = {}  
@@ -129,6 +127,11 @@ $(function() {
    function addDataLayer(data) {
      // Likely a Neighborhood if we have a Polygon.  Center the map to the 
      // neighborhoods first point
+     if(data.features[0] == undefined) {
+       $('#total .num').text(0)
+       return;
+     }
+     
      var first = data.features[0],
          type = first.geometry.type.toLowerCase()
      if(type == 'polygon' || type == 'multipolygon') {

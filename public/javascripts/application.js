@@ -68,7 +68,7 @@ $(function() {
   $(document).bind('crimes.loaded', function(event, data) {
     if($('body[data-path=offenses-show]').length != 1)
       return
-      
+    
     var start = Date.today().add(-30).days(),
         end = new Date(),
         range = pv.range(start.getTime(), end.getTime(), 86400000 /* 1 day */),
@@ -93,11 +93,11 @@ $(function() {
       nhoods[props.neighborhood_id]++
       hash[ra.toString('MM-dd-yy')]++      
     })
-      
+  
    for(var date in hash)
      counts.push(hash[date])
      
-     sparkline('#pulse', counts, true)     
+     sparkline('#pulse', counts, true)   
      $('#total .num').text(data.features.length)
      
      var last = Date.parse(data.features[0].properties.reported_at) 
