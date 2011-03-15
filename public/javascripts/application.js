@@ -128,8 +128,12 @@ $(function() {
                   
       $.each(data, function() {
         var nhood = this,
-            cnt = $.grep(top5, function(nhc, idx) { return nhc[0] == nhood.id })[0]
-        names.push({name: this.name.capitalizeWords(), count: cnt[1], permalink: this.permalink})
+            cnt = $.grep(top5, function(nhc, idx) { 
+              return nhc[0] == nhood.id 
+            })[0]
+        
+        if(cnt)
+          names.push({name: this.name.capitalizeWords(), count: cnt[1], permalink: this.permalink})
       })
       
       names = names.sort(function(a, b) {
