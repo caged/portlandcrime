@@ -1,5 +1,5 @@
 <% title @offense.name %>
-<section id="main">
+<section id="main" data-permalink="<%= @offense.permalink %>">
   <div class="box" id="map">
     <header>
       <h1>Crime Map</h1>
@@ -17,9 +17,27 @@
     </h1>
     <p><%= @offense.desc %></p>
     <div id="pulse"></div>
+    <% summary = @trend['value'] %>
+    <% total = summary['night'].to_i + summary['day'].to_i %>
+    <div class="trend-grid">
+      <ul class="times">
+        <li class="day" title="Daylight: 5am-6pm">
+          <span class="num"><%= number_with_delimiter(summary['day'].to_i) %></span>
+          <span class="percent"><%= ((summary['day'] / total) * 100).round %>%</span>
+        </li>
+        <li class="night" title="Dark: 6pm-5am">
+          <span class="num"><%= number_with_delimiter(summary['night'].to_i) %></span>
+          <span class="percent"><%= ((summary['night'] / total) * 100).round %>%</span>
+        </li>
+        <li class="nightlife" title="Weekend Nightlife: Fri, Sat 8pm-2am">
+          <span class="num"><%= number_with_delimiter(summary['nightlife'].to_i) %></span>
+          <span class="percent"><%= ((summary['nightlife'] / total) * 100).round %>%</span>
+        </li>
+      </ul>
+    </div>
     <div id="total">
       <span class="num"></span>
-      <span class="label">Total</span>
+      <span class="label">30 Day Total</span>
     </div>
     <ul class="props">
       <li id="dagerange">

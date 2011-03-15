@@ -16,18 +16,14 @@ class Crime
   
   add_concerns :reporting
   
-  scope :between, lambda {|from, to| where(:reported_at.gte => from, :reported_at.lt => to) }
-    
-  scope :in_the_past, lambda {|time|   
-    where(:reported_at.gte => Time.zone.now.change(:hour => 0) - time, 
-          :reported_at.lt => Time.zone.now).sort(:reported_at.desc)}
-  
+  scope :between, lambda {|from, to| where(:reported_at.gte => from, :reported_at.lt => to) }  
+  scope :in_the_past, lambda {|time|   where(
+    :reported_at.gte => Time.zone.now.change(:hour => 0) - time, 
+    :reported_at.lt => Time.zone.now).sort(:reported_at.desc)}
   scope :in_the_year, lambda { |year| year = Time.new(year); between(year, year.end_of_year) }
-  
   scope :of_type, lambda {|type| 
     ids = Offense.all(:'type.name' => /#{type}/i).collect(&:id)
-    where(:offense_id.in => ids)
-  }
+    where(:offense_id.in => ids)}
   
   # distance (in miles). Defaults to 100 yards
   def self.near_location(loc, distance = 0.0568181818)

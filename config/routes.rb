@@ -3,7 +3,11 @@ Pdxpatrol::Application.routes.draw do
     resource :crimes
   end
   
-  resources :offenses
+  resources :offenses do
+    member do
+      get 'trends'
+    end
+  end
 
   get '/trends', :to => 'trends#index'
   # The priority is based upon order of creation:

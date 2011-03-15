@@ -10,6 +10,10 @@ class OffensesController < ApplicationController
   
   def show    
     @offense = Offense.first(:permalink => params[:id])
+    
+    summary_col = MongoMapper.database["summaries_for_offenses_in_#{@from.year}"]
+    @trend = summary_col.find_one(:_id => @offense.id)
+    
     respond_to do |format|
       format.html
       format.json do
@@ -22,5 +26,13 @@ class OffensesController < ApplicationController
         render :geojson => @crimes
       end
     end
+  end
+  
+  def trends  
+    offense = Offense.first(:permalink => params[:id])  
+    summary_col = MongoMapper.database["summaries_for_offenses_in_#{@from.year}"]
+    trend = summary_col.find_one(:_id => offense.id)
+
+    render :json => trend
   end
 end

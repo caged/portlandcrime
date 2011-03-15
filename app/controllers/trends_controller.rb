@@ -1,12 +1,9 @@
 class TrendsController < ApplicationController
-  caches_page :index
-  
-  def index
-    years = [(Time.now - 1.year).year, Time.now.year]
-    
+  caches_page :index  
+  def index    
     respond_to do |wants|
       wants.html do
-        summary_col = MongoMapper.database["summaries_for_offenses_in_#{years.last}"]
+        summary_col = MongoMapper.database["summaries_for_offenses_in_#{@to.year}"]
         summaries = summary_col.nil? ? [] : summary_col.find.to_a
         
         # Looks like I'm going to need to denormalize a little and include the 
@@ -23,6 +20,7 @@ class TrendsController < ApplicationController
         trends = []
         weeks  = []
         months = []
+        years = [@from.year, @to.year]
         
         years.each do |year|
           col = MongoMapper.database["weekly_citywide_totals_report_#{year}"]          
