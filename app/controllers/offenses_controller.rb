@@ -11,7 +11,7 @@ class OffensesController < ApplicationController
   def show    
     @offense = Offense.first(:permalink => params[:id])
     
-    summary_col = MongoMapper.database["summaries_for_offenses_in_#{@from.year}"]
+    summary_col = MongoMapper.database["summaries_for_offenses_in_#{@to.year}"]
     @trend = summary_col.find_one(:_id => @offense.id)
     
     respond_to do |format|
