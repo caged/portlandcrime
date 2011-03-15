@@ -1088,7 +1088,7 @@ ul.times li span.percent {
 .trend-grid ul.times li {
   width: 60px;
   background-position: 50% 0;
-  padding: 25px 10px 10px 10px;
+  padding: 25px 10px 0 10px;
   text-align: center;
 }
 
