@@ -16,7 +16,7 @@ namespace :crime do
     csv = out.sub(/\.zip$/, '.csv')
     csv = csv.sub(/\_#{year}/, '') unless year.nil?
     
-    fork { exec "curl -f#LA 'PDXCrime v0.1' #{url.to_s} -o #{out.to_s}"; exit! 1 }
+    fork { exec "curl -f#LA 'PDXCrime v0.1' #{url.to_s} -o #{out.to_s}  #{'> /dev/null 2>&1' if Rails.env.production?}"; exit! 1 }
     Process.wait
     fork { exec "unzip -o #{out.to_s} -d #{out.dirname}"; exit! 1 }
     Process.wait
@@ -75,12 +75,12 @@ namespace :crime do
               puts crime.errors.full_messages.join(", ")
             else
               i += 1
-              puts "\c[[FImported #{i} Crimes. #{'%0.2f' % (Time.now - start)} seconds"
+              puts "\c[[FImported #{i} Crimes. #{'%0.2f' % (Time.now - start)} seconds" unless Rails.env.production?
             end
           end
         end
         # Hack to ignore header row and reduce memory consuption when forced to 
-        # create hashes from large CSV files
+        # create arrays from large CSV files
         i = 1 if i == 0  
       end
       puts "Imported #{i - 1} crimes in #{'%0.2f' % (Time.now - start)} seconds"
