@@ -119,8 +119,8 @@ $(function() {
        return (b[1] < a[1]) ? -1 : ((b[1] > a[1]) ? 1 : 0)
      })
      
-     var top5 = nhcounts.slice(0,5)
-     nhids = top5.map(function(ar) { return ar[0] })
+     var top5 = nhcounts.slice(0,5),
+         nhids = top5.map(function(ar) { return ar[0] })
      
     $.getJSON('/neighborhoods.json?ids[]=' + nhids.join(','), function(data) {
       var ul = $('#topneighborhoods ul.val'),
@@ -132,7 +132,8 @@ $(function() {
               return nhc[0] == nhood.id 
             })[0]
         
-        if(cnt)
+        //console.log(nhood) 
+        //if(cnt)
           names.push({name: this.name.capitalizeWords(), count: cnt[1], permalink: this.permalink})
       })
       
