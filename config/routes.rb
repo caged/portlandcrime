@@ -1,8 +1,9 @@
 Pdxpatrol::Application.routes.draw do
-  
   resources :neighborhoods do
     resources :crimes
   end
+  resources :crimes
+  
   
   resources :offenses do
     member do

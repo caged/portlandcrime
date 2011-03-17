@@ -56,7 +56,7 @@ namespace :crime do
             else
               point = Proj4::Point.new(lat.to_f, lon.to_f)
               wgs84 = projection.inverseDeg(point)
-              crime.loc = {:lat => wgs84.x, :lon => wgs84.y}
+              crime.loc = {:lat => wgs84.y, :lon => wgs84.x}
             end
 
             # A little cleanup

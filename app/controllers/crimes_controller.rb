@@ -28,4 +28,7 @@ class CrimesController < ApplicationController
     end
   end
   
+  def show
+    @crime = Crime.first(params[:id])
+  end
 end

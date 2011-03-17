@@ -140,4 +140,19 @@ namespace :migrations do
       nh.save
     end
   end
+  
+  task :stimpy_you_idiot => :environment do
+    step = 500
+    count = Crime.count
+    (0...count).step(step).each do |skip|
+      puts "==> Correcting #{skip}..#{skip + step} of #{count} crimes"
+      Crime.limit(step).skip(skip).each do |crime|
+        unless crime.loc[:lat] == 0 && crime.loc[:lon] == 0
+          loc = crime.loc
+          crime.loc = {:lat => loc[:lon], :lon => loc[:lat]}
+          crime.save
+        end
+      end
+    end
+  end
 end

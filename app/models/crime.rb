@@ -40,7 +40,7 @@ class Crime
       :properties => props,
       :geometry => {
         :type => 'Point', 
-        :coordinates => [loc['lat'], loc['lon']]
+        :coordinates => [loc['lon'], loc['lat']]
       }
     }
   end

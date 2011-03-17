@@ -15,6 +15,8 @@ module ApplicationHelper
   # selected_class([:crimes, :offenses])
   # selected_class([[:crimes, :show], [:offenses, :index]])
   def selected_class(nav)
+    return ' selected' if nav == :home && request.path == '/'
+    
     klass = nil  
     begin
       mappings = {
@@ -35,14 +37,13 @@ module ApplicationHelper
 
         opts = {:controller => c}
         opts.merge!(:action => a) unless a.nil?
-      
-        if current_page?(opts)
+        
+        if current_page?(opts) 
           klass = ' selected'
           break
         end
       end
-    rescue
-      
+    rescue 
     end
         
     klass
