@@ -1,5 +1,5 @@
 embed_assets: on
-package_assets: always
+package_assets: on
 javascripts:
   vendor:
     - public/javascripts/vendor/jquery.js

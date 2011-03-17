@@ -16,11 +16,6 @@ class NeighborhoodsController < ApplicationController
         
         @totals = totals
       end
-      wants.json do
-        ids = params[:ids][0].split(',')
-        @neighborhoods = @neighborhoods.select { |n| ids.include?(n.id.to_s) }
-        render :json => @neighborhoods
-      end
       wants.geojson do
         render :geojson => @neighborhoods
       end

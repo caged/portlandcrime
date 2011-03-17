@@ -120,9 +120,10 @@ $(function() {
      })
      
      var top5 = nhcounts.slice(0,5),
-         nhids = top5.map(function(ar) { return ar[0] })
+         nhids = top5.map(function(ar) { return ar[0] }),
+         off
      
-    $.getJSON('/neighborhoods.json?ids[]=' + nhids.join(','), function(data) {
+    $.getJSON(document.location.pathname + '/recurring_neighborhoods.json?ids[]=' + nhids.join(','), function(data) {
       var ul = $('#topneighborhoods ul.val'),
           names = []
                   

@@ -28,11 +28,13 @@ class OffensesController < ApplicationController
     end
   end
   
-  def trends  
-    offense = Offense.first(:permalink => params[:id])  
-    summary_col = MongoMapper.database["summaries_for_offenses_in_#{@from.year}"]
-    trend = summary_col.find_one(:_id => offense.id)
-
-    render :json => trend
+  def recurring_neighborhoods
+    respond_to do |format|
+      format.json do
+        ids = params[:ids][0].split(',')
+        neighborhoods = Neighborhood.all(:id.in => ids)
+        render :json => neighborhoods
+      end
+    end
   end
 end

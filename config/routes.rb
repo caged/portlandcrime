@@ -7,9 +7,7 @@ Pdxpatrol::Application.routes.draw do
   
   
   resources :offenses, :only => [:index, :show] do
-    member do
-      get 'trends'
-    end
+    get 'recurring_neighborhoods'
   end
 
   get '/trends', :to => 'trends#index'
