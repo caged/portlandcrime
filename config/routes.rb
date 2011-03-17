@@ -1,11 +1,12 @@
 Pdxpatrol::Application.routes.draw do
-  resources :neighborhoods do
-    resources :crimes
+  resources :neighborhoods, :only => [:index, :show] do
+    resources :crimes, :only => [:index, :show]
   end
-  resources :crimes
+  
+  resources :crimes, :only => [:index, :show]
   
   
-  resources :offenses do
+  resources :offenses, :only => [:index, :show] do
     member do
       get 'trends'
     end
