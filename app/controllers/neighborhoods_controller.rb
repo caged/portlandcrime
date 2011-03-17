@@ -40,8 +40,8 @@ class NeighborhoodsController < ApplicationController
         
         # Based on yearly trends. There is a window of a couple weeks for
         # crimes to be fully reported.
-        @this_years_total = @neighborhood.crimes.between(@this_year_start, (Time.now - 1.week)).count
-        @last_years_total = @neighborhood.crimes.between(@last_year_start, (Time.now - 1.week) - 1.year).count
+        @this_years_total = @neighborhood.crimes.between(@this_year_start, (Time.now - 2.weeks)).count
+        @last_years_total = @neighborhood.crimes.between(@last_year_start, (Time.now - 2.weeks) - 1.year).count
 
         @this_year_trends = MongoMapper.database["neighborhood_totals_for_#{@this_year_start.year}"].find_one(:_id => @neighborhood.id)          
         @last_year_trends = MongoMapper.database["neighborhood_totals_for_#{@last_year_start.year}"].find_one(:_id => @neighborhood.id)
