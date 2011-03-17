@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <%= auto_discovery_link_tag(:rss, neighborhood_crimes_url(@neighborhood, 'rss')) %>
+<% end %>
+
 <% title @neighborhood.name %>
 <% keywords @neighborhood.name %>
 <section id="main">

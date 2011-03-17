@@ -1,6 +1,7 @@
 Pdxpatrol::Application.routes.draw do
+  
   resources :neighborhoods do
-    resource :crimes
+    resources :crimes
   end
   
   resources :offenses do
@@ -10,17 +11,10 @@ Pdxpatrol::Application.routes.draw do
   end
 
   get '/trends', :to => 'trends#index'
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
   get '/stops/:type', :to => 'stops#index'
   get '/routes/:type', :to => 'routes#index'
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
   get '/about', :to => 'site#about'
+  
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
