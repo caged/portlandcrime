@@ -88,7 +88,6 @@
             <% this_year_type_total += this_year %>
             <% last_year_type_total += last_year %>
           <% end %>
-
           <tr>
             <th><span class="badge" data-code="<%= type['name'].parameterize[0..1] %>">E</span><%= truncate(type['name'], :length => 12) %></th>
             <td><%= number_with_delimiter this_year_type_total.to_i %></td>

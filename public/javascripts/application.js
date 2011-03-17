@@ -97,7 +97,8 @@ $(function() {
    for(var date in hash)
      counts.push(hash[date])
      
-     sparkline('#pulse', counts, true)   
+     sparkline('#pulse', counts, true) 
+     $('#pulse').append($('<span />').text('30 Day Trend').addClass('quiet'))  
      $('#total .num').text(data.features.length)
      
      var last = Date.parse(data.features[0].properties.reported_at) 

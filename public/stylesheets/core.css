@@ -1096,6 +1096,14 @@ ul.times li span.percent {
   line-height: 190%;
   display: block;
 }
+
+.quiet {
+  color: #aaa;
+  text-align: center;
+  display: block;
+  font-style: italic;
+  font-size: 11px;
+}
 /* @end */
 
 /*------------------------------------------------------------------------------------
