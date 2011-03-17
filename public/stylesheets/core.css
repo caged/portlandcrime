@@ -242,6 +242,10 @@ ol.alpha-list li a:hover {
   background: rgba(44, 143, 244,0.9);
 }
 
+.loader {
+  margin: 40% auto;
+}
+
 /* @end */
 
 /*------------------------------------------------------------------------------------
@@ -409,6 +413,7 @@ header a.locate.finding {
   overflow: hidden;
   position: relative;
   height: 565px;
+  text-align: center;
 }
 
 aside#info {
@@ -598,6 +603,10 @@ h3[data-code=fi] {
 /*------------------------------------------------------------------------------------
   @group sbar
 ------------------------------------------------------------------------------------*/
+#offense-nav {
+  z-index: 9999;
+}
+
 .offenses, #offenses {
   list-style: none;
   margin: 0;
@@ -726,6 +735,46 @@ div.year {
 
 #total div.year span.label {
   font-style: normal;
+}
+
+/*.fullscreen #offense-nav {
+  z-index: 9999;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 200px;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+}*/
+
+.fullscreen .offenses li {
+  border-top: 1px solid rgba(50,50,50,0.8);
+}
+
+.fullscreen .offenses li a {
+  color: rgba(255,255,255,0.5);
+  text-shadow: 1px 1px rgba(0,0,0,0.8);
+}
+
+.fullscreen .box header {
+  color: rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.8);
+  text-shadow: 1px 1px rgba(0,0,0,0.8);
+}
+
+.fullscreen .box header h1 {
+  text-shadow: none;
+}
+
+.fullscreen .offenses span.otype  {
+  background: transparent -webkit-gradient(linear, left top, left bottom, from(rgba(20,20,20,0.5)), to(rgba(0,0,0,0.9)));
+  background: transparent -moz-linear-gradient(top, #e0e0e0, #cfcfcf);
+  border-bottom-color: rgba(0,0,0,0.9);
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 1px 1px rgba(255,255,255,0.5);
+  display: block;
+  padding: 8px 10px;
 }
 
 /* @end */

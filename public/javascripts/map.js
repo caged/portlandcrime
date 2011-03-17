@@ -3,6 +3,7 @@ $(function() {
   if(mapel.length == 0) return
   
   var path = $(document.body).data().path,
+      loader = $('<img/>').attr('src', '/images/loader.gif').addClass('loader'),
       po = org.polymaps,
       lightstyle = 5870,
       darkstyle  = 1960,
@@ -21,6 +22,12 @@ $(function() {
       + "/" + lightstyle + "/256/{Z}/{X}/{Y}.png")
       .hosts(["a.", "b.", "c.", ""])));
 
+
+      loader.bind("ajaxSend", function(){
+        mapel.prepend(this);
+      }).bind("ajaxComplete", function(){
+        $(this).remove();
+      });
   
 /**
  * Generate trimet routes
@@ -340,6 +347,7 @@ $(function() {
       width = mapel.width(),
       height = mapel.height(),
       body   = $(document.body),
+      pnav   = $('#offense-nav'),
       logo   = $('<img />')
         .attr('src', '/images/logo-small.png')
         .addClass('fslogo'),
@@ -355,7 +363,7 @@ $(function() {
       body.removeClass('fullscreen')
       mapel.find('header').show()
       mapel.css({position: 'static', width: width, height: height, 'z-index': 'inherit'})
-      logo.remove()      
+      logo.remove()
     } else {
       _gaq.push(['_trackEvent', 'Map', 'Fullscreen Zoom', document.title]);
       body.addClass('fullscreen')
