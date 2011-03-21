@@ -143,14 +143,14 @@ namespace :migrations do
   
   task :stimpy_you_idiot => :environment do
     step = 500
-    count = Crime.count
+    count = TrimetStop.count
     (0...count).step(step).each do |skip|
-      puts "==> Correcting #{skip}..#{skip + step} of #{count} crimes"
-      Crime.limit(step).skip(skip).each do |crime|
-        unless crime.loc[:lat] == 0 && crime.loc[:lon] == 0
-          loc = crime.loc
-          crime.loc = {:lat => loc[:lon], :lon => loc[:lat]}
-          crime.save
+      puts "==> Correcting #{skip}..#{skip + step} of #{count} stops"
+      TrimetStop.limit(step).skip(skip).each do |st|
+        unless st.loc[:lat] == 0 && st.loc[:lon] == 0
+          loc = st.loc
+          st.loc = {:lat => loc[:lon], :lon => loc[:lat]}
+          st.save
         end
       end
     end
