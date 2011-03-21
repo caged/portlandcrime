@@ -25,12 +25,6 @@ class Crime
     ids = Offense.all(:'type.name' => /#{type}/i).collect(&:id)
     where(:offense_id.in => ids)}
   
-  # distance (in miles). Defaults to 100 yards
-  def self.near_location(loc, distance = 0.0568181818)
-    distance = distance / 69.0
-    query('loc' => {'$within' => {'$center' => [[loc['lat'], loc['lon']], distance] }})
-  end
-  
   def as_geojson(options = {})
     props = attributes
     props.delete(:loc)

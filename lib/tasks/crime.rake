@@ -2,8 +2,28 @@ require 'pathname'
 require 'pp'
 require 'csv'
 require 'name_map'
+require 'csv'
 
 namespace :crime do
+  task :export => :environment do
+    quads = %w(NE SE SW NW N)
+    CSV.open('crime-nodes.csv', 'w', :write_headers => true, :headers => ['id', 'Label']) do |csv|
+      quads.each_with_index do |q, idx|
+        csv << [idx, q]
+      end
+    end
+    
+    CSV.open('crime-edges.csv', 'w', :write_headers => true, :headers => ['Source', 'Target', 'Type', 'oname', 'otype', 'time', 'quadrant']) do |csv|
+      Crime.limit(1000).each_with_index do |c, idx|
+        quad = c.address.scan(/\bNE|SE|SW|NW|N\b/)[0]
+        next if quad.nil?
+        puts "#{c.loc.to_s}"
+        #off  = c.offense
+        #csv << [idx, quad, 'Directed', off.name, off.type['name'], c.reported_at.strftime('%H:%M'), quad]
+      end
+    end
+  end
+  
   desc 'Import new crimes from PDX Data Catalog.  Set YEAR to import specific year.  Defaults to current year.'
   task :import => :environment do
     year = ENV['YEAR'].nil? ? nil : ENV['YEAR'].strip

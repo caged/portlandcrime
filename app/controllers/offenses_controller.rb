@@ -1,5 +1,6 @@
 class OffensesController < ApplicationController
-  caches_page :show
+  caches_page :show, :recurring_neighborhoods
+  
   def index
     respond_to do |wants|
       wants.json do

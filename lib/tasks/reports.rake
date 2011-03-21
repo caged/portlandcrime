@@ -5,6 +5,9 @@ require 'name_map'
 
 namespace :crime do
   namespace :reports do
+    desc 'Run all reports'
+    task :all => [:crime_totals, :ytd_offense_summaries, :neighborhood_offense_totals]
+    
     desc 'Run Crime Totals For last year & this year'
     task :crime_totals => :environment do
       [(Time.now - 1.year).year, Time.now.year].each do |year|
