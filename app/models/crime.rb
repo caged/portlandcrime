@@ -25,6 +25,14 @@ class Crime
     ids = Offense.all(:'type.name' => /#{type}/i).collect(&:id)
     where(:offense_id.in => ids)}
   
+  # Distance given in feet and passed to query as radius
+  # See http://www.mongodb.org/display/DOCS/Geospatial+Indexing#GeospatialIndexing-TheEarthisRoundbutMapsareFlat
+  def self.near_location(loc, distance)
+    # earth mean radius in miles * feet in a mile
+    distance = distance.to_f / (3959.0 * 5280)
+    query('loc' => {'$within' => {'$centerSphere' => [[loc['lon'], loc['lat']], distance] }})
+  end
+  
   def as_geojson(options = {})
     props = attributes
     props.delete(:loc)
