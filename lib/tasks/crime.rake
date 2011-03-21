@@ -52,11 +52,11 @@ namespace :crime do
             lon = cr[9].empty? ? 0 : cr[9]
             
             if lat == 0 || lon == 0
-              crime.loc = {:lat => 0, :lon => 0}
+              crime.loc = {:lon => 0, :lat => 0}
             else
               point = Proj4::Point.new(lat.to_f, lon.to_f)
               wgs84 = projection.inverseDeg(point)
-              crime.loc = {:lat => wgs84.y, :lon => wgs84.x}
+              crime.loc = {:lon => wgs84.x, :lat => wgs84.y}
             end
 
             # A little cleanup

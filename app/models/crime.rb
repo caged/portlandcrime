@@ -7,7 +7,7 @@ class Crime
   key :district, Integer
   key :precinct, String
   key :address, String
-  key :loc, Hash, :default => {'lat' => 0, 'lon' => 0}
+  key :loc, Hash, :default => {'lon' => 0, 'lat' => 0}
   key :code, String
   timestamps!
   

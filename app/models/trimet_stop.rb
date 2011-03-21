@@ -7,7 +7,7 @@ class TrimetStop
   key :jurisdiction
   key :zipcode
   key :type
-  key :loc, Hash, :default => {'lat' => 0, 'lon' => 0}
+  key :loc, Hash, :default => {'lon' => 0, 'lat' => 0}
   
   scope :max_stops, :type => 'max'
   scope :streetcar_stops, :type.in => %w(sc bsc)
@@ -23,7 +23,7 @@ class TrimetStop
       :properties => props,
       :geometry => {
         :type => 'Point', 
-        :coordinates => [loc['lat'], loc['lon']]
+        :coordinates => [loc['lon'], loc['lat']]
       }
     }
   end
