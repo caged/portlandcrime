@@ -1,147 +1,37 @@
-$(function() {
-  if($('body[data-path=trends-index]').length != 0) {
-    $.getJSON('/trends.json', function(data) {      
-      var ranges = ["prev", "curr"],
-          weeks  = data[0],
-          months = data[1],
-          mlabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          curYear = new Date().getUTCFullYear()
-      
-      var w = $('#trends').width() - 70,
-          h = 200,
-          pmax = pv.max(weeks, function(d) { return d.prev }),
-          cmax = pv.max(weeks, function(d) { return d.curr }),
-          max  = pv.max([pmax, cmax]),
-          x = pv.Scale.ordinal(weeks, function(d) { return d.week }).splitBanded(0, w, 0.6),
-          y = pv.Scale.linear(0, max).range(0, h),
-          k = x.range().band / ranges.length
+/* DO NOT MODIFY. This file was compiled Tue, 22 Mar 2011 08:41:23 GMT from
+ * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/trends.coffee
+ */
 
-      var vis = new pv.Panel()
-          .width(w)
-          .height(h)
-          .margin(20)
-          .top(40)
-          .right(40)
-
-      var panel = vis.add(pv.Panel)
-          .data(weeks)
-          .left(function(d) { return x(d.week) })
-          .width(x.range().band);
-
-      panel.add(pv.Bar)
-          .data(ranges)
-          .bottom(0)
-          .width(k - 1)
-          .left(function() { return this.index * k })
-          .height(function(t, d) { return y(d[t]) })
-          .fillStyle(pv.colors("#ccc", "#00b2ec"))
-          .lineWidth(1)
-          .title(function(key, obj) { return obj[key] })
-          .event('mouseover', pv.Behavior.tipsy({gravity: "s", fade: true}));
-          
-      panel.anchor("bottom").add(pv.Label)
-          .visible(function() { return !(this.parent.index % 3) })
-          .textBaseline("top")
-          .textMargin(5)
-          .text(function(d) { return d.week });
-          
-      vis.add(pv.Dot) 
-            .data([curYear - 1, curYear]) 
-            .top(-20) 
-            .left(function() { return 360 + this.index * 65 }) 
-            .size(30) 
-            .strokeStyle(null)
-            .fillStyle(pv.colors('#ccc', '#00b2ec')) 
-          .anchor("right").add(pv.Label)
-            .top(-19)
-            .left(function() { return 365 + this.index * 65 })
-            .font("bold 14px 'Helvetica Neue', sans-serif")
-            .textStyle('#444');
-
-      vis.add(pv.Rule)
-          .data(y.ticks(12))
-          .bottom(y)
-          .strokeStyle(function(i) { return i ? "rgba(100, 100, 100, .1)" : "#ccc" })
-        .anchor("left").add(pv.Label)
-          .visible(function() { return !(this.index & 1) })
-          .right(-30)
-          .textAlign('right')
-
-      vis.canvas('weekly').render();
-      
-      
-      /**
-       * monthly chart
-       */
-       var pmax = pv.max(months, function(d) { return d.prev }),
-           cmax = pv.max(months, function(d) { return d.curr }),
-           max  = pv.max([pmax, cmax]),
-           x = pv.Scale.ordinal(months, function(d) { return d.month }).splitBanded(0, w, 0.6),
-           y = pv.Scale.linear(0, max).range(0, h),
-           k = x.range().band / ranges.length
-
-       vis = new pv.Panel()
-           .width(w)
-           .height(h)
-           .margin(20)
-           .top(40)
-           .right(40)
-
-       panel = vis.add(pv.Panel)
-           .data(months)
-           .left(function(d) { return x(d.month) })
-           .width(x.range().band);
-
-       panel.add(pv.Bar)
-           .data(ranges)
-           .bottom(0)
-           .width(k - 5)
-           .left(function() { return this.index * k })
-           .height(function(t, d) { return y(d[t]) })
-           .fillStyle(pv.colors("#ccc", "#00b2ec"))
-           .lineWidth(1)
-           .title(function(key, obj) { return obj[key] })
-           .event('mouseover', pv.Behavior.tipsy({gravity: "s", fade: true}));
-
-       panel.anchor("bottom").add(pv.Label)
-           .textBaseline("top")
-           .textMargin(5)
-           .text(function(d) { return mlabels[d.month] });
-
-       vis.add(pv.Dot) 
-             .data([curYear - 1, curYear]) 
-             .top(-20) 
-             .left(function() { return 360 + this.index * 65 }) 
-             .size(30) 
-             .strokeStyle(null)
-             .fillStyle(pv.colors('#ccc', '#00b2ec')) 
-           .anchor("right").add(pv.Label)
-             .top(-19)
-             .left(function() { return 365 + this.index * 65 })
-             .font("bold 14px 'Helvetica Neue', sans-serif")
-             .textStyle('#444');
-
-       vis.add(pv.Rule)
-           .data(y.ticks(12))
-           .bottom(y)
-           .strokeStyle(function(i) { return i ? "rgba(100, 100, 100, .1)" : "#ccc" })
-         .anchor("left").add(pv.Label)
-           .visible(function() { return !(this.index & 1) })
-           .right(-30)
-           .textAlign('right')
-           
-       $(document).bind('tab.clicked', function(event, el) {
-         el = $(el)
-         var selected = $('li a.current').attr('href'),
-             hdr      = el.prev('h1')
-        
-         if(selected == '#monthly')
-           hdr.text('Weekly Trend')
-         else
-          hdr.text('Monthly Trend')
-          
-         vis.canvas('monthly').render();
-       })
-    })
-  }
-});
+(function() {
+  $(function() {
+    if ($('body[data-path=trends-index]').length !== 0) {
+      return $.getJSON('/trends.json', function(data) {
+        var bars, cmax, curYear, h, layers, max, mlabels, months, pmax, ranges, vis, w, weeks, x;
+        ranges = ['prev', 'curr'];
+        weeks = data[0], months = data[1];
+        mlabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        curYear = new Date().getUTCFullYear();
+        w = $('#trends').width() - 70;
+        h = 200;
+        pmax = d3.max(weeks, function(d) {
+          return d.prev;
+        });
+        cmax = d3.max(weeks, function(d) {
+          return d.curr;
+        });
+        max = d3.max([pmax, cmax], x = function(d) {
+          return d.x * w / weeks.length;
+        });
+        vis = d3.select('#weekly').append('svg:svg').attr('width', w).attr('height', h).data(data);
+        layers = vis.selectAll('g.layer').data(ranges).enter().append('svg:g').attr('class', 'layer');
+        bars = layers.selectAll('g.bar').enter().append('svg:g').attr('fill', "rgb(30,30,30)").attr('class', 'bar').attr('transform', function(t, d) {
+          console.log(arguments);
+          return "translate(" + (x(d)) + ")";
+        });
+        return bars.append('svg:rect').attr('width', x({
+          x: 0.9
+        })).attr('x', 0).attr('h', h);
+      });
+    }
+  });
+}).call(this);
