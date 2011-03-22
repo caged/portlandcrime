@@ -23,16 +23,16 @@ class TrendsController < ApplicationController
         years = [@from.year, @to.year]
         
         years.each do |year|
-          col = MongoMapper.database["weekly_citywide_totals_report_#{year}"]          
-          trends << col.find.to_a
+          trends << MongoMapper.database["weekly_citywide_totals_report_#{year}"].find.to_a         
         end
         
+        wprev = {:series => 'prev', :values => []}
+        wcurr = {:series => 'curr', :values => []}
         (0..52).each do |i|
           prev = trends.first[i] ? trends.first[i]['value']['count'] : 0
           curr = trends.last[i] ? trends.last[i]['value']['count'] : 0
-          
-          week = {:week => (i + 1), :prev => prev, :curr => curr}
-          weeks << week
+          wprev[:values] << {:week => (i + 1), :value => prev}
+          wcurr[:values] << {:week => (i + 1), :value => curr}
         end 
         
         trends = []
@@ -41,14 +41,17 @@ class TrendsController < ApplicationController
           trends << col.find.to_a
         end
         
+        mprev = {:series => 'prev', :values => []}
+        mcurr = {:series => 'curr', :values => []}
         (0..11).each do |i|
           prev = trends.first[i] ? trends.first[i]['value']['count'] : 0
           curr = trends.last[i] ? trends.last[i]['value']['count'] : 0
-          month = {:month => i, :prev => prev, :curr => curr}
-          months << month
+          
+          mprev[:values] << {:month => i, :value => prev}
+          mcurr[:values] << {:month => i, :value => curr}          
         end
         
-        render :json => [weeks, months]
+        render :json => [[wprev, wcurr], [mprev, mcurr]]
       end
     end
   end

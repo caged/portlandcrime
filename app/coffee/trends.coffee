@@ -1,43 +1,38 @@
 $ ->
   if $('body[data-path=trends-index]').length != 0
     $.getJSON '/trends.json', (data) ->
-      ranges = ['prev', 'curr']
       [weeks, months] = data
       mlabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
       curYear = new Date().getUTCFullYear()
+      p = 20
+      w = $('#trends').width() - .5 - p
+      h = 200 - .5 - p
+      wmax = d3.max weeks, (d) -> d3.max d.values, (e) -> e.value
+      x0 = d3.scale.ordinal().domain(d3.range weeks[0].values.length).rangeBands [0, w], 0.5
+      x1 = d3.scale.ordinal().domain(d3.range weeks[0].values.length).rangeBands [0, w], 0.5
       
-      w = $('#trends').width() - 70
-      h = 200
-      pmax = d3.max weeks, (d) -> d.prev 
-      cmax = d3.max weeks, (d) -> d.curr
-      max  = d3.max [pmax, cmax],
-      x = (d) -> d.x * w / weeks.length
-      #x = d3.scale.ordinal(weeks, (d) -> d.week).splitBanded 0, w, 0.6
-      # cmax = pv.max(weeks, function(d) { return d.curr })
-      # max  = pv.max([pmax, cmax])
-      # x = pv.Scale.ordinal(weeks, function(d) { return d.week }).splitBanded(0, w, 0.6)
-      # y = pv.Scale.linear(0, max).range(0, h)
-      # k = x.range().band / ranges.length
+      y = d3.scale.linear().domain([0, wmax]).range [0, h]
       
       vis = d3.select('#weekly')
         .append('svg:svg')
-          .attr('width', w)
+          .attr('width', w + p)
           .attr('height', h)
-          .data(data)
           
       layers = vis.selectAll('g.layer')
-          .data(ranges)
+          .data(weeks)
         .enter().append('svg:g')
           .attr('class', 'layer')
+          .attr('transform', (d, i) -> "translate(#{i * x.rangeBand()},0)")
+          .attr('fill', (d) -> if d.series == 'prev' then '#00b2ec' else '#cccccc')
             
       bars = layers.selectAll('g.bar')
-          .data((d)-> d)
+          .data((d)-> d.values)
         .enter().append('svg:g')
-          .attr('fill', "rgb(30,30,30)")
           .attr('class', 'bar')
-          .attr('transform', (t, d) -> console.log arguments; "translate(#{x(d)})")
+          .attr('transform', (d) -> "translate(#{x(d.week)},0)")
       
       bars.append('svg:rect')
-        .attr('width', x({x: 0.9}))
+        .attr('width', 5)
         .attr('x', 0)
-        .attr('h', h)
+        .attr('y', (d) -> h - y d.value)
+        .attr('height', (d) -> y d.value)
