@@ -4,53 +4,59 @@ $ ->
       [weeks, months] = data
       mlabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
       curYear = new Date().getUTCFullYear()
-      p = 20
-      nweeks = weeks[0].values.length
-      w = $('#trends').width() -  p * 10
-      h = 200 -  p
-      wmax = d3.max weeks, (d) -> d3.max d.values, (e) -> e.value
-      x0 = d3.scale.ordinal().domain(d3.range nweeks).rangeBands [0, w], 0.5
-      x1 = d3.scale.ordinal().domain(d3.range nweeks).rangeBands [0, x0.rangeBand()]
-      y = d3.scale.linear().domain([0, wmax]).range [0, h]
+      nweeks  = weeks[0].values.length
+      ptop    = 10
+      pbot    = 20
+      pleft   = 10
+      pright  = 30
+      w       = $('#trends').width() - (pleft + pright)
+      h       = 200 - (ptop + pbot)
+      wmax    = d3.max weeks, (d) -> d3.max d.values, (e) -> e.value
+      x       = d3.scale.linear().domain([0, wmax]).range [h,0]
+      y0      = d3.scale.ordinal().domain(d3.range nweeks).rangeBands [0, w], 0.5
+      y1      = d3.scale.ordinal().domain(d3.range 2).rangeBands [0, y0.rangeBand()]
       
       vis = d3.select('#weekly')
         .append('svg:svg')
-          .attr('width', w + p)
-          .attr('height', h)
+          .attr('width', w + (pleft + pright))
+          .attr('height', h + ptop + pbot)
+          .append('svg:g')
+            .attr('transform', "translate(#{pleft},#{ptop})")
       
-      # rules = vis.selectAll('g.rule')
-      #     .data()
-      #   .enter().append("svg:g")
-      #     .attr("class", "rule")
-      #   
-      # rules.append('svg:line')
-      #   .attr("y1", y)
-      #   .attr("y2", y)
-      #   .attr("x1", 0)
-      #   .attr("x2", w + 1);
+      rules = vis.selectAll('g.rule')
+          .data(x.ticks(12))
+        .enter().append('svg:g')
+          .attr('class', (d) -> if d then null else 'axis')
           
-      layers = vis.selectAll('g.layer')
+      rules.append('svg:line')
+        .attr("y1", x)
+        .attr("y2", x)
+        .attr("x1", 0)
+        .attr("x2", w + 1)
+        
+      # rules.append('svg:text')
+      #   .attr('y', y1)
+      
+      g = vis.selectAll('g.bar')
           .data(weeks)
         .enter().append('svg:g')
-          .attr('class', 'layer')
-          .attr('transform', (d, i) -> "translate(#{x1(i)},0)")
           .attr('fill', (d) -> if d.series == 'prev' then '#00b2ec' else '#cccccc')
-            
-      bars = layers.selectAll('g.bar')
-          .data((d)-> d.values)
-        .enter().append('svg:g')
-          .attr('class', 'bar')
-          .attr('transform', (d, i) ->  "translate(#{x0 d.week},0)")
+          .attr('transform', (d, i) -> "translate(#{y1(i)},0)")
       
-      bars.append('svg:rect')
-        .attr('width', 3)
-        .attr('x', 0)
-        .attr('y', (d) -> h - y d.value)
-        .attr('height', (d) -> y d.value)
+      g.selectAll('rect')
+        .data((d) -> d.values)
+      .enter().append('svg:rect')
+        .attr('transform', (d,i) -> "translate(#{y0(i)},0)")
+        .attr('width', y1.rangeBand())
+        .attr('height', (d,i) -> h - x(d.value))
+        .attr('y', (d) -> x(d.value))
         
       vis.selectAll('text')
-        .data(weeks[0].values)
+        .data(d3.range(nweeks))
       .enter().append('svg:text')
-        .attr("transform", (d, i) -> "translate(#{x0(i)},0)")
-        .attr("text-anchor", "bottom")
-        .text((d)-> d.week)
+        .attr('class', (d, i) -> if i % 3 == 0 then 'hlbl' else 'hlbl hide')
+        .attr("transform", (d, i) -> "translate(#{y0(i)},0)")
+        .attr("x", y0.rangeBand() / 2)
+        .attr("y", h + 12)
+        .attr("text-anchor", "middle")
+        .text((d)-> d + 1)

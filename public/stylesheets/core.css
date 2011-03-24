@@ -409,10 +409,6 @@ header a.locate.finding {
   position: relative;
 }
 
-#weekly {
-  height: 500px;
-}
-
 #canvas {
   overflow: hidden;
   position: relative;

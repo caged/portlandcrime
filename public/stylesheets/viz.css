@@ -1,0 +1,18 @@
+svg text.hlbl {
+  font-size: 10px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+svg text.hlbl.hide {
+  display: none;
+}
+
+line {
+  stroke: rgba(100,100,100,0.1);
+  shape-rendering: crispEdges;
+  stroke-width: 1px;
+}
+
+line.axis {
+  stroke: rgba(100,100,100,0.3);
+}
