@@ -5,13 +5,10 @@ $ ->
       mlabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
       year    = new Date().getUTCFullYear()
       nweeks  = weeks[0].values.length
-      ptop    = 20
-      pbot    = 30
-      pleft   = 20
-      pright  = 40
+      [pt,pl,pb,pr] = [20,30,20,40]
       lblwid  = 60
-      w       = $('#trends').width() - (pleft + pright + 10)
-      h       = 200 - (ptop + pbot)
+      w       = $('#trends').width() - (pl + pr + 10)
+      h       = 200 - (pt + pb)
       wmax    = d3.max weeks, (d) -> d3.max d.values, (e) -> e.value
       x       = d3.scale.linear().domain([0, wmax]).range [h,0]
       y0      = d3.scale.ordinal().domain(d3.range nweeks).rangeBands [0, w], 0.5
@@ -19,10 +16,10 @@ $ ->
       
       vis = d3.select('#weekly')
         .append('svg:svg')
-          .attr('width', w + (pleft + pright))
-          .attr('height', h + ptop + pbot)
+          .attr('width', w + (pl + pr))
+          .attr('height', h + pt + pb)
           .append('svg:g')
-            .attr('transform', "translate(#{pleft},#{ptop})")
+            .attr('transform', "translate(#{pl},#{pt})")
       
       rules = vis.selectAll('g.rule')
           .data(x.ticks(10))

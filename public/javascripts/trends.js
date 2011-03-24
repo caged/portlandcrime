@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Thu, 24 Mar 2011 20:10:28 GMT from
+/* DO NOT MODIFY. This file was compiled Thu, 24 Mar 2011 20:13:55 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/trends.coffee
  */
 
@@ -6,18 +6,15 @@
   $(function() {
     if ($('body[data-path=trends-index]').length !== 0) {
       return $.getJSON('/trends.json', function(data) {
-        var g, h, lblwid, legend, mlabels, months, nweeks, pbot, pleft, pright, ptop, rules, vis, w, weeks, wmax, x, y0, y1, year;
+        var g, h, lblwid, legend, mlabels, months, nweeks, pb, pl, pr, pt, rules, vis, w, weeks, wmax, x, y0, y1, year, _ref;
         weeks = data[0], months = data[1];
         mlabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         year = new Date().getUTCFullYear();
         nweeks = weeks[0].values.length;
-        ptop = 20;
-        pbot = 30;
-        pleft = 20;
-        pright = 40;
+        _ref = [20, 30, 20, 40], pt = _ref[0], pl = _ref[1], pb = _ref[2], pr = _ref[3];
         lblwid = 60;
-        w = $('#trends').width() - (pleft + pright + 10);
-        h = 200 - (ptop + pbot);
+        w = $('#trends').width() - (pl + pr + 10);
+        h = 200 - (pt + pb);
         wmax = d3.max(weeks, function(d) {
           return d3.max(d.values, function(e) {
             return e.value;
@@ -26,7 +23,7 @@
         x = d3.scale.linear().domain([0, wmax]).range([h, 0]);
         y0 = d3.scale.ordinal().domain(d3.range(nweeks)).rangeBands([0, w], 0.5);
         y1 = d3.scale.ordinal().domain(d3.range(2)).rangeBands([0, y0.rangeBand()]);
-        vis = d3.select('#weekly').append('svg:svg').attr('width', w + (pleft + pright)).attr('height', h + ptop + pbot).append('svg:g').attr('transform', "translate(" + pleft + "," + ptop + ")");
+        vis = d3.select('#weekly').append('svg:svg').attr('width', w + (pl + pr)).attr('height', h + pt + pb).append('svg:g').attr('transform', "translate(" + pl + "," + pt + ")");
         rules = vis.selectAll('g.rule').data(x.ticks(10)).enter().append('svg:g').attr('class', function(d) {
           if (d) {
             return null;
