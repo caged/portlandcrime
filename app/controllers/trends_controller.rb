@@ -50,7 +50,7 @@ class TrendsController < ApplicationController
           mprev[:values] << {:month => i, :value => prev}
           mcurr[:values] << {:month => i, :value => curr}          
         end
-        
+                
         render :json => [[wprev, wcurr], [mprev, mcurr]]
       end
     end

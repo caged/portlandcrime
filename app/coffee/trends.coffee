@@ -32,7 +32,7 @@ $ ->
         g = vis.selectAll('g.bar')
             .data(data)
           .enter().append('svg:g')
-            .attr('fill', (d) -> if d.series == 'prev' then '#00b2ec' else '#cccccc')
+            .attr('fill', (d) -> if d.series == 'prev' then '#cccccc' else '#00b2ec')
             .attr('transform', (d, i) -> "translate(#{y1(i)},0)")
       
         g.selectAll('rect')

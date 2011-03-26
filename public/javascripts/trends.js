@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Sat, 26 Mar 2011 18:01:41 GMT from
+/* DO NOT MODIFY. This file was compiled Sat, 26 Mar 2011 18:11:53 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/trends.coffee
  */
 
@@ -29,9 +29,9 @@
           vis = d3.select(el).append('svg:svg').attr('width', w + (pl + pr)).attr('height', h + pt + pb).attr('class', 'viz').append('svg:g').attr('transform', "translate(" + pl + "," + pt + ")");
           g = vis.selectAll('g.bar').data(data).enter().append('svg:g').attr('fill', function(d) {
             if (d.series === 'prev') {
-              return '#00b2ec';
-            } else {
               return '#cccccc';
+            } else {
+              return '#00b2ec';
             }
           }).attr('transform', function(d, i) {
             return "translate(" + (y1(i)) + ",0)";
