@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Thu, 24 Mar 2011 20:13:55 GMT from
+/* DO NOT MODIFY. This file was compiled Sat, 26 Mar 2011 17:03:39 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/trends.coffee
  */
 
@@ -23,7 +23,7 @@
         x = d3.scale.linear().domain([0, wmax]).range([h, 0]);
         y0 = d3.scale.ordinal().domain(d3.range(nweeks)).rangeBands([0, w], 0.5);
         y1 = d3.scale.ordinal().domain(d3.range(2)).rangeBands([0, y0.rangeBand()]);
-        vis = d3.select('#weekly').append('svg:svg').attr('width', w + (pl + pr)).attr('height', h + pt + pb).append('svg:g').attr('transform', "translate(" + pl + "," + pt + ")");
+        vis = d3.select('#weekly').append('svg:svg').attr('width', w + (pl + pr)).attr('height', h + pt + pb).attr('class', 'viz').append('svg:g').attr('transform', "translate(" + pl + "," + pt + ")");
         rules = vis.selectAll('g.rule').data(x.ticks(10)).enter().append('svg:g').attr('class', function(d) {
           if (d) {
             return null;
@@ -58,8 +58,8 @@
         g.selectAll('rect').data(function(d) {
           return d.values;
         }).enter().append('svg:rect').attr('transform', function(d, i) {
-          return "translate(" + (y0(i)) + ",0)";
-        }).attr('width', y1.rangeBand() / 1.5).attr('height', function(d, i) {
+          return "translate(" + (y0(i) + 0.5) + ",0)";
+        }).attr('width', y1.rangeBand() / 2).attr('height', function(d, i) {
           return h - x(d.value);
         }).attr('y', function(d) {
           return x(d.value);

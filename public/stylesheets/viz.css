@@ -1,4 +1,5 @@
-svg {
+svg.viz {
+  shape-rendering: crispEdges;
 }
 
 svg text.hlbl,

@@ -18,6 +18,7 @@ $ ->
         .append('svg:svg')
           .attr('width', w + (pl + pr))
           .attr('height', h + pt + pb)
+          .attr('class', 'viz')
           .append('svg:g')
             .attr('transform', "translate(#{pl},#{pt})")
       
@@ -58,8 +59,8 @@ $ ->
       g.selectAll('rect')
         .data((d) -> d.values)
       .enter().append('svg:rect')
-        .attr('transform', (d,i) -> "translate(#{y0(i)},0)")
-        .attr('width', y1.rangeBand() / 1.5)
+        .attr('transform', (d,i) -> "translate(#{y0(i) + 0.5},0)")
+        .attr('width', y1.rangeBand() / 2)
         .attr('height', (d,i) -> h - x(d.value))
         .attr('y', (d) -> x(d.value))
         
@@ -79,17 +80,3 @@ $ ->
         .attr('y', 5)
         .attr('class', 'legend')
         .text((d) -> d)
-        
-        
-        # vis.add(pv.Dot) 
-        #       .data([curYear - 1, curYear]) 
-        #       .top(-20) 
-        #       .left(function() { return 360 + this.index * 65 }) 
-        #       .size(30) 
-        #       .strokeStyle(null)
-        #       .fillStyle(pv.colors('#ccc', '#00b2ec')) 
-        #     .anchor("right").add(pv.Label)
-        #       .top(-19)
-        #       .left(function() { return 365 + this.index * 65 })
-        #       .font("bold 14px 'Helvetica Neue', sans-serif")
-        #       .textStyle('#444');
