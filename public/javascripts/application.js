@@ -71,7 +71,7 @@ $(function() {
     
     var start = Date.today().add(-30).days(),
         end = new Date(),
-        range = pv.range(start.getTime(), end.getTime(), 86400000 /* 1 day */),
+        range = d3.range(start.getTime(), end.getTime(), 86400000 /* 1 day */),
         hash = {},
         counts = [],
         nhoods = {},

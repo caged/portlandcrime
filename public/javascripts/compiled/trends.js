@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Sat, 26 Mar 2011 18:11:53 GMT from
+/* DO NOT MODIFY. This file was compiled Sat, 26 Mar 2011 19:54:16 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/trends.coffee
  */
 

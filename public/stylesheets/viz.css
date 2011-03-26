@@ -2,14 +2,13 @@ svg.viz {
   shape-rendering: crispEdges;
 }
 
-svg text.hlbl,
-svg text.vlbl {
+svg text {
   font-size: 10px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: #444;
 }
 
-svg text.hlbl.hide {
+svg .hide {
   display: none;
 }
 
@@ -25,4 +24,15 @@ line.axis {
 
 .legend {
   font-weight: bold;
+}
+
+.path {
+  stroke: rgb(82,119,158);
+  stroke-width: 2px;
+  fill: none;
+  shape-rendering: smoothEdges;
+}
+
+circle.dot.max {
+  fill: rgba(153,0,0,1);
 }

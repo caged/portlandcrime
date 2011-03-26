@@ -10,13 +10,12 @@ javascripts:
     - public/javascripts/vendor/rails.js
     - public/javascripts/maptip.js
     - public/javascripts/vendor/d3/d3.js
-    - public/javascripts/vendor/d3/d3.geo.js
-    - public/javascripts/vendor/d3/d3.geom.js
     - public/javascripts/vendor/d3/d3.behavior.js
     - public/javascripts/vendor/d3/d3.layout.js
     - public/javascripts/vendor/d3/d3.time.js
   app:
     - public/javascripts/lib/*.js
+    - public/javascripts/compiled/*.js
     - public/javascripts/*.js
     - public/javascripts/application.js
 stylesheets:
