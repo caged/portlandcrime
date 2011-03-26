@@ -28,20 +28,6 @@ $ ->
             .attr('class', 'viz')
             .append('svg:g')
               .attr('transform', "translate(#{pl},#{pt})")
-      
-        g = vis.selectAll('g.bar')
-            .data(data)
-          .enter().append('svg:g')
-            .attr('fill', (d) -> if d.series == 'prev' then '#cccccc' else '#00b2ec')
-            .attr('transform', (d, i) -> "translate(#{y1(i)},0)")
-      
-        g.selectAll('rect')
-          .data((d) -> d.values)
-        .enter().append('svg:rect')
-          .attr('transform', (d,i) -> "translate(#{y0(i) + 0.5},0)")
-          .attr('width', y1.rangeBand() / 2)
-          .attr('height', (d,i) -> h - x(d.value))
-          .attr('y', (d) -> x(d.value))
         
         rules = vis.selectAll('g.rule')
             .data((d) -> if el != '#monthly' then x.ticks(10) else x.ticks(4))
@@ -49,8 +35,8 @@ $ ->
             .attr('class', (d) -> if d then null else 'axis')
           
         rules.append('svg:line')
-          .attr("y1", x)
-          .attr("y2", x)
+          .attr("y1", (d) -> Math.ceil(x(d)))
+          .attr("y2", (d) -> Math.ceil(x(d)))
           .attr("x1", 0)
           .attr("x2", w)
         
@@ -87,6 +73,20 @@ $ ->
           .attr('y', 5)
           .attr('class', 'legend')
           .text((d) -> d)
+              
+        g = vis.selectAll('g.bar')
+            .data(data)
+          .enter().append('svg:g')
+            .attr('fill', (d) -> if d.series == 'prev' then '#cccccc' else '#00b2ec')
+            .attr('transform', (d, i) -> "translate(#{y1(i)},0)")
+    
+        g.selectAll('rect')
+          .data((d) -> d.values)
+        .enter().append('svg:rect')
+          .attr('transform', (d,i) -> "translate(#{y0(i) + 0.5},0)")
+          .attr('width', y1.rangeBand() / 2)
+          .attr('height', (d,i) -> h - x(d.value))
+          .attr('y', (d) -> x(d.value))
         
       drawTrend '#weekly', weeks
       $(document).bind 'tab.clicked', (event, el) ->

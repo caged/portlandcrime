@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Sat, 26 Mar 2011 19:54:16 GMT from
+/* DO NOT MODIFY. This file was compiled Sat, 26 Mar 2011 20:16:49 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/trends.coffee
  */
 
@@ -27,24 +27,6 @@
           y1 = d3.scale.ordinal().domain(d3.range(2)).rangeBands([0, y0.rangeBand()]);
           labels = el === '#monthly' ? mlabels : d3.range(samples);
           vis = d3.select(el).append('svg:svg').attr('width', w + (pl + pr)).attr('height', h + pt + pb).attr('class', 'viz').append('svg:g').attr('transform', "translate(" + pl + "," + pt + ")");
-          g = vis.selectAll('g.bar').data(data).enter().append('svg:g').attr('fill', function(d) {
-            if (d.series === 'prev') {
-              return '#cccccc';
-            } else {
-              return '#00b2ec';
-            }
-          }).attr('transform', function(d, i) {
-            return "translate(" + (y1(i)) + ",0)";
-          });
-          g.selectAll('rect').data(function(d) {
-            return d.values;
-          }).enter().append('svg:rect').attr('transform', function(d, i) {
-            return "translate(" + (y0(i) + 0.5) + ",0)";
-          }).attr('width', y1.rangeBand() / 2).attr('height', function(d, i) {
-            return h - x(d.value);
-          }).attr('y', function(d) {
-            return x(d.value);
-          });
           rules = vis.selectAll('g.rule').data(function(d) {
             if (el !== '#monthly') {
               return x.ticks(10);
@@ -58,7 +40,11 @@
               return 'axis';
             }
           });
-          rules.append('svg:line').attr("y1", x).attr("y2", x).attr("x1", 0).attr("x2", w);
+          rules.append('svg:line').attr("y1", function(d) {
+            return Math.ceil(x(d));
+          }).attr("y2", function(d) {
+            return Math.ceil(x(d));
+          }).attr("x1", 0).attr("x2", w);
           rules.append('svg:text').attr('y', x).attr("dy", ".2em").attr('x', w + 5).attr('class', 'vlbl').text(function(d) {
             return d;
           });
@@ -89,10 +75,28 @@
           }).attr('r', 3).text(function(d) {
             return d;
           });
-          return legend.enter().append('svg:text').attr('transform', "translate(" + ((w - (lblwid * 2)) / 2) + ", -10)").attr("x", function(d, i) {
+          legend.enter().append('svg:text').attr('transform', "translate(" + ((w - (lblwid * 2)) / 2) + ", -10)").attr("x", function(d, i) {
             return 10 + (lblwid * i);
           }).attr('y', 5).attr('class', 'legend').text(function(d) {
             return d;
+          });
+          g = vis.selectAll('g.bar').data(data).enter().append('svg:g').attr('fill', function(d) {
+            if (d.series === 'prev') {
+              return '#cccccc';
+            } else {
+              return '#00b2ec';
+            }
+          }).attr('transform', function(d, i) {
+            return "translate(" + (y1(i)) + ",0)";
+          });
+          return g.selectAll('rect').data(function(d) {
+            return d.values;
+          }).enter().append('svg:rect').attr('transform', function(d, i) {
+            return "translate(" + (y0(i) + 0.5) + ",0)";
+          }).attr('width', y1.rangeBand() / 2).attr('height', function(d, i) {
+            return h - x(d.value);
+          }).attr('y', function(d) {
+            return x(d.value);
           });
         };
         drawTrend('#weekly', weeks);
