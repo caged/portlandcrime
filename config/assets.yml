@@ -16,10 +16,11 @@ javascripts:
     - public/javascripts/*.js
     - public/javascripts/application.js
 stylesheets:
+  pictos:
+    - public/stylesheets/pictos.css
   core:
     - public/stylesheets/reset.css
     - public/stylesheets/core.css
     - public/stylesheets/data.css
-    - public/stylesheets/pictos.css
     - public/stylesheets/maptip.css
     - public/stylesheets/vendor/tipsy.css
