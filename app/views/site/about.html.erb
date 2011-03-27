@@ -1,6 +1,6 @@
 <% title 'About' %>
 <section id="main">
-  <div class="box txt">
+  <div class="box txt page">
     <h1>About Portland Crime</h1>
     <p>Portland Crime is an Open Source effort to document and display crime in neighborhoods across Portland, OR.</p>
       
@@ -15,6 +15,20 @@
     <h2>Can I help?</h2>
     <p><strong>Yes!</strong> This project is Open Source.  Anyone can help.  While the project is still small, I encourage you to 
       <%= mail_to('justin@labratrevenge.com', 'email me', :encode => :hex) %> with any ideas you have in mind.  You can also <%= link_to 'follow me on twitter', 'http://twitter.com/Caged' %>.</p>
+      
+    <h2>Special Thanks <span class="glyph">&#107;</span> </h2>
+    <p>
+      Portland Crime would not be possible without the tireless work of other Open Source projects.  Here is a short list of 
+      the Open Source software in use:
+      <ul>
+        <li><a href="http://mbostock.github.com/d3/" title="D3">D3 - Data Visualization Library</a></li>
+        <li><a href="http://polymaps.org" title="PolyMaps">Polymaps - Dynamic Mapping</a></li>
+        <li><a href="http://jquery.com" title="jQuery">jQuery - JavaScript Library</a></li>
+        <li><a href="http://mongodb.org" title="MongoDB">MongoDB</a></li>
+        <li><a href="http://rubyonrails.org" title="Ruby on Rails">Ruby on Rails</a></li>
+        <li><a href="http://jashkenas.github.com/coffee-script" title="CoffeeScript">CoffeeScript</a></li>
+      </ul>
+      </p>
   </div>
 </section>
 

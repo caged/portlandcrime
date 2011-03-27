@@ -95,6 +95,18 @@ a:hover {
   margin-bottom: 10px;
 }
 
+.box.txt.page {
+  padding: 20px;
+}
+
+.box.txt.page ul {
+  margin: 20px 40px;
+}
+
+.box.txt.page ul li {
+  padding: 5px;
+}
+
 .box.txt h1 {
   font-size: 14px;
   margin-bottom: 10px;
