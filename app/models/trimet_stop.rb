@@ -14,7 +14,7 @@ class TrimetStop
   scope :bus_stops, :type.in => %w(bus bsc)
   scope :rail_stops, :type.in => %w(sc max bsc)
   
-  add_concerns :reporting
+  # add_concerns :reporting
   
   def as_geojson(options = {})
     props = attributes
