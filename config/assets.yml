@@ -21,9 +21,9 @@ javascripts:
 stylesheets:
   core:
     - public/stylesheets/reset.css
+    - public/stylesheets/pictos.css
     - public/stylesheets/core.css
     - public/stylesheets/data.css
     - public/stylesheets/viz.css
-    - public/stylesheets/pictos.css
     - public/stylesheets/maptip.css
     - public/stylesheets/vendor/tipsy.css
