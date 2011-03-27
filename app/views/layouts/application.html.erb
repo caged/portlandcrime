@@ -6,6 +6,10 @@
   <meta name="description" content="Track and review all types of crimes happening across Portland, OR neighborhoods."/>
   <meta http-equiv="X-UA-Compatible" content="chrome=1" />
   <%= yield :head %>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  
   <!--[if IE]>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
   <script type="text/javascript" charset="utf-8">
@@ -21,7 +25,7 @@
 
     var _gaq = _gaq || [];
     
-    <% if Rails.env == 'production' || true %>
+    <% if Rails.env == 'production' %>
     _gaq.push(['_setAccount', 'UA-7881178-3']);
     _gaq.push(['_trackPageview']);
     _gaq.push(['_setDomainName', 'none']); 
@@ -72,6 +76,5 @@
       </div>
     </div>
   </footer>
-
 </body>
 </html>
