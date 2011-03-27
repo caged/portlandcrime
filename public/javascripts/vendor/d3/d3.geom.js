@@ -1,4 +1,4 @@
-(function(){d3.geom = {};
+;(function(){d3.geom = {};
 /**
  * Computes a contour for a given input grid function using the <a
  * href="http://en.wikipedia.org/wiki/Marching_squares">marching

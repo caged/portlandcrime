@@ -13,7 +13,7 @@ $.fn.addSVGClass = function(c) {
       this.setAttribute('class', $.trim(cl.join(' ')))
     }
   })
-}
+};
 
 $.fn.removeSVGClass = function(c) {
   var el = this[0]
@@ -27,7 +27,7 @@ $.fn.removeSVGClass = function(c) {
   }
   
   return this
-}
+};
 
 $.fn.hasSVGClass = function(c) {
   var el = this[0]
@@ -40,7 +40,7 @@ $.fn.hasSVGClass = function(c) {
     has = true
     
   return has
-}
+};
 
 /**
  * place here for now

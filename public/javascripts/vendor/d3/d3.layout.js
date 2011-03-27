@@ -1,4 +1,4 @@
-(function(){d3.layout = {};
+;(function(){d3.layout = {};
 d3.layout.chord = function() {
   var chord = {},
       chords,

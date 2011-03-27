@@ -1,4 +1,4 @@
-(function(){d3.behavior = {};
+;(function(){d3.behavior = {};
 // TODO unbind zoom behavior?
 // TODO unbind listener?
 d3.behavior.zoom = function() {
