@@ -783,6 +783,9 @@ div.year {
   @group neighborhood
 ------------------------------------------------------------------------------------*/
 
+#neighborhoods-map {
+  height: 600px;
+}
 
 .comparison {
   width: 100%;
