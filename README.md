@@ -9,9 +9,7 @@ Requires Ruby 1.9.2 and MongoDb
    You should at least import this year and last year.
 3. **Run reports:**
     
-        rake crime:reports:neighborhood_offense_totals  # Run Neighborhood Crime Stats
-        rake crime:reports:weekly_crime_totals          # Run Weekly Crime Totals For last year & this year
-        rake crime:reports:ytd_offense_summaries        # Run YTD Offense Summaries
+        rake crime:reports:all
 4. **Import trimet stops and routes**:
 
         rake trimet:import:routes  # Import Trimet Bus, Max, and Streetcar Routes
