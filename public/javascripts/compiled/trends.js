@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Sun, 27 Mar 2011 19:35:37 GMT from
+/* DO NOT MODIFY. This file was compiled Mon, 28 Mar 2011 04:23:58 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/trends.coffee
  */
 
@@ -24,7 +24,7 @@
           });
           x = d3.scale.linear().domain([0, wmax]).range([h, 0]);
           y0 = d3.scale.ordinal().domain(d3.range(samples)).rangeBands([0, w], 0.5);
-          y1 = d3.scale.ordinal().domain(d3.range(2)).rangeBands([0, y0.rangeBand()]);
+          y1 = d3.scale.ordinal().domain(d3.range(2)).rangeRoundBands([0, y0.rangeBand()]);
           labels = el === '#monthly' ? mlabels : d3.range(samples);
           vis = d3.select(el).append('svg:svg').attr('width', w + (pl + pr)).attr('height', h + pt + pb).attr('class', 'viz').append('svg:g').attr('transform', "translate(" + pl + "," + pt + ")");
           rules = vis.selectAll('g.rule').data(function(d) {

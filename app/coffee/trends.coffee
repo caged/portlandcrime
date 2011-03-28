@@ -18,7 +18,7 @@ $ ->
         wmax    = d3.max data, (d) -> d3.max d.values, (e) -> e.value
         x       = d3.scale.linear().domain([0, wmax]).range [h,0]
         y0      = d3.scale.ordinal().domain(d3.range samples).rangeBands [0, w], 0.5
-        y1      = d3.scale.ordinal().domain(d3.range 2).rangeBands [0, y0.rangeBand()]
+        y1      = d3.scale.ordinal().domain(d3.range 2).rangeRoundBands [0, y0.rangeBand()]
         labels  = if el == '#monthly' then mlabels else d3.range(samples)
       
         vis = d3.select(el)
