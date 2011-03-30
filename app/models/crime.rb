@@ -25,7 +25,7 @@ class Crime
     ids = Offense.all(:'type.name' => /#{type}/i).collect(&:id)
     where(:offense_id.in => ids)}
   
-  # Distance given in feet and passed to query as radius
+  # Distance given in feet and passed to query as radians
   # See http://www.mongodb.org/display/DOCS/Geospatial+Indexing#GeospatialIndexing-TheEarthisRoundbutMapsareFlat
   def self.near_location(loc, distance)
     # earth mean radius in miles * feet in a mile
