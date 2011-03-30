@@ -4,15 +4,20 @@ Pdxpatrol::Application.routes.draw do
   end
   
   resources :crimes, :only => [:index, :show]
-  
-  
+
   resources :offenses, :only => [:index, :show] do
     get 'recurring_neighborhoods'
   end
 
+  resources :routes, :only => [:index, :show] do
+  end
+  
+  get '/routes/type/:type', :to => 'routes#type'
+  
   get '/trends', :to => 'trends#index'
   get '/stops/:type', :to => 'stops#index'
-  get '/routes/:type', :to => 'routes#index'
+  # get '/'
+  #get '/routes/:type', :to => 'routes#index'
   get '/about', :to => 'site#about'
   
   # Sample of named route:

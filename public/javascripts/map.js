@@ -32,7 +32,7 @@ $(function() {
 /**
  * Generate trimet routes
  */
-  $.getJSON('/routes/rail.geojson', function(data) {
+  $.getJSON('/routes/type/rail.geojson', function(data) {
     map.add(po.geoJson()
       .features(data.features)
       .on('load', routesLoaded))

@@ -1,7 +1,13 @@
 class RoutesController < ApplicationController
-  caches_page :index
+  caches_page :index, :type
+  
   def index
+    
+  end
+  
+  def type
     respond_to do |wants|
+      wants.html {}
       wants.geojson do
         case params[:type].to_sym
           when :max       then routes = TrimetRoute.max_routes.all
