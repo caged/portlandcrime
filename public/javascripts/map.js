@@ -46,6 +46,8 @@ $(function() {
           props = this.data.properties
       
       $el.addSVGClass(props.type.replace(/\s+/g, '-') + '-route')
+      $el.addSVGClass('rte-' + props.rte)
+      
     })
   }  
     

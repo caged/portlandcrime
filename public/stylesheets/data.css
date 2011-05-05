@@ -209,17 +209,23 @@ g.inactive circle, g.inactive text {
 }
 
 .max-route,
-.street-car-route {
+.sc-route {
   fill: none;
   stroke: #555;
   stroke-width: 2;
 }
 
 .max-route,
-.street-car-route {
+.sc-route {
   stroke: #000;
   stroke-opacity: 0.5;
   stroke-dasharray: 10 2;
 }
+
+.rte-200 { stroke:  #2c7000 } /* MAX Green Line */
+.rte-190 { stroke: #cbb500 } /* MAX Yellow Line */
+.rte-100 { stroke: blue } /* MAX Blue Line */
+.rte-90 { stroke: red } /* MAX Red Line */
+.rte-193 { stroke:  #6b09ff } /* Street Car */
 
 /* @end */

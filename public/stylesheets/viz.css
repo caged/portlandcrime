@@ -13,7 +13,7 @@ svg .hide {
 }
 
 line {
-  stroke: rgb(100,100,100);
+  stroke: red;
   stroke-opacity: 0.1;
   shape-rendering: crispEdges;
   stroke-width: 1px;

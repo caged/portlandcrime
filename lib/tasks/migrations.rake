@@ -140,52 +140,5 @@ namespace :migrations do
       nh.save
     end
   end
-  
-  task :stimpy_you_idiot => :environment do
-    step = 500
-    count = TrimetStop.count
-    (0...count).step(step).each do |skip|
-      puts "==> Correcting #{skip}..#{skip + step} of #{count} stops"
-      TrimetStop.limit(step).skip(skip).each do |st|
-        unless st.loc[:lat] == 0 && st.loc[:lon] == 0
-          loc = st.loc
-          st.loc = {:lat => loc[:lon], :lon => loc[:lat]}
-          st.save
-        end
-      end
-    end
-  end
-  
-  task :fix_locaction_hash_order_for_stops => :environment do
-    step = 500
-    count = TrimetStop.count
-    
-   # Reorder hash keys for TrimetStop's.  Mongo requires :lon (y) to be before :lat (x)
-    (0...count).step(step).each do |skip|
-      puts "==> Correcting #{skip}..#{skip + step} of #{count} stops"
-      TrimetStop.limit(step).skip(skip).each do |st|
-        unless st.loc[:lat] == 0 && st.loc[:lon] == 0
-          loc = st.loc
-          st.loc = {:lon => loc[:lon], :lat => loc[:lat]}
-          st.save
-        end
-      end
-    end
-  end
-  
-  # Reorder hash keys for TrimetStop's.  Mongo requires :lon (y) to be before :lat (x)
-  task :fix_locaction_hash_order_for_crimes => :environment do
-    count = Crime.count
-    step  = 500
-    (0...count).step(step).each do |skip|
-      puts "==> Correcting #{skip}..#{skip + step} of #{count} crimes"
-      Crime.limit(step).skip(skip).each do |cr|
-        unless cr.loc[:lat] == 0 && cr.loc[:lon] == 0
-          loc = cr.loc
-          cr.loc = {:lon => loc[:lon], :lat => loc[:lat]}
-          cr.save
-        end
-      end
-    end
-  end
+
 end

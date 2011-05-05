@@ -1,3 +1,0 @@
-class TrimetStop
-
-end

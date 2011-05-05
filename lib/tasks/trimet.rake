@@ -1,6 +1,6 @@
 namespace :trimet do
   namespace :import do
-    desc 'Import Trimet Bus, Max, and Streetcar Stops'
+    desc 'Import Transit Bus, Max, and Streetcar Stops'
     task :stops => :environment do
       file = Pathname.new(Rails.root) + 'db' + 'data' + 'trimet-stops.json'
       stops = JSON.parse(File.read(file))['features']
