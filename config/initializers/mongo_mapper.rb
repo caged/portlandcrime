@@ -1,3 +1,4 @@
+# MongoMapper.setup(Rails.configuration.database_configuration, Rails.env, :logger => Rails.logger)
 def establish_connection
   database_config_file = File.join(Rails.root, "/config/database.mongo.yml")
   yaml_content = File.read(database_config_file)

@@ -32,11 +32,11 @@ $(function() {
 /**
  * Generate trimet routes
  */
-  $.getJSON('/routes/type/rail.geojson', function(data) {
-    map.add(po.geoJson()
-      .features(data.features)
-      .on('load', routesLoaded))
-  }) 
+  // $.getJSON('/routes/type/rail.geojson', function(data) {
+  //   map.add(po.geoJson()
+  //     .features(data.features)
+  //     .on('load', routesLoaded))
+  // }) 
   
   function routesLoaded(e) {
     var counts = {}  
@@ -56,18 +56,19 @@ $(function() {
    * Load Max stops then load crimes
    */    
   var loaded = false
-  $.getJSON('/stops/rail.geojson', function(data) {
-    map.add(po.geoJson()
-      .features(data.features)
-      .on('load', function(e) {
-        stopsLoaded(e)
-        if(!loaded) {
-          $.getJSON(document.location.pathname + '.geojson', addDataLayer) 
-          loaded = true
-        }
-      })
-    )
-  }) 
+  $.getJSON(document.location.pathname + '.geojson', addDataLayer) 
+  
+  // $.getJSON('/stops/rail.geojson', function(data) {
+  //   map.add(po.geoJson()
+  //     .features(data.features)
+  //     .on('load', function(e) {
+  //       stopsLoaded(e)
+  //       if(!loaded) {
+  //         loaded = true
+  //       }
+  //     })
+  //   )
+  // }) 
 
   function stopsLoaded(e) {
     var counts = {}  

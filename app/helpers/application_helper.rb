@@ -7,7 +7,7 @@ module ApplicationHelper
     @keywords = str.join(' ')
   end
   
-  # Determines selected nav
+  # Determines selected nav.  I kind of hate this.
   # 
   # Examples:
   # selected_class(:crimes)
@@ -21,8 +21,9 @@ module ApplicationHelper
     begin
       mappings = {
         :home   => [:crimes, [:offenses, :show]],
-        :trends => [:trends],
+        :trends => [[:trends, :index]],
         :neighborhoods => [[:neighborhoods, :index], [:neighborhoods, :show]],
+        :transit => [[:trends, :transit]],
         :about  => [[:site, :about]]
       }
     

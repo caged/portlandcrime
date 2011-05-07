@@ -15,6 +15,8 @@ Pdxpatrol::Application.routes.draw do
   get '/routes/type/:type', :to => 'routes#type'
   
   get '/trends', :to => 'trends#index'
+  get '/transit', :to => 'trends#transit'
+  
   get '/stops/:type', :to => 'stops#index'
   # get '/'
   #get '/routes/:type', :to => 'routes#index'

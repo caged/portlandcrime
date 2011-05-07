@@ -19,4 +19,9 @@ class RoutesController < ApplicationController
       end
     end
   end
+  
+  def show
+    @route = TransitRoute.find(params[:id])
+    @sotps = @route.stops
+  end
 end

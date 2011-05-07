@@ -5,13 +5,6 @@ namespace :transit do
       file = Pathname.new(Rails.root) + 'db' + 'data' + 'transit_routes.json'
       routes = JSON.parse(file.read)['features']
       routes.each do |r|
-        # key :rte, Integer
-        # key :prte, Integer
-        # key :type
-        # key :desc
-        # key :dir_desc
-        # key :dir, Integer
-        # key :geo, Hash
         props = r['properties']
         route = TransitRoute.new
         route.rte = props['RTE'].to_i
@@ -24,51 +17,45 @@ namespace :transit do
         route.save
       end
       TransitRoute.ensure_index(:rte)
-      TransitRoute.ensure_index(:type)
+      TransitRoute.ensure_index(:type)     
+    end
+ 
+    desc 'Import Bus, Max, and Streetcar Stops'
+    task :stops => :environment do
+      TransitStop.ensure_index(:stop_id)
+      TransitStop.ensure_index(:rte)
+      TransitStop.ensure_index([[:loc, "2d"]])
+      TransitRoute.ensure_index([[:rte, 1], [:dir, 1]])
+      TransitRoute.ensure_index(:rte)
       
+      
+      file = Pathname.new(Rails.root) + 'db' + 'data' + 'transit_route_stops.json'
+      stops = JSON.parse(file.read)['features']
+
+      stops.each_with_index do |s, i|
+        props = s['properties']
+        geo   = s['geometry']['coordinates']
+        stop = TransitStop.first_or_new(:stop_id => props['STOP_ID'])
+        route = TransitRoute.first(:rte => props['RTE'], :dir => props['DIR'])
+        if route.nil?
+          puts "#{stop.stop_id}/#{props['RTE']} #{props['RTE_DESC']} #{props['DIR_DESC']}"
+        else
+          stop.zipcode = props['ZIPCODE']
+          stop.jurisdiction = props['JURISDIC']
+          stop.name = props['STOP_NAME']
+          stop.dir_desc = props['DIR_DESC']
+          stop.rte_desc = props['RTE_DESC']
+          stop.type = props['TYPE']
+          stop.dir = props['DIR']
+          stop.stop_seq = props['STOP_SEQ']
+          stop.frequent = props['FREQUENT'].downcase == 'true' ? true : false
+          stop.loc = {'lon' => geo[0], 'lat' => geo[1]}
+          stop.routes << route
+          route.stops << stop
+          stop.save
+          route.save
+        end
+      end
     end
   end
-  #   desc 'Import Trimet Bus, Max, and Streetcar Stops'
-  #   task :routes => :environment do
-  #     raise "Already Imported Routes" if TrimetRoute.count < 0
-  #     
-  #     file = Pathname.new(Rails.root) + 'db' + 'data' + 'lightrail-routes.json'
-  #     routes = JSON.parse(File.read(file))['features']
-  #     
-  #     routes.each do |r|
-  #       props = r['properties']
-  #       route = TrimetRoute.new
-  #       route.type = props['TYPE'].downcase
-  #       route.status = props['STATUS'].downcase
-  #       route.tunnel = props['TUNNEL']
-  #       route.line = props['LINE']
-  #       route.length = props['LENGTH']
-  #       route.geo = r['geometry']
-  #       route.save
-  #     end
-  #     
-  #     TrimetRoute.ensure_index([[:type, 1], [:status, 1]])
-  #   end
-  # end
-  # 
-  # desc 'Import Transit Bus, Max, and Streetcar Stops'
-  # task :stops => :environment do
-  #   file = Pathname.new(Rails.root) + 'db' + 'data' + 'trimet-stops.json'
-  #   stops = JSON.parse(File.read(file))['features']
-  #   
-  #   stops.each do |s|
-  #     props = s['properties']
-  #     geo   = s['geometry']['coordinates']
-  #     stop = TrimetStop.new(:stop_id => props['stop_id'])
-  # 
-  #     stop.name = props['stop_name']
-  #     stop.jurisdiction = props['jurisdic']
-  #     stop.zipcode = props['zipcode']
-  #     stop.type = props['type'].downcase
-  #     stop.loc = {'lat' => geo[0], 'lon' => geo[1]}
-  #     stop.save
-  #   end
-  #   TrimetStop.ensure_index([[:loc, "2d"]])
-  #   TrimetStop.ensure_index(:type)
-  # end
 end

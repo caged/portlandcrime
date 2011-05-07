@@ -35,5 +35,16 @@ namespace :crime do
       Neighborhood.offense_totals_between(Time.now.beginning_of_year - 1.year, (Time.now - threshold) - 1.year)
       puts "[#{Time.zone.now}] Calculated neighborhood statistics"
     end
+    
+    desc 'Run Transit Route Crime Summaries'
+    task :transit_totals => :environment do
+      offenses = Offense.all
+      TransitRoute.streetcar_routes.each do |route|
+        puts "#{route.desc} #{route.dir_desc}"
+        route.stops.each do |stop|
+          puts "\t#{stop.name}" 
+        end
+      end
+    end
   end
 end

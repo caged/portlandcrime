@@ -337,7 +337,7 @@ nav#primary ul li {
 
 nav#primary ul li a {
   display: inline-block;
-  padding: 12px 15px 13px 15px;
+  padding: 12px 10px 13px 10px;
   color: #838b92;
   font-weight: 600;
   font-size: 12px;
@@ -1360,5 +1360,83 @@ ul.times li span.percent {
 .box header .segments li a.current {
   color: #516177;
 }
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group transit
+------------------------------------------------------------------------------------*/
+.rte-group {
+  margin-bottom: 10px;
+}
+
+.routes {
+  width: 100%;
+  background: transparent;
+  border-collapse: collapse;
+}
+
+.routes th {
+  padding: 10px;
+  text-align: left;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #ccc;
+}
+
+.routes span.prte {
+  font-weight: bold;
+  color: #999;
+  margin-right: 10px;
+}
+
+.routes td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.routes tr:last-child th,
+.routes tr:last-child td {
+  border-bottom: none;
+}
+.routes tr:last-child th {
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-bottom-left-radius: 3px;
+}
+/*.tmp-routes,
+.bus-routes {
+  list-style: none;
+}
+
+.tmp-routes li {
+  padding: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.bus-routes li {
+  border-bottom: 1px solid #eee;
+}
+
+.bus-routes h2 {
+  padding: 10px;
+  display: inline-block;
+  width: 200px;
+  border-right: 2px solid #eee;
+  background: #f7f7f7;
+}
+
+.bus-routes li a {
+  padding: 10px 5px;
+  width: 250px;
+  display: inline-block;
+  border-right: 1px solid #eee;
+}
+
+.bus-routes li a:first-child {
+  border-right: 1px solid #eee;
+}*/
+
+
 
 /* @end */

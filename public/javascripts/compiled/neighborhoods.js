@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Wed, 30 Mar 2011 20:53:40 GMT from
+/* DO NOT MODIFY. This file was compiled Fri, 06 May 2011 19:27:33 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/neighborhoods.coffee
  */
 

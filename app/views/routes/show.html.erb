@@ -1,0 +1,7 @@
+  <div class="box" id="map">
+    <header>
+      <h1><%= "<span>##{@route.prte}</span>".html_safe if @route.bus? %> <%= @route.name %> Crime Map &mdash; 7 days</h1>
+      <%= link_to 'Locate', nil, :class => 'locate' %>
+    </header>
+    <div id="canvas" class="nhood-detail"></div>
+  </div>

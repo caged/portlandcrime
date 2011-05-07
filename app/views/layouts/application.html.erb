@@ -52,7 +52,8 @@
             <ul>
               <li class="home<%= selected_class :home %>"><%= link_to(root_path) { "<span>@</span> Crimes".html_safe } %></li>
               <li class="trends<%= selected_class :trends %>"><%= link_to(trends_path) { "<span>Y</span> Trends".html_safe } %></li>
-              <li class="about<%= selected_class :neighborhoods %>"><%= link_to(neighborhoods_path) { "<span>H</span> Neighborhoods".html_safe } %></li>
+              <li class="nhoods<%= selected_class :neighborhoods %>"><%= link_to(neighborhoods_path) { "<span>H</span> Neighborhoods".html_safe } %></li>
+              <li class="transit<%= selected_class :transit %>"><%= link_to(transit_path) { "<span>&#88;</span> Transit".html_safe } %></li>
               <li class="about<%= selected_class :about %>"><%= link_to(about_path) { "<span>i</span> About".html_safe } %></li>
             </ul>
             </nav><% if @last_import %><span class="last-import">Data Updated <%= @last_import.created_at.strftime('%A, %B %d %-I:%M %p') %></span><% end %>
