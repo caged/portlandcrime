@@ -9,13 +9,13 @@ Pdxpatrol::Application.routes.draw do
     get 'recurring_neighborhoods'
   end
 
-  resources :routes, :only => [:index, :show] do
-  end
+  resources :routes, :only => [:index, :show]
+  resources :stops, :only => [:index, :show]
   
   get '/routes/type/:type', :to => 'routes#type'
   
   get '/trends', :to => 'trends#index'
-  get '/transit', :to => 'trends#transit'
+  get '/transit', :to => 'routes#index'
   
   get '/stops/:type', :to => 'stops#index'
   # get '/'

@@ -55,10 +55,4 @@ class TrendsController < ApplicationController
       end
     end
   end
-
-  def transit
-    @sc_routes = TransitRoute.streetcar_routes.all
-    @max_routes = TransitRoute.max_routes.all
-    @bus_routes = TransitRoute.bus_routes.all
-  end
 end

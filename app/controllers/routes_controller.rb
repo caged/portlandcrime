@@ -2,7 +2,9 @@ class RoutesController < ApplicationController
   caches_page :index, :type
   
   def index
-    
+    @sc_routes = TransitRoute.streetcar_routes.all
+    @max_routes = TransitRoute.max_routes.all
+    @bus_routes = TransitRoute.bus_routes.all
   end
   
   def type
@@ -21,7 +23,9 @@ class RoutesController < ApplicationController
   end
   
   def show
-    @route = TransitRoute.find(params[:id])
-    @sotps = @route.stops
+    @route  = TransitRoute.find(params[:id])
+    @route2 = TransitRoute.first(:rte => @route.rte, :id.ne => @route.id)
+    @routes = [@route, @route2].sort_by(&:dir)
+    @stops = @route.stops
   end
 end

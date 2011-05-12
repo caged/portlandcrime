@@ -428,6 +428,16 @@ header a.locate.finding {
   text-align: center;
 }
 
+.slim #map {
+  height: 300px;
+}
+.slim #canvas {
+  overflow: hidden;
+  position: relative;
+  height: 300px;
+  text-align: center;
+}
+
 aside#info {
   width: 220px;
   background-color: rgba(0,0,0,0.9);
@@ -1382,6 +1392,7 @@ ul.times li span.percent {
   background: #fafafa;
   border-bottom: 1px solid #eee;
   border-right: 1px solid #ccc;
+  width: 290px;
 }
 
 .routes span.prte {
@@ -1404,39 +1415,29 @@ ul.times li span.percent {
   -moz-border-radius-bottomleft: 3px;
   border-bottom-left-radius: 3px;
 }
-/*.tmp-routes,
-.bus-routes {
+
+.transit h1 {
+  font-size: 14px;
+  padding: 20px 10px;
+  text-align: center;
+}
+
+.transit .dirs,
+.txt .stops {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.tmp-routes li {
-  padding: 5px;
-  border-bottom: 1px solid #eee;
-}
-
-.bus-routes li {
-  border-bottom: 1px solid #eee;
-}
-
-.bus-routes h2 {
+.transit .dirs li a,
+.txt .stops li a {
+  display: block;
   padding: 10px;
-  display: inline-block;
-  width: 200px;
-  border-right: 2px solid #eee;
-  background: #f7f7f7;
+  border-top: 1px solid #eee;
 }
 
-.bus-routes li a {
-  padding: 10px 5px;
-  width: 250px;
-  display: inline-block;
-  border-right: 1px solid #eee;
+#stops {
+  margin-top: 10px;
 }
-
-.bus-routes li a:first-child {
-  border-right: 1px solid #eee;
-}*/
-
-
 
 /* @end */

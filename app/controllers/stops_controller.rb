@@ -14,4 +14,8 @@ class StopsController < ApplicationController
       end
     end
   end
+  
+  def show
+    @stop = TransitStop.find(params[:id])
+  end
 end

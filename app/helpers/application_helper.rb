@@ -23,7 +23,7 @@ module ApplicationHelper
         :home   => [:crimes, [:offenses, :show]],
         :trends => [[:trends, :index]],
         :neighborhoods => [[:neighborhoods, :index], [:neighborhoods, :show]],
-        :transit => [[:trends, :transit]],
+        :transit => [[:routes, :index]],
         :about  => [[:site, :about]]
       }
     

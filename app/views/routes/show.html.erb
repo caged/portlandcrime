@@ -1,7 +1,35 @@
+<% title @route.name %>
+<section id="main" data-id="<%= @route.id %>" class="slim">
   <div class="box" id="map">
     <header>
-      <h1><%= "<span>##{@route.prte}</span>".html_safe if @route.bus? %> <%= @route.name %> Crime Map &mdash; 7 days</h1>
+      <h1><%= "<span>##{@route.prte}</span>".html_safe if @route.bus? %> <%= @route.name %></h1>
       <%= link_to 'Locate', nil, :class => 'locate' %>
     </header>
-    <div id="canvas" class="nhood-detail"></div>
+    <div id="canvas"></div>
   </div>
+</section>
+
+<aside id="sbar">
+  <div class="box transit">
+    <h1 class="<%=  @route.type %>">
+      <% if @route.bus? %>
+        <span class="prte">#<%= @route.prte %></span>
+      <% end %>
+        <%= @route.desc %>
+    </h1>
+    <ul class="dirs">
+      <% @routes.each do |rt| %>
+      <li><%= link_to rt.dir_desc, route_path(rt) %></li>
+      <% end %>
+    </ul>
+  </div>
+  
+  <div class="box txt" id="stops">
+    <h1 class="<%=  @route.type %>">Stops</h1>
+    <ul class="stops">
+      <% @stops.each do |st| %>
+      <li><%= link_to st.name, stop_path(st) %></li>
+      <% end %>
+    </ul>
+  </div>
+</aside>

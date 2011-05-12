@@ -12,7 +12,7 @@ class TransitRoute
   
   ensure_index :prte
   
-  many :stops, :class => TransitStop, :in => :stop_ids
+  many :stops, :class => TransitStop, :in => :stop_ids, :sort => :stop_id.asc
   
   scope :max_routes,        :type => 'max', :rte.ne => 150, :sort => 'rte'
   scope :streetcar_routes,  :type => 'sc'
@@ -21,7 +21,7 @@ class TransitRoute
   scope :rail_routes,       :type.in => ['sc', 'max'], :rte.ne => 150
   
   def name
-    "#{desc} #{dir_desc}"
+    "#{desc} #{dir_desc.sub(/To/, 'to')}"
   end
   
   def bus?
