@@ -6,7 +6,7 @@ require 'name_map'
 namespace :crime do
   namespace :reports do
     desc 'Run all reports'
-    task :all => [:crime_totals, :ytd_offense_summaries, :neighborhood_offense_totals]
+    task :all => [:crime_totals, :ytd_offense_summaries, :neighborhood_offense_totals, :historical_offense_counts]
     
     desc 'Run Crime Totals For last year & this year'
     task :crime_totals => :environment do
@@ -34,6 +34,14 @@ namespace :crime do
       Neighborhood.offense_totals_between(Time.now.beginning_of_year, Time.now - threshold)
       Neighborhood.offense_totals_between(Time.now.beginning_of_year - 1.year, (Time.now - threshold) - 1.year)
       puts "[#{Time.zone.now}] Calculated neighborhood statistics"
+    end
+    
+    desc 'Run Historical totals for Offenses'
+    task :historical_offense_counts => :environment do
+      start = Time.now.beginning_of_year - 1.year
+      finish = Time.now.end_of_month  - 1.month
+      Offense.count_of_crimes_in_offense_between(start, finish)
+      puts "[#{start.year}-#{finish.year}] Calculated historical offense statistics"
     end
   end
 end

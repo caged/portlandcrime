@@ -79,6 +79,23 @@ text {
   cursor: default;
 }
 
+.area {
+  fill: #00aff2;
+  fill-opacity: 0.2;
+}
+
+.apath {
+    stroke: #00aff2;
+    stroke-width: 2px;
+    fill: none;
+    stroke-opacity: 0.4;
+}
+
+.point {
+  fill: #00aff2;
+  
+}
+
 /*------------------------------------------------------------------------------------
   @group crime types
 ------------------------------------------------------------------------------------*/

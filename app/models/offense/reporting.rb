@@ -19,6 +19,32 @@ class Offense
         }}, :out => {:inline => true}, :raw => true)
   end
   
+  def self.count_of_crimes_in_offense_between(start, finish)
+    map = <<-JS 
+      function() { 
+        var m = this.reported_at.getMonth()
+        emit({offense: this.offense_id, month: m, year: this.reported_at.getFullYear()}, 1) 
+      } 
+    JS
+    
+    red = <<-JS
+      function(key, vals) {
+        var sum = 0
+        vals.forEach(function(val, idx) {
+          sum += val
+        })
+        
+        return sum
+      }
+    JS
+    
+    Crime.collection.map_reduce(map, red,
+      :query => { :reported_at => {
+          '$lt' => finish, 
+          '$gte' => start
+        }}, :out => "#{start.year}_#{finish.year}_monthly_offense_history")
+  end
+  
   def self.summaries_for_the_past(start)
     map = <<-JS
     function() {
@@ -61,5 +87,3 @@ class Offense
         }}, :out => "summaries_for_offenses_in_#{Time.now.year}")
   end
 end
-
-#[{'_id': { oid: '234234234234', period: 'night'}, value:{ }}]

@@ -29,4 +29,12 @@ every 1.day, :at => '2:40 am' do
    rake "crime:reports:ytd_offense_summaries"
 end
 
+every 1.day, :at => '2:50 am' do
+   rake "crime:reports:neighborhood_offense_totals"
+end
+
+every 15.days, :at => '3:00 am' do
+   rake "crime:reports:historical_offense_counts"
+end
+
 # Learn more: http://github.com/javan/whenever

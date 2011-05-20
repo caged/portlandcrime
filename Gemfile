@@ -27,4 +27,5 @@ end
 
 group :development do
   gem 'jquery-rails'
+  gem 'awesome_print', :require => 'ap'
 end

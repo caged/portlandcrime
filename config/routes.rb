@@ -7,6 +7,7 @@ Pdxpatrol::Application.routes.draw do
 
   resources :offenses, :only => [:index, :show] do
     get 'recurring_neighborhoods'
+    get 'history'
   end
 
   resources :routes, :only => [:index, :show] do
