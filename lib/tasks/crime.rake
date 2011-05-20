@@ -52,7 +52,7 @@ namespace :crime do
     begin
       CSV.foreach(csv) do |cr|
         if i != 0
-          crime = Crime.first(:case_id => cr[0].to_i)
+          crime = Crime.first(:case_id => cr[0].strip.to_i)
           if crime.nil?
             # Ruby 1.9 will not parse american date formats with the month first
             # so we do some hackery here to put the month first

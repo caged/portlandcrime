@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Mon, 28 Mar 2011 04:23:58 GMT from
+/* DO NOT MODIFY. This file was compiled Fri, 20 May 2011 00:22:42 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/trends.coffee
  */
 
@@ -15,23 +15,23 @@
         w = $('#trends').width() - (pl + pr + 10);
         h = 230 - (pt + pb);
         drawTrend = function(el, data) {
-          var g, labels, legend, rules, samples, vis, wmax, x, y0, y1;
+          var g, labels, legend, rules, samples, vis, wmax, x0, x1, y;
           samples = data[0].values.length;
           wmax = d3.max(data, function(d) {
             return d3.max(d.values, function(e) {
               return e.value;
             });
           });
-          x = d3.scale.linear().domain([0, wmax]).range([h, 0]);
-          y0 = d3.scale.ordinal().domain(d3.range(samples)).rangeBands([0, w], 0.5);
-          y1 = d3.scale.ordinal().domain(d3.range(2)).rangeRoundBands([0, y0.rangeBand()]);
+          y = d3.scale.linear().domain([0, wmax]).range([h, 0]);
+          x0 = d3.scale.ordinal().domain(d3.range(samples)).rangeBands([0, w], 0.5);
+          x1 = d3.scale.ordinal().domain(d3.range(2)).rangeRoundBands([0, x0.rangeBand()]);
           labels = el === '#monthly' ? mlabels : d3.range(samples);
           vis = d3.select(el).append('svg:svg').attr('width', w + (pl + pr)).attr('height', h + pt + pb).attr('class', 'viz').append('svg:g').attr('transform', "translate(" + pl + "," + pt + ")");
           rules = vis.selectAll('g.rule').data(function(d) {
             if (el !== '#monthly') {
-              return x.ticks(10);
+              return y.ticks(10);
             } else {
-              return x.ticks(4);
+              return y.ticks(4);
             }
           }).enter().append('svg:g').attr('class', function(d) {
             if (d) {
@@ -41,22 +41,22 @@
             }
           });
           rules.append('svg:line').attr("y1", function(d) {
-            return Math.ceil(x(d));
+            return Math.ceil(y(d));
           }).attr("y2", function(d) {
-            return Math.ceil(x(d));
+            return Math.ceil(y(d));
           }).attr("x1", 0).attr("x2", w);
-          rules.append('svg:text').attr('y', x).attr("dy", ".2em").attr('x', w + 5).attr('class', 'vlbl').text(function(d) {
+          rules.append('svg:text').attr('y', y).attr("dy", ".2em").attr('x', w + 5).attr('class', 'vlbl').text(function(d) {
             return d;
           });
           vis.selectAll('h.text').data(labels).enter().append('svg:text').attr('class', function(d, i) {
-            if (i % 3 !== 0 && el !== '#monthly') {
+            if (i % 2 !== 0 && el !== '#monthly') {
               return 'hlbl hide';
             } else {
               return 'hlbl';
             }
           }).attr("transform", function(d, i) {
-            return "translate(" + (y0(i)) + ",0)";
-          }).attr("x", y0.rangeBand() / 2).attr("y", h + 12).attr("text-anchor", "middle").text(function(d) {
+            return "translate(" + (x0(i)) + ",0)";
+          }).attr("x", x0.rangeBand()).attr("y", h + 12).attr("text-anchor", "middle").text(function(d) {
             if (el !== '#monthly') {
               return d + 1;
             } else {
@@ -72,7 +72,7 @@
             } else {
               return '#cccccc';
             }
-          }).attr('r', 3).text(function(d) {
+          }).attr('class', 'c').attr('r', 4).text(function(d) {
             return d;
           });
           legend.enter().append('svg:text').attr('transform', "translate(" + ((w - (lblwid * 2)) / 2) + ", -10)").attr("x", function(d, i) {
@@ -87,16 +87,16 @@
               return '#00b2ec';
             }
           }).attr('transform', function(d, i) {
-            return "translate(" + (y1(i)) + ",0)";
+            return "translate(" + (x1(i)) + ",0)";
           });
           return g.selectAll('rect').data(function(d) {
             return d.values;
           }).enter().append('svg:rect').attr('transform', function(d, i) {
-            return "translate(" + (y0(i) + 0.5) + ",0)";
-          }).attr('width', y1.rangeBand() / 2).attr('height', function(d, i) {
-            return h - x(d.value);
+            return "translate(" + (x0(i) + x1.rangeBand()) + ",0)";
+          }).attr('width', x1.rangeBand() / 2).attr('height', function(d, i) {
+            return h - y(d.value);
           }).attr('y', function(d) {
-            return x(d.value);
+            return y(d.value);
           });
         };
         drawTrend('#weekly', weeks);
