@@ -18,6 +18,7 @@ gem 'whenever', :require => false
 gem 'mongo_geo', :git => 'https://github.com/parrish/mongo_geo.git'
 gem 'rails3-generators', :git => 'https://github.com/indirect/rails3-generators.git'
 gem 'barista', '~> 1.0'
+gem 'awesome_print', :require => 'ap'
 
 group :development, :test do
   gem 'factory_girl_rails'
@@ -27,5 +28,4 @@ end
 
 group :development do
   gem 'jquery-rails'
-  gem 'awesome_print', :require => 'ap'
 end
