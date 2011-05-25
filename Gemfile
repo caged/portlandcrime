@@ -4,11 +4,9 @@ gem 'rails', '3.0.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'mongo_mapper', 
-  :git => 'http://github.com/jnunemaker/mongomapper.git', 
-  :ref => '49821d'
+gem 'mongo_mapper', '0.9.1'
   
-gem 'bson_ext', '1.2.4'
+gem 'bson_ext', '1.3.1'
 gem 'json', '1.4.6'
 gem 'jammit'
 gem 'yui-compressor'
