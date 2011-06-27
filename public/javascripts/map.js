@@ -322,7 +322,6 @@ $(function() {
            .append(close)
            .addClass(otype) 
         }
-      
         bdy.text(props.address)
         bdy.append($('<span />')
           .addClass('date')

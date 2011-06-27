@@ -25,6 +25,7 @@ class Crime
     ids = Offense.all(:'type.name' => /#{type}/i).collect(&:id)
     where(:offense_id.in => ids)}
   
+  scope :within_poly, lambda {|poly| where(:loc => {'$within' => { '$polygon' => poly }})}
   # Distance given in feet and passed to query as radians
   # See http://www.mongodb.org/display/DOCS/Geospatial+Indexing#GeospatialIndexing-TheEarthisRoundbutMapsareFlat
   def self.near_location(loc, distance)
