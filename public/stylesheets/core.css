@@ -258,6 +258,19 @@ ol.alpha-list li a:hover {
   margin: 40% auto;
 }
 
+.box.faded {
+  margin: 10px 0;
+  padding: 10px;
+  background: rgba(255,255,255,0.5);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+h1 #___plusone_0 {
+  float: right !important;
+}
+
 /* @end */
 
 /*------------------------------------------------------------------------------------

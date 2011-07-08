@@ -56,7 +56,7 @@
               <li class="about<%= selected_class :about %>"><%= link_to(about_path) { "<span>i</span> About".html_safe } %></li>
             </ul>
             </nav><% if @last_import %><span class="last-import">Data Updated <%= @last_import.created_at.strftime('%A, %B %d %-I:%M %p') %></span><% end %>
-        </div>
+        </div>        
       </div>
     </div>
   </header>
@@ -88,5 +88,7 @@
         s.parentNode.insertBefore(t, s);
       })();
     </script>
+    <!-- Place this tag in your head or just before your close body tag -->
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 </body>
 </html>
