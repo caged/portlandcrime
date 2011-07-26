@@ -25,7 +25,6 @@ $ ->
       .on('load', load))
       
   load = (e) ->
-    console.log 'loading'
     $.each e.features, () ->
       el = $(this.element)
       props = this.data.properties

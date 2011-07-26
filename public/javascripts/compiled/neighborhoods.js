@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Fri, 20 May 2011 00:15:56 GMT from
+/* DO NOT MODIFY. This file was compiled Tue, 26 Jul 2011 18:21:19 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/neighborhoods.coffee
  */
 
@@ -23,7 +23,6 @@
       return map.add(po.geoJson().features(data.features).on('load', load));
     });
     return load = function(e) {
-      console.log('loading');
       return $.each(e.features, function() {
         var el, label, props;
         el = $(this.element);

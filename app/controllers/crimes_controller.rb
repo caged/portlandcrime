@@ -1,5 +1,5 @@
 class CrimesController < ApplicationController  
-  caches_page :index
+  caches_page :index, :show
   
   def index
     if params[:neighborhood_id]
@@ -29,6 +29,7 @@ class CrimesController < ApplicationController
   end
   
   def show
-    @crime = Crime.first(params[:id])
+    @crime = Crime.find(params[:id])
+    @similar = Crime.between(@crime.reported_at - 1.hours, @crime.reported_at + 1.hours).where(:code => @crime.code, :case_id.ne => @crime.case_id).limit(10).all
   end
 end

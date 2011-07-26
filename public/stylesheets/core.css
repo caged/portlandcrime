@@ -99,6 +99,10 @@ a:hover {
   padding: 20px;
 }
 
+.box.txt.page h2 {
+  margin-top: 20px;
+}
+
 .box.txt.page ul {
   margin: 20px 40px;
 }
@@ -270,6 +274,27 @@ ol.alpha-list li a:hover {
 h1 #___plusone_0 {
   float: right !important;
 }
+
+dl.props {
+  line-height: 1.5em;
+}
+
+.props dt {
+  font-weight: bold;
+}
+
+.props dd {
+  display: inline-block;
+  color: #555;
+}
+
+/*.props dt:before {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}*/
 
 /* @end */
 
@@ -601,7 +626,8 @@ h3[data-code=fi] {
   float: none;
 }
 
-.crime-list span.date {
+.crime-list span.date,
+.crimeinfo span.date {
   position: absolute;
   top: -10px;
   right: 0;
@@ -614,12 +640,18 @@ h3[data-code=fi] {
   background-repeat: no-repeat;
 }
 
-.crime-list li.day span.date {
+.crime-list li.day span.date,
+.crimeinfo.day span.date {
   background-image: url(/images/day.png);
 }
 
-.crime-list li.night span.date {
+.crime-list li.night span.date,
+.crimeinfo.night span.date {
   background-image: url(/images/night.png);
+}
+
+.crimeinfo h1 {
+  position: relative;
 }
 
 
@@ -1372,6 +1404,31 @@ ul.times li span.percent {
 
 .box header .segments li a.current {
   color: #516177;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group minimap
+------------------------------------------------------------------------------------*/
+
+.minimap .map {
+  width: 100px;
+  height: 100px;
+  float: left;
+  border: 2px solid #aaa;
+}
+
+.minimap:after {
+  content: ".";
+  clear: both;
+  display: block;
+}
+
+.minimap h1,
+.minimap p,
+.minimap h3 {
+  margin-left: 120px;
 }
 
 /* @end */
