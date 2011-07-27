@@ -139,7 +139,8 @@ text {
 
 .circle.fr,
 .circle.fo,
-.circle.em {
+.circle.em,
+.circle.ga {
   fill: #51d749;
   stroke: #3fa738;
 }

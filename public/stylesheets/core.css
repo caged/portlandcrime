@@ -1417,12 +1417,15 @@ ul.times li span.percent {
   height: 100px;
   float: left;
   border: 2px solid #aaa;
+  background: #f7f7f7;
 }
 
 .minimap:after {
   content: ".";
   clear: both;
   display: block;
+  visibility: hidden;
+  height: 0;
 }
 
 .minimap h1,

@@ -9,6 +9,10 @@ $ ->
     lon = e.data('lon')
     code = e.data('code')
     
+    if 0 in [lat, lon]
+      e.prepend($('<div class="map" />'))
+      return
+    
     svg = po.svg 'svg'
     e.prepend(svg)
     map = po.map()

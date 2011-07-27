@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Tue, 26 Jul 2011 19:23:00 GMT from
+/* DO NOT MODIFY. This file was compiled Wed, 27 Jul 2011 19:46:54 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/minimap.coffee
  */
 
@@ -14,6 +14,10 @@
       lat = e.data('lat');
       lon = e.data('lon');
       code = e.data('code');
+      if (0 === lat || 0 === lon) {
+        e.prepend($('<div class="map" />'));
+        return;
+      }
       svg = po.svg('svg');
       e.prepend(svg);
       map = po.map().container(svg).center({
