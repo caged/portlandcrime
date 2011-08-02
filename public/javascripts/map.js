@@ -322,10 +322,19 @@ $(function() {
            .append(close)
            .addClass(otype) 
         }
+<<<<<<< HEAD
+=======
+      
+        var time = Date.parse(props.reported_at).toString('dddd, MMM dS @ h:mm tt')
+        time = $('<a />')
+            .attr('href', '/crimes/' + props._id)
+            .text(time)
+            
+>>>>>>> master
         bdy.text(props.address)
         bdy.append($('<span />')
           .addClass('date')
-          .text(Date.parse(props.reported_at).toString('dddd, MMM dS @ h:mm tt')))
+          .html(time))
         
         cnt.append($('<div/>').addClass('nub'))
         cnt.append(hdr).append(bdy) 

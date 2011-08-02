@@ -2,9 +2,9 @@
  {
     "desc":"Any willful burning or attempt to burn a building, motor vehicle, aircraft, or personal property of another.",
     "name":"Arson",
-    "type": "Non-Violent",
+    "type": "Violent",
     "order": 0,
-    "group_order": 1
+    "group_order": 0
  },
  {
     "desc":"An attack by one person upon another for the purpose of inflicting severe injury. This type of assault usually is accompanied by the use of a weapon or by means likely to produce death or injury.",

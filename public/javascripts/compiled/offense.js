@@ -1,10 +1,13 @@
-/* DO NOT MODIFY. This file was compiled Fri, 20 May 2011 19:46:35 GMT from
+/* DO NOT MODIFY. This file was compiled Fri, 08 Jul 2011 21:00:13 GMT from
  * /Users/justin/dev/lrr/rails/portlandcrime/app/coffee/offense.coffee
  */
 
 (function() {
   $(function() {
     var mlabels, offense;
+    if ($('body[data-path=offenses-show]').length === 0) {
+      return;
+    }
     offense = $('#main').data('permalink');
     mlabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return $.getJSON("/offenses/" + offense + "/history.json", function(d) {

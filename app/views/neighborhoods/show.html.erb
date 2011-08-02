@@ -53,7 +53,7 @@
 <aside id="sbar">
   <div class="box txt">
     <h1>
-      <%=h @neighborhood.name %>
+      <%=h @neighborhood.name %><g:plusone size="small"></g:plusone>  
     </h1>
     <div id="total">
       <div class="year">
@@ -107,7 +107,7 @@
       <% @crimes.each do |crime| %>
       <li data-code="<%= crime.code %>" class="<%= crime.at_daylight? ? 'day' : 'night'  %>">
         <h3 data-code="<%= crime.offense.type['name'].parameterize[0..1] %>">
-          <%= crime.offense.name %>
+          <%= link_to(crime.offense.name, crime) %>
           <span class="date"><%= crime.reported_at.strftime('%b %d %I:%m%p') %></span>
         </h3>
         <p><span class="district">District <%= crime.district %></span>&mdash;<%= crime.address %></p>

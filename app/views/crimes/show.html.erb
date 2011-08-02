@@ -1,0 +1,25 @@
+<% title "#{@crime.offense.name} at #{@crime.address}" %>
+<div class="box txt page">
+  <div  data-lat="<%= @crime.loc['lat'] %>" data-lon="<%= @crime.loc['lon'] %>" data-code="<%= @crime.code %>" class="minimap crimeinfo <%= @crime.at_daylight? ? 'day' : 'night'  %>">
+    <h1 data-code="<%= @crime.offense.type['name'].parameterize[0..1] %>">
+      <%= @crime.offense.name %> in <%= link_to(@crime.neighborhood.name, @crime.neighborhood) %> Portland, OR
+      <span class="date"><%= @crime.reported_at.strftime('%A, %B %d %I:%m%p') %></span>
+    </h1>
+    <p><span class="district">District <%= @crime.district %></span>&mdash;<%= @crime.address %> via <%= @crime.precinct %></p>
+  </div>
+  
+  <% if @similar && !@similar.empty? %>
+    <h2>Similar Crimes between <%= (@crime.reported_at - 1.hour).strftime('%I:%H %p') %> and <%= (@crime.reported_at + 1.hour).strftime('%I:%H %p') %></h2>
+    <ol class="crime-list">
+      <% @similar.each do |crime| %>
+      <li data-lat="<%= crime.loc['lat'] %>" data-lon="<%= crime.loc['lon'] %>" data-code="<%= crime.code %>" class="minimap <%= crime.at_daylight? ? 'day' : 'night'  %>">
+        <h3 data-code="<%= crime.offense.type['name'].parameterize[0..1] %>">
+          <%= link_to(crime.offense.name, crime) %> in <%= link_to(@crime.neighborhood.name, @crime.neighborhood) %> Portland, OR
+          <span class="date"><%= crime.reported_at.strftime('%A, %B %d %I:%m%p') %></span>
+        </h3>
+        <p><span class="district">District <%= crime.district %></span>&mdash;<%= crime.address %></p>
+      </li>
+      <% end %>
+    </ol>
+  <% end %>
+</div>

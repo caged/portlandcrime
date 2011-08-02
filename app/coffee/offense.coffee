@@ -1,4 +1,5 @@
 $ ->
+  return if $('body[data-path=offenses-show]').length == 0
   offense = $('#main').data 'permalink'
   mlabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   
