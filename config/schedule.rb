@@ -17,23 +17,23 @@ set :output, "/home/deploy/pdxcrime/shared/log/cron.log"
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every 1.day, :at => '2:00 am' do
+every 1.day, :at => '4:00 am' do
    rake "crime:import"
 end
 
-every 1.day, :at => '2:30 am' do
+every 1.day, :at => '4:30 am' do
    rake "crime:reports:crime_totals"
 end
 
-every 1.day, :at => '2:40 am' do
+every 1.day, :at => '4:40 am' do
    rake "crime:reports:ytd_offense_summaries"
 end
 
-every 1.day, :at => '2:50 am' do
+every 1.day, :at => '4:50 am' do
    rake "crime:reports:neighborhood_offense_totals"
 end
 
-every 15.days, :at => '3:00 am' do
+every 15.days, :at => '5:00 am' do
    rake "crime:reports:historical_offense_counts"
 end
 
