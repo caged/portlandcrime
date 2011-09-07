@@ -364,7 +364,7 @@ header h1 {
 
 
 nav#primary {
-  width: 640px;
+  width: 620px;
   display: inline-block;
 } 
 
@@ -413,7 +413,9 @@ span.last-import {
   display: inline-block;
   color: #858585;
   font-weight: 200;
-  margin-left: 35px;
+  float: right;
+  margin-top: 10px;
+  overflow: hidden;
 }
 
 span.last-import:before {
