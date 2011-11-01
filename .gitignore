@@ -9,3 +9,5 @@ public/cache
 public/data/*.zip
 public/data/*.csv
 config/deploy.rb
+db/data/**/*.csv
+.DS_Store
