@@ -7,7 +7,7 @@ gem 'rails', '3.0.5'
 gem 'mongo_mapper', '0.9.1'
   
 gem 'bson_ext', '1.3.1'
-gem 'json', '1.4.6'
+gem 'json', '2.3.1'
 gem 'jammit'
 gem 'yui-compressor'
 gem 'closure-compiler'
