@@ -126,7 +126,7 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.25)
+    tzinfo (0.3.61)
     whenever (0.6.6)
       aaronh-chronic (>= 0.3.9)
       activesupport (>= 2.3.4)
